@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DispatcherDesk - Coopmetro</title>
+
+  <style>
+
+    :root {
+      --primary: #123c69;
+      --primary-dark: #0b2745;
+      --secondary: #f5a623;
+      --accent: #14b8a6;
+      --bg: #eef3f8;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #d7e0ea;
+      --soft: #f7fafc;
+      --danger: #b42318;
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: radial-gradient(circle at top left, #1f7a8c 0%, var(--primary) 42%, var(--primary-dark) 100%);
+      color: white;
+      padding: 24px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin: 8px 0 0;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+
+    .brand {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-logo {
+      width: 74px;
+      height: 74px;
+      flex: 0 0 auto;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+    }
+
+    .brand-text {
+      text-align: left;
+    }
+
+    .brand-text h1 {
+      margin: 0;
+      font-size: 30px;
+      letter-spacing: -0.4px;
+    }
+
+    .brand-text p {
+      margin: 8px 0 0;
+      font-size: 15px;
+      opacity: 0.95;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(11, 39, 69, 0.72);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .popup-card {
+      width: min(560px, 100%);
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      animation: popupEntrada 0.35s ease-out;
+    }
+
+    .popup-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .popup-logo {
+      width: 64px;
+      height: 64px;
+      flex: 0 0 auto;
+    }
+
+    .popup-card h2 {
+      margin: 0;
+      color: var(--primary);
+      font-size: 24px;
+    }
+
+    .popup-card p {
+      color: var(--text);
+      line-height: 1.55;
+      margin: 12px 0;
+      font-size: 15px;
+    }
+
+    .popup-card strong {
+      color: var(--primary-dark);
+    }
+
+    .popup-button {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-top: 12px;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--primary), #1f7a8c);
+      transition: 0.2s;
+    }
+
+    .popup-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(18, 60, 105, 0.25);
+    }
+
+    .hidden-popup {
+      display: none;
+    }
+
+    @keyframes popupEntrada {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand-text {
+        text-align: center;
+      }
+
+      .brand-text h1 {
+        font-size: 25px;
+      }
+    }
+
+    .container {
+      max-width: 1250px;
+      margin: 25px auto;
+      padding: 0 16px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .tab-button {
+      border: none;
+      padding: 12px 18px;
+      background: #dce8f5;
+      color: var(--primary);
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .tab-button.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .tab-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .tab-content {
+      display: none;
+      background: white;
+      padding: 22px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      padding: 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      font-size: 15px;
+      outline: none;
+      background: #ffffff;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--secondary);
+      box-shadow: 0 0 0 3px rgba(0, 168, 89, 0.12);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 270px;
+      resize: vertical;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .textarea-small {
+      min-height: 100px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    button.action {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .generate {
+      background: var(--primary);
+      color: white;
+    }
+
+    .copy {
+      background: var(--secondary);
+      color: white;
+    }
+
+    .clear {
+      background: #e8edf3;
+      color: var(--text);
+    }
+
+    .add {
+      background: var(--text);
+      color: white;
+    }
+
+    .danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .action:hover {
+      transform: translateY(-2px);
+      opacity: 0.92;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .info-box {
+      background: #eef6ff;
+      border-left: 5px solid var(--secondary);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .alarm-box {
+      background: #fff7e6;
+      border-left: 5px solid var(--secondary);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      color: #5c4200;
+    }
+
+    .alarm-on {
+      background: #ecfdf3;
+      border-left-color: var(--secondary);
+      color: #05603a;
+    }
+
+    .alarm-off {
+      background: #fef3f2;
+      border-left-color: var(--danger);
+      color: #7a271a;
+    }
+
+    .clock-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .clock-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .clock-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .clock-value {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .section-title {
+      margin: 22px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .rota-card,
+    .veiculo-card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 14px;
+    }
+
+    .footer-creditos {
+      text-align: center;
+      margin: 30px auto 20px;
+      padding: 16px;
+      max-width: 1250px;
+      color: var(--primary);
+      font-weight: bold;
+      background: #eef6ff;
+      border: 1px solid #cbdbea;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(0, 107, 63, 0.08);
+    }
+
+    .footer-creditos strong {
+      color: var(--primary-dark);
+    }
+
+
+    .table-wrapper {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin: 16px 0;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 900px;
+    }
+
+    th {
+      background: var(--primary);
+      color: white;
+      text-align: left;
+      padding: 11px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    td {
+      border-bottom: 1px solid #e5eee9;
+      padding: 10px;
+      font-size: 13px;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td {
+      background: var(--soft);
+    }
+
+    .driver-input {
+      width: 180px;
+      min-width: 160px;
+    }
+
+    .preview-image {
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-top: 12px;
+      background: white;
+    }
+
+
+    .excel-wrapper {
+      max-height: 430px;
+      overflow: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      background: white;
+      margin: 12px 0 18px;
+    }
+
+    .excel-table {
+      border-collapse: collapse;
+      width: max-content;
+      min-width: 100%;
+      font-size: 11px;
+      background: white;
+    }
+
+    .excel-table th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background: #eaf1fb;
+      color: var(--text);
+      border: 1px solid #cbd5e1;
+      padding: 5px 7px;
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: nowrap;
+      text-align: left;
+    }
+
+    .excel-table td {
+      border: 1px solid #dbe3ec;
+      padding: 4px 7px;
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: nowrap;
+      background: white;
+      max-width: 220px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .excel-table tr:nth-child(even) td {
+      background: #f8fbff;
+    }
+
+
+    .excel-table td.celula-regiao {
+      white-space: normal;
+      min-width: 260px;
+      max-width: 520px;
+      overflow: visible;
+      text-overflow: unset;
+      line-height: 1.35;
+    }
+
+    .excel-table tr:hover td {
+      background: #fff4d6;
+    }
+
+    .excel-note {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -6px;
+      margin-bottom: 8px;
+    }
+
+    .download-link {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-weight: bold;
+      background: var(--secondary);
+      color: white;
+      margin-top: 10px;
+    }
+
+
+    #tabelaEscalaSimplificada th {
+      padding: 8px;
+      font-size: 12px;
+    }
+
+    #tabelaEscalaSimplificada td {
+      padding: 7px;
+      font-size: 12px;
+    }
+
+    #tabelaEscalaSimplificada input {
+      padding: 7px;
+      font-size: 12px;
+      height: 32px;
+    }
+
+    @media (max-width: 900px) {
+      .form-grid,
+      .form-grid-2,
+      .clock-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="popup-overlay" id="popupInicial">
+    <div class="popup-card">
+      <div class="popup-top">
+
+      <svg class="popup-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Logo DispatcherDesk">
+        <defs>
+          <linearGradient id="logoGradPopup" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f5a623"/>
+            <stop offset="55%" stop-color="#14b8a6"/>
+            <stop offset="100%" stop-color="#123c69"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="10" width="100" height="100" rx="28" fill="url(#logoGradPopup)"/>
+        <path d="M35 39h34c12 0 22 10 22 22s-10 22-22 22H35V39z" fill="rgba(255,255,255,0.95)"/>
+        <path d="M47 52h20c5 0 9 4 9 9s-4 9-9 9H47V52z" fill="#123c69"/>
+        <circle cx="43" cy="84" r="7" fill="#ffffff"/>
+        <circle cx="78" cy="84" r="7" fill="#ffffff"/>
+        <path d="M31 85h60" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M27 32l12 11M93 32L81 43" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+
+        <div>
+          <h2>DispatcherDesk - Coopmetro</h2>
+          <p><strong>Bem-vindo à central operacional.</strong></p>
+        </div>
+      </div>
+
+      <p>
+        Este sistema foi feito por <strong>Edinan Magalhães</strong>, do
+        <strong>SGO3 - Hidrolândia, Goiás</strong>.
+      </p>
+
+      <p>
+        Obrigado por utilizar. Caso encontre bugs, erros ou tenha sugestões de melhoria,
+        passe o feedback para a <strong>Supervisora Samara</strong>.
+      </p>
+
+      <button class="popup-button" onclick="fecharPopupInicial()">Entendi, acessar sistema</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="brand">
+
+      <svg class="brand-logo" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-label="Logo DispatcherDesk">
+        <defs>
+          <linearGradient id="logoGradHeader" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stop-color="#f5a623"/>
+            <stop offset="55%" stop-color="#14b8a6"/>
+            <stop offset="100%" stop-color="#123c69"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="10" width="100" height="100" rx="28" fill="url(#logoGradHeader)"/>
+        <path d="M35 39h34c12 0 22 10 22 22s-10 22-22 22H35V39z" fill="rgba(255,255,255,0.95)"/>
+        <path d="M47 52h20c5 0 9 4 9 9s-4 9-9 9H47V52z" fill="#123c69"/>
+        <circle cx="43" cy="84" r="7" fill="#ffffff"/>
+        <circle cx="78" cy="84" r="7" fill="#ffffff"/>
+        <path d="M31 85h60" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+        <path d="M27 32l12 11M93 32L81 43" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+
+      <div class="brand-text">
+        <h1>DispatcherDesk - Coopmetro</h1>
+        <p>Central operacional para mensagens, escala, fechamento e suporte ao dispatcher</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab-button active" onclick="abrirAba('ambulancia', this)">Solicitação / Ambulância</button>
+      <button class="tab-button" onclick="abrirAba('hora', this)">Hora em Hora</button>
+      <button class="tab-button" onclick="abrirAba('fechamento', this)">Fechamento</button>
+      <button class="tab-button" onclick="abrirAba('scheduling', this)">Scheduling</button>
+      <button class="tab-button" onclick="abrirAba('clientes', this)">Mensagens Clientes</button>
+      <button class="tab-button" onclick="abrirAba('escala', this)">Gerador de Escala</button>
+      <button class="tab-button" onclick="abrirAba('fechamentoRota', this)">Fechamento de Rota</button>
+    </div>
+
+    <section id="ambulancia" class="tab-content active">
+      <div class="info-box">
+        Primeiro gere a solicitação sem rota aberta. Depois selecione abertura, preencha a rota aberta, atualize os números e gere a nova mensagem.
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Tipo de mensagem</label>
+          <select id="tipoAmbulancia" onchange="alternarRotaAberta()">
+            <option value="solicitacao">Solicitação de Ambulância</option>
+            <option value="abertura">Abertura de Ambulância</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo de motivo</label>
+          <select id="tipoMotivo" onchange="alternarCondominio()">
+            <option value="normal">Alto volume / Região complexa</option>
+            <option value="condominio">Condomínio / Restrição de acesso</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Semana</label>
+          <input id="semana" placeholder="Ex: 22" />
+        </div>
+
+        <div class="form-group">
+          <label>Data</label>
+          <input id="data" placeholder="Ex: 29/05/2026" />
+        </div>
+
+        <div class="form-group">
+          <label>Transportadora</label>
+          <input id="transportadora" value="Coopmetro" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Região</label>
+          <input id="regiao" placeholder="Ex: Vila Irmãos Souza, Sítios Santa Luzia" />
+        </div>
+
+        <div class="form-group">
+          <label>Driver</label>
+          <input id="driver" placeholder="Ex: Janaina Silva Almeida Lopes" />
+        </div>
+
+        <div class="form-group">
+          <label>Rota Original</label>
+          <input id="rotaOriginal" placeholder="Ex: 386438200" />
+        </div>
+
+        <div class="form-group hidden" id="campoRotaAberta">
+          <label>Rota Aberta</label>
+          <input id="rotaAberta" placeholder="Preencher apenas na abertura" />
+        </div>
+
+        <div class="form-group">
+          <label>Rota</label>
+          <input id="rota" placeholder="Ex: C1_PM1" />
+        </div>
+
+        <div class="form-group">
+          <label>SPR / Pacotes da rota</label>
+          <input id="spr" placeholder="Ex: 143" />
+        </div>
+
+        <div class="form-group">
+          <label>Paradas</label>
+          <input id="paradas" placeholder="Ex: 91" />
+        </div>
+
+        <div class="form-group">
+          <label>Pacotes pendentes</label>
+          <input id="pacotesPendentes" placeholder="Ex: 143" />
+        </div>
+
+        <div class="form-group hidden" id="campoCondominio">
+          <label>Nome do condomínio</label>
+          <input id="condominio" placeholder="Ex: Jardins Valência" />
+        </div>
+
+        <div class="form-group full">
+          <label>Complemento opcional do motivo</label>
+          <input id="complementoMotivo" placeholder="Ex: região com acessos demorados, baixa produtividade, deslocamento longo..." />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarAmbulancia()">Gerar mensagem</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoAmbulancia')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoAmbulancia')">Limpar mensagem</button>
+        <button class="action clear" onclick="limparCamposAmbulancia()">Limpar campos</button>
+      </div>
+
+      <textarea id="resultadoAmbulancia" placeholder="A mensagem gerada aparecerá aqui..."></textarea>
+    </section>
+
+    <section id="hora" class="tab-content">
+      <div class="info-box">
+        Agora o alarme conta a partir da primeira hora registrada. Exemplo: registrou 16:00, ele toca 16:55. Depois toca de hora em hora: 17:55, 18:55...
+      </div>
+
+      <div class="clock-grid">
+        <div class="clock-card">
+          <div class="clock-label">Hora atual</div>
+          <div class="clock-value" id="relogioAtual">--:--:--</div>
+        </div>
+
+        <div class="clock-card">
+          <div class="clock-label">Primeira hora enviada</div>
+          <div class="clock-value" id="primeiraHoraEnviada">Não registrada</div>
+        </div>
+
+        <div class="clock-card">
+          <div class="clock-label">Próximo lembrete</div>
+          <div class="clock-value" id="proximoLembreteHora">Registre a primeira hora</div>
+        </div>
+      </div>
+
+      <div class="alarm-box alarm-off" id="statusAlarmeHora">
+        Alarme Hora em Hora desativado. Registre a primeira hora e depois ative o alarme.
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="registrarPrimeiraHora()">Registrar primeira hora</button>
+        <button class="action clear" onclick="limparPrimeiraHora()">Limpar primeira hora</button>
+        <button class="action generate" onclick="ativarAlarmeHora()">Ativar alarme</button>
+        <button class="action danger" onclick="desativarAlarmeHora()">Desativar alarme</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Monitor(a)</label>
+          <input id="hhMonitor" placeholder="Ex: LORRANNY" />
+        </div>
+
+        <div class="form-group">
+          <label>MLP / Transportadora</label>
+          <input id="hhMlp" value="COOPMETRO" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Horário</label>
+          <input id="hhHorario" placeholder="Ex: 18:45" />
+        </div>
+
+        <div class="form-group">
+          <label>Rotas sem atividade</label>
+          <input id="hhSemAtividade" placeholder="Ex: 0" />
+        </div>
+
+        <div class="form-group">
+          <label>Insucessos</label>
+          <input id="hhInsucessos" placeholder="Ex: 09" />
+        </div>
+
+        <div class="form-group">
+          <label>Rotas em atraso</label>
+          <input id="hhAtraso" placeholder="Ex: 00" />
+        </div>
+
+        <div class="form-group">
+          <label>Em tratativa</label>
+          <input id="hhTratativa" placeholder="Ex: 05" />
+        </div>
+
+        <div class="form-group">
+          <label>Sem reversão</label>
+          <input id="hhSemReversao" placeholder="Ex: 00" />
+        </div>
+
+        <div class="form-group">
+          <label>Revertidos</label>
+          <input id="hhRevertidos" placeholder="Ex: 4" />
+        </div>
+
+        <div class="form-group">
+          <label>Rotas pendentes</label>
+          <input id="hhPendentes" placeholder="Ex: 0" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarHora()">Gerar mensagem</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoHora')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoHora')">Limpar mensagem</button>
+        <button class="action clear" onclick="limparCamposHora()">Limpar campos</button>
+      </div>
+
+      <textarea id="resultadoHora" placeholder="A mensagem hora em hora aparecerá aqui..."></textarea>
+    </section>
+
+    <section id="fechamento" class="tab-content">
+      <div class="info-box">
+        Preencha os indicadores do fechamento. Nas justificativas, adicione quantas rotas ofensoras forem necessárias.
+      </div>
+
+      <h3 class="section-title">Dados principais</h3>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Data</label>
+          <input id="fData" placeholder="Ex: 28/05/2026" />
+        </div>
+
+        <div class="form-group">
+          <label>Transportadora</label>
+          <input id="fTransportadora" value="COOPMETRO" />
+        </div>
+
+        <div class="form-group">
+          <label>DS Final</label>
+          <input id="fDs" placeholder="Ex: 97,1%" />
+        </div>
+
+        <div class="form-group">
+          <label>Total de pacotes expedidos</label>
+          <input id="fExpedidos" placeholder="Ex: 373" />
+        </div>
+
+        <div class="form-group">
+          <label>Percentual de falhas de entregas</label>
+          <input id="fPercentual" placeholder="Ex: 2,9%" />
+        </div>
+
+        <div class="form-group">
+          <label>Quantidade de pacotes por falhas</label>
+          <input id="fQtdFalhas" placeholder="Ex: 11" />
+        </div>
+
+        <div class="form-group">
+          <label>Total de rotas</label>
+          <input id="fRotas" placeholder="Ex: 06" />
+        </div>
+
+        <div class="form-group">
+          <label>Total de no shows</label>
+          <input id="fNoShows" placeholder="Ex: 00" />
+        </div>
+
+        <div class="form-group">
+          <label>Total de ambulâncias</label>
+          <input id="fAmbulancias" placeholder="Ex: 03" />
+        </div>
+      </div>
+
+      <h3 class="section-title">Relatório por motivos</h3>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Não havia ninguém no endereço</label>
+          <input id="motivoNinguem" placeholder="Ex: 02" />
+        </div>
+
+        <div class="form-group">
+          <label>Pacote de outra área</label>
+          <input id="motivoOutraArea" placeholder="Ex: 02" />
+        </div>
+
+        <div class="form-group">
+          <label>Negócio fechado</label>
+          <input id="motivoNegocioFechado" placeholder="Ex: 07" />
+        </div>
+
+        <div class="form-group">
+          <label>Endereço incorreto ou incompleto</label>
+          <input id="motivoEndereco" placeholder="Ex: 00" />
+        </div>
+
+        <div class="form-group">
+          <label>Faltante</label>
+          <input id="motivoFaltante" placeholder="Ex: 00" />
+        </div>
+
+        <div class="form-group">
+          <label>Recusado</label>
+          <input id="motivoRecusado" placeholder="Ex: 00" />
+        </div>
+      </div>
+
+      <h3 class="section-title">Justificativas rotas ofensoras</h3>
+
+      <div id="rotasOfensoras"></div>
+
+      <div class="actions">
+        <button class="action add" onclick="adicionarRotaOfensora()">Adicionar rota ofensora</button>
+        <button class="action generate" onclick="gerarFechamento()">Gerar fechamento</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoFechamento')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoFechamento')">Limpar mensagem</button>
+      </div>
+
+      <textarea id="resultadoFechamento" placeholder="O fechamento aparecerá aqui..."></textarea>
+    </section>
+
+    <section id="scheduling" class="tab-content">
+      <div class="info-box">
+        Pedido de ajuste de Scheduling. Você pode adicionar mais de um tipo de veículo na mesma mensagem, como Utilitário, Passeio e VUC.
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>MLP</label>
+          <input id="sMlp" placeholder="Ex: Entrevias" />
+        </div>
+
+        <div class="form-group">
+          <label>Data</label>
+          <input id="sData" placeholder="Ex: 29/05/2026" />
+        </div>
+
+        <div class="form-group">
+          <label>Ciclo</label>
+          <select id="sCiclo">
+            <option value="AM">AM</option>
+            <option value="PM" selected>PM</option>
+            <option value="SD">SD</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Ação</label>
+          <select id="sAcao">
+            <option value="Adicionar">Adicionar</option>
+            <option value="Remover">Remover</option>
+            <option value="Ajustar">Ajustar</option>
+          </select>
+        </div>
+
+        <div class="form-group full">
+          <label>Observação</label>
+          <input id="sObs" placeholder="Ex: SACA" />
+        </div>
+      </div>
+
+      <h3 class="section-title">Veículos solicitados</h3>
+
+      <div id="veiculosScheduling"></div>
+
+      <div class="actions">
+        <button class="action add" onclick="adicionarVeiculoScheduling()">Adicionar veículo</button>
+        <button class="action danger" onclick="limparVeiculosScheduling()">Limpar veículos</button>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarScheduling()">Gerar mensagem</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoScheduling')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoScheduling')">Limpar mensagem</button>
+        <button class="action clear" onclick="limparCamposScheduling()">Limpar tudo</button>
+      </div>
+
+      <textarea id="resultadoScheduling" placeholder="A mensagem de scheduling aparecerá aqui..."></textarea>
+    </section>
+
+    <section id="clientes" class="tab-content">
+      <div class="info-box">
+        Mensagens rápidas para clientes. Preencha nome do cliente, rota e parada. Depois escolha o motivo e gere a mensagem.
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Tipo de mensagem</label>
+          <select id="clienteTipo">
+            <option value="ausente">Ausente</option>
+            <option value="comercio">Comércio fechado</option>
+            <option value="condominio">Condomínio</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Nome do cliente</label>
+          <input id="clienteNome" placeholder="Ex: João" />
+        </div>
+
+        <div class="form-group">
+          <label>Rota</label>
+          <input id="clienteRota" placeholder="Ex: C1_PM1" />
+        </div>
+
+        <div class="form-group">
+          <label>Parada</label>
+          <input id="clienteParada" placeholder="Ex: 45" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarMensagemCliente()">Gerar mensagem</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoCliente')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoCliente')">Limpar mensagem</button>
+        <button class="action clear" onclick="limparCamposCliente()">Limpar campos</button>
+      </div>
+
+      <textarea id="resultadoCliente" placeholder="A mensagem para cliente aparecerá aqui..."></textarea>
+    </section>
+
+    <section id="escala" class="tab-content">
+      <div class="info-box">
+        Suba o CSV da operação. Primeiro ele aparece formatado em colunas. Depois você pode gerar uma escala simplificada com Onda, Rota Otimizada, Doca, Transportadora COOPMETRO e campo para preencher o Driver.
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group full">
+          <label>Arquivo CSV da escala</label>
+          <input type="file" id="arquivoEscalaCsv" accept=".csv,text/csv" onchange="carregarCsvEscala(event)" />
+        </div>
+      </div>
+
+      <h3 class="section-title">CSV formatado completo</h3>
+      <div class="excel-note">Visual compacto estilo Excel. Passe o mouse sobre as linhas e role para os lados se precisar.</div>
+      <div class="excel-wrapper">
+        <table id="tabelaCsvCompleto" class="excel-table">
+          <thead>
+            <tr>
+              <th>Aguardando CSV...</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h3 class="section-title">Escala simplificada</h3>
+      <div class="table-wrapper">
+        <table id="tabelaEscalaSimplificada">
+          <thead>
+            <tr>
+              <th>Onda</th>
+              <th>Rota Otimizada</th>
+              <th>Doca</th>
+              <th>Transportadora</th>
+              <th>Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td colspan="5">Suba um CSV para montar a escala.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarImagemEscala()">Gerar escala em imagem</button>
+        <button class="action clear" onclick="limparEscala()">Limpar escala</button>
+      </div>
+
+      <canvas id="canvasEscala" class="hidden"></canvas>
+      <div id="areaImagemEscala"></div>
+    </section>
+
+
+    <section id="fechamentoRota" class="tab-content">
+      <div class="info-box">
+        Gere uma mensagem rápida de fechamento de rota. A transportadora fica fixa como CoopMetro.
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Transportadora</label>
+          <input id="frTransportadora" value="CoopMetro" readonly />
+        </div>
+
+        <div class="form-group">
+          <label>Driver</label>
+          <input id="frDriver" placeholder="Ex: Ricardo Pinheiro da Silva" />
+        </div>
+
+        <div class="form-group">
+          <label>ID rota</label>
+          <input id="frIdRota" placeholder="Ex: 386445718" />
+        </div>
+
+        <div class="form-group full">
+          <label>Motivo</label>
+          <input id="frMotivo" placeholder="Ex: pacote faltante" />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="action generate" onclick="gerarFechamentoRota()">Gerar mensagem</button>
+        <button class="action copy" onclick="copiarMensagem('resultadoFechamentoRota')">Copiar mensagem</button>
+        <button class="action clear" onclick="limparResultado('resultadoFechamentoRota')">Limpar mensagem</button>
+        <button class="action clear" onclick="limparCamposFechamentoRota()">Limpar campos</button>
+      </div>
+
+      <textarea id="resultadoFechamentoRota" placeholder="A mensagem de fechamento de rota aparecerá aqui..."></textarea>
+    </section>
+
+  </div>
+
+  <footer class="footer-creditos">
+    🚚 DispatcherDesk - Coopmetro | Feito por <strong>EDINAN MAGALHÃES</strong>, SEU DISPATCHER FAVORITO!
+  </footer>
+
+  <script>
+
+    function fecharPopupInicial() {
+      const popup = document.getElementById('popupInicial');
+      if (popup) {
+        popup.classList.add('hidden-popup');
+      }
+    }
+
+    let contadorRotas = 0;
+    let contadorVeiculosScheduling = 0;
+    let dadosEscalaCsv = [];
+    let colunasEscalaCsv = [];
+
+    let alarmeHoraAtivo = false;
+    let intervaloAlarmeHora = null;
+    let ultimoLembreteTocado = null;
+    let audioContexto = null;
+    let primeiraHoraData = null;
+    let proximoLembreteData = null;
+
+    function abrirAba(id, botao) {
+      document.querySelectorAll('.tab-content').forEach(aba => {
+        aba.classList.remove('active');
+      });
+
+      document.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById(id).classList.add('active');
+      botao.classList.add('active');
+    }
+
+    function valor(id) {
+      const elemento = document.getElementById(id);
+      return elemento ? elemento.value.trim() : '';
+    }
+
+    function formatarHora(data, comSegundos = false) {
+      const hora = String(data.getHours()).padStart(2, '0');
+      const minuto = String(data.getMinutes()).padStart(2, '0');
+      const segundo = String(data.getSeconds()).padStart(2, '0');
+
+      return comSegundos ? `${hora}:${minuto}:${segundo}` : `${hora}:${minuto}`;
+    }
+
+    function atualizarRelogio() {
+      const agora = new Date();
+
+      const relogio = document.getElementById('relogioAtual');
+      if (relogio) relogio.textContent = formatarHora(agora, true);
+
+      atualizarProximoLembrete();
+    }
+
+    function calcularProximoLembrete() {
+      if (!primeiraHoraData) return null;
+
+      const agora = new Date();
+      let lembrete = new Date(primeiraHoraData.getTime() + 55 * 60 * 1000);
+
+      while (lembrete <= agora) {
+        lembrete = new Date(lembrete.getTime() + 60 * 60 * 1000);
+      }
+
+      return lembrete;
+    }
+
+    function atualizarProximoLembrete() {
+      const campo = document.getElementById('proximoLembreteHora');
+
+      if (!campo) return;
+
+      if (!primeiraHoraData) {
+        campo.textContent = 'Registre a primeira hora';
+        return;
+      }
+
+      proximoLembreteData = calcularProximoLembrete();
+
+      if (proximoLembreteData) {
+        campo.textContent = formatarHora(proximoLembreteData, false);
+      }
+    }
+
+    function registrarPrimeiraHora() {
+      const agora = new Date();
+      primeiraHoraData = new Date(agora);
+      ultimoLembreteTocado = null;
+
+      const horaFormatada = formatarHora(primeiraHoraData, false);
+
+      const campoPrimeiraHora = document.getElementById('primeiraHoraEnviada');
+      if (campoPrimeiraHora) {
+        campoPrimeiraHora.textContent = horaFormatada;
+      }
+
+      const campoHorarioMensagem = document.getElementById('hhHorario');
+      if (campoHorarioMensagem) {
+        campoHorarioMensagem.value = horaFormatada;
+      }
+
+      atualizarProximoLembrete();
+
+      const status = document.getElementById("statusAlarmeHora");
+      status.classList.remove("alarm-off");
+      status.classList.add("alarm-on");
+      status.innerHTML = `Primeira hora registrada às ${horaFormatada}. O primeiro lembrete tocará 55 minutos depois.`;
+    }
+
+    function limparPrimeiraHora() {
+      primeiraHoraData = null;
+      proximoLembreteData = null;
+      ultimoLembreteTocado = null;
+
+      const campoPrimeiraHora = document.getElementById('primeiraHoraEnviada');
+      if (campoPrimeiraHora) {
+        campoPrimeiraHora.textContent = 'Não registrada';
+      }
+
+      const campoProximo = document.getElementById('proximoLembreteHora');
+      if (campoProximo) {
+        campoProximo.textContent = 'Registre a primeira hora';
+      }
+
+      const status = document.getElementById("statusAlarmeHora");
+      status.classList.remove("alarm-on");
+      status.classList.add("alarm-off");
+      status.innerHTML = "Primeira hora apagada. Registre novamente para iniciar a contagem do alarme.";
+    }
+
+    function alternarCondominio() {
+      const tipo = valor('tipoMotivo');
+      const campo = document.getElementById('campoCondominio');
+
+      if (tipo === 'condominio') {
+        campo.classList.remove('hidden');
+      } else {
+        campo.classList.add('hidden');
+      }
+    }
+
+    function alternarRotaAberta() {
+      const tipo = valor('tipoAmbulancia');
+      const campo = document.getElementById('campoRotaAberta');
+
+      if (tipo === 'abertura') {
+        campo.classList.remove('hidden');
+      } else {
+        campo.classList.add('hidden');
+      }
+    }
+
+    function gerarAmbulancia() {
+      const tipoMensagem = valor('tipoAmbulancia');
+      const tipoMotivo = valor('tipoMotivo');
+
+      const semana = valor('semana');
+      const data = valor('data');
+      const transportadora = valor('transportadora');
+      const regiao = valor('regiao');
+      const driver = valor('driver');
+      const rotaOriginal = valor('rotaOriginal');
+      const rotaAberta = valor('rotaAberta');
+      const rota = valor('rota');
+      const spr = valor('spr');
+      const paradas = valor('paradas');
+      const pacotesPendentes = valor('pacotesPendentes');
+      const condominio = valor('condominio');
+      const complemento = valor('complementoMotivo');
+
+      const titulo = tipoMensagem === 'abertura'
+        ? 'ABERTURA DE AMBULÂNCIA'
+        : 'SOLICITAÇÃO DE AMBULÂNCIA';
+
+      const linhaRotaAberta = tipoMensagem === 'abertura'
+        ? `ROTA ABERTA: ${rotaAberta}\n`
+        : '';
+
+      let motivo = '';
+
+      if (tipoMotivo === 'condominio') {
+        motivo = `Solicito ambulância para a rota ${rota} com spr de ${spr} pacotes e ${paradas} paradas, devido ao alto volume operacional da rota e à presença do condomínio ${condominio || '[NOME DO CONDOMÍNIO]'}, que possui restrição de acesso, necessidade de cadastro na entrada, procedimentos internos obrigatórios e horários limitados para atendimento. Essa condição aumenta o tempo de permanência do driver na região, reduz a produtividade por parada e dificulta eventuais reversões dentro da janela operacional.${complemento ? ' ' + complemento : ''} Sem apoio, há risco elevado de impacto no ORH da rota, aumento de pacotes pendentes, queda na performance do driver e prejuízo direto no resultado da operação.`;
+      } else {
+        motivo = `Solicito ambulância para a rota ${rota} com spr de ${spr} pacotes e ${paradas} paradas, devido ao alto volume operacional da rota, região com deslocamentos internos demorados e baixa produtividade por parada. A rota possui pontos com restrição de acesso, necessidade de procedimentos de entrada e horários limitados para atendimento, o que compromete o cumprimento da janela operacional.${complemento ? ' ' + complemento : ''} Sem apoio, há risco elevado de impacto no ORH da rota, aumento de pacotes pendentes, queda na performance do driver e prejuízo direto no resultado da operação.`;
+      }
+
+      const mensagem = `${titulo}
+
+Semana: ${semana}
+DATA : ${data}
+TRANSPORTADORA : ${transportadora}
+REGIÃO : ${regiao}
+DRIVER : ${driver}
+ROTA ORIGINAL: ${rotaOriginal}
+${linhaRotaAberta}Pacotes pendentes a serem entregues: ${pacotesPendentes}
+MOTIVO : ${motivo}`;
+
+      document.getElementById('resultadoAmbulancia').value = mensagem;
+    }
+
+    function gerarHora() {
+      const mensagem = `Monitor(a): ${valor('hhMonitor')}
+🚘MLP: ${valor('hhMlp')}
+⏱️ Horário: ${valor('hhHorario')}
+🚗 Rotas sem atividade: ${valor('hhSemAtividade')}
+📉 Insucessos: ${valor('hhInsucessos')}
+🚙 Rotas em atraso: ${valor('hhAtraso')}
+⚙️ Em tratativa: ${valor('hhTratativa')}
+❌ Sem reversão: ${valor('hhSemReversao')}
+✅Revertidos: ${valor('hhRevertidos')}
+🚨 Rotas pendentes: ${valor('hhPendentes')}`;
+
+      document.getElementById('resultadoHora').value = mensagem;
+    }
+
+    function tocarAlarmeHora() {
+      try {
+        if (!audioContexto) {
+          audioContexto = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        if (audioContexto.state === 'suspended') {
+          audioContexto.resume();
+        }
+
+        const duracao = 7;
+        const agora = audioContexto.currentTime;
+
+        const oscillator = audioContexto.createOscillator();
+        const gain = audioContexto.createGain();
+
+        oscillator.type = "sawtooth";
+
+        oscillator.frequency.setValueAtTime(300, agora);
+        oscillator.frequency.linearRampToValueAtTime(900, agora + 1);
+        oscillator.frequency.linearRampToValueAtTime(300, agora + 2);
+        oscillator.frequency.linearRampToValueAtTime(900, agora + 3);
+        oscillator.frequency.linearRampToValueAtTime(300, agora + 4);
+        oscillator.frequency.linearRampToValueAtTime(900, agora + 5);
+        oscillator.frequency.linearRampToValueAtTime(300, agora + 6);
+        oscillator.frequency.linearRampToValueAtTime(700, agora + 7);
+
+        gain.gain.setValueAtTime(0.001, agora);
+        gain.gain.linearRampToValueAtTime(0.5, agora + 0.3);
+        gain.gain.setValueAtTime(0.5, agora + duracao - 0.6);
+        gain.gain.exponentialRampToValueAtTime(0.001, agora + duracao);
+
+        oscillator.connect(gain);
+        gain.connect(audioContexto.destination);
+
+        oscillator.start(agora);
+        oscillator.stop(agora + duracao);
+      } catch (erro) {
+        console.log("Não foi possível tocar o alarme:", erro);
+      }
+    }
+
+    function ativarAlarmeHora() {
+      if (!primeiraHoraData) {
+        alert("Registre a primeira hora antes de ativar o alarme.");
+        return;
+      }
+
+      alarmeHoraAtivo = true;
+
+      const status = document.getElementById("statusAlarmeHora");
+      status.classList.remove("alarm-off");
+      status.classList.add("alarm-on");
+      status.innerHTML = "Alarme Hora em Hora ativado. A sirene tocará 55 minutos após a primeira hora e depois de hora em hora.";
+
+      if (intervaloAlarmeHora) {
+        clearInterval(intervaloAlarmeHora);
+      }
+
+      intervaloAlarmeHora = setInterval(verificarAlarmeHora, 1000);
+      verificarAlarmeHora();
+    }
+
+    function desativarAlarmeHora() {
+      alarmeHoraAtivo = false;
+
+      if (intervaloAlarmeHora) {
+        clearInterval(intervaloAlarmeHora);
+        intervaloAlarmeHora = null;
+      }
+
+      const status = document.getElementById("statusAlarmeHora");
+      status.classList.remove("alarm-on");
+      status.classList.add("alarm-off");
+      status.innerHTML = "Alarme Hora em Hora desativado.";
+    }
+
+    function verificarAlarmeHora() {
+      if (!alarmeHoraAtivo || !primeiraHoraData) return;
+
+      const agora = new Date();
+      const lembrete = calcularProximoLembrete();
+
+      if (!lembrete) return;
+
+      const diferencaMs = lembrete.getTime() - agora.getTime();
+
+      if (diferencaMs <= 1000 && diferencaMs >= -30000) {
+        const chaveLembrete = lembrete.toISOString();
+
+        if (ultimoLembreteTocado !== chaveLembrete) {
+          ultimoLembreteTocado = chaveLembrete;
+
+          tocarAlarmeHora();
+
+          const status = document.getElementById("statusAlarmeHora");
+          status.classList.remove("alarm-off");
+          status.classList.add("alarm-on");
+          status.innerHTML = `🚨 Lembrete: hora de preparar/enviar o Hora em Hora. Próximo ciclo seguirá em 1 hora.`;
+
+          alert("🚨 Lembrete: hora de preparar/enviar o Hora em Hora.");
+        }
+      }
+    }
+
+    function adicionarRotaOfensora() {
+      contadorRotas++;
+
+      const container = document.getElementById('rotasOfensoras');
+
+      const card = document.createElement('div');
+      card.className = 'rota-card';
+      card.id = `rotaCard${contadorRotas}`;
+
+      card.innerHTML = `
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label>ID Rota</label>
+            <input id="rotaId${contadorRotas}" placeholder="Ex: 385924197" />
+          </div>
+
+          <div class="form-group">
+            <label>ID Driver</label>
+            <input id="rotaDriver${contadorRotas}" placeholder="Ex: Wisley de Paula Macedo" />
+          </div>
+
+          <div class="form-group">
+            <label>Pacotes afetados</label>
+            <input id="rotaPacotes${contadorRotas}" placeholder="Ex: 08" />
+          </div>
+
+          <div class="form-group">
+            <label>Suporte em rota</label>
+            <select id="rotaSuporte${contadorRotas}">
+              <option value="Não">Não</option>
+              <option value="Sim">Sim</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label>Motivo</label>
+            <textarea class="textarea-small" id="rotaMotivo${contadorRotas}" placeholder="Digite o motivo da rota ofensora..."></textarea>
+          </div>
+        </div>
+
+        <button class="action clear" onclick="removerRotaOfensora(${contadorRotas})">Remover esta rota</button>
+      `;
+
+      container.appendChild(card);
+    }
+
+    function removerRotaOfensora(numero) {
+      const card = document.getElementById(`rotaCard${numero}`);
+      if (card) card.remove();
+    }
+
+    function gerarFechamento() {
+      let motivos = '';
+
+      const listaMotivos = [
+        ['Não havia ninguém no endereço', valor('motivoNinguem')],
+        ['Pacote de outra área', valor('motivoOutraArea')],
+        ['Negócio fechado', valor('motivoNegocioFechado')],
+        ['Endereço incorreto ou incompleto', valor('motivoEndereco')],
+        ['Faltante', valor('motivoFaltante')],
+        ['Recusado', valor('motivoRecusado')]
+      ];
+
+      listaMotivos.forEach(item => {
+        if (item[1]) {
+          motivos += `* ${item[0]}: ${item[1]}\n`;
+        }
+      });
+
+      let justificativas = '';
+
+      for (let i = 1; i <= contadorRotas; i++) {
+        const card = document.getElementById(`rotaCard${i}`);
+
+        if (card) {
+          const idRota = valor(`rotaId${i}`);
+          const driver = valor(`rotaDriver${i}`);
+          const pacotes = valor(`rotaPacotes${i}`);
+          const suporte = valor(`rotaSuporte${i}`);
+          const motivo = valor(`rotaMotivo${i}`);
+
+          if (idRota || driver || pacotes || motivo) {
+            justificativas += `
+
+* ID Rota: ${idRota}
+•⁠ ID Driver: ${driver}
+•⁠ Pacotes afetados: ${pacotes}
+•⁠ Suporte em rota: ${suporte}
+•⁠ MOTIVO : *${motivo}`;
+          }
+        }
+      }
+
+      const mensagem = `📊 Relatório de Performance e DS. 
+
+🚛 Transportadora: ${valor('fTransportadora')}
+ 📅 Data: ${valor('fData')}  
+📈 DS Final: ${valor('fDs')}  
+* Total de pacotes expedidos: ${valor('fExpedidos')}  
+* Percentual de falhas de entregas: ${valor('fPercentual')}  
+* Quantidade de pacotes  por falhas de entrega: ${valor('fQtdFalhas')} 
+
+
+* Total de rotas:  ${valor('fRotas')}
+* Total de no shows:  ${valor('fNoShows')} 
+* Total de ambulâncias: ${valor('fAmbulancias')}
+
+🚨 Relatório por Motivos:
+${motivos}
+🚗 Justificativas rotas
+ ofensoras:
+${justificativas}`;
+
+      document.getElementById('resultadoFechamento').value = mensagem;
+    }
+
+    function adicionarVeiculoScheduling(tipoPadrao = 'Utilitário', quantidadePadrao = '1', modalidadePadrao = 'SDD') {
+      contadorVeiculosScheduling++;
+
+      const container = document.getElementById('veiculosScheduling');
+
+      const card = document.createElement('div');
+      card.className = 'veiculo-card';
+      card.id = `veiculoCard${contadorVeiculosScheduling}`;
+
+      card.innerHTML = `
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Tipo de veículo</label>
+            <select id="sVeiculo${contadorVeiculosScheduling}">
+              <option value="Utilitário">Utilitário</option>
+              <option value="Passeio">Passeio</option>
+              <option value="VUC">VUC</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Quantidade</label>
+            <input id="sQuantidade${contadorVeiculosScheduling}" placeholder="Ex: 1" />
+          </div>
+
+          <div class="form-group">
+            <label>Modalidade</label>
+            <select id="sModalidade${contadorVeiculosScheduling}">
+              <option value="SDD">SDD</option>
+              <option value="SPOT">SPOT</option>
+            </select>
+          </div>
+        </div>
+
+        <button class="action clear" onclick="removerVeiculoScheduling(${contadorVeiculosScheduling})">Remover este veículo</button>
+      `;
+
+      container.appendChild(card);
+
+      document.getElementById(`sVeiculo${contadorVeiculosScheduling}`).value = tipoPadrao;
+      document.getElementById(`sQuantidade${contadorVeiculosScheduling}`).value = quantidadePadrao;
+      document.getElementById(`sModalidade${contadorVeiculosScheduling}`).value = modalidadePadrao;
+    }
+
+    function removerVeiculoScheduling(numero) {
+      const card = document.getElementById(`veiculoCard${numero}`);
+      if (card) card.remove();
+    }
+
+    function limparVeiculosScheduling() {
+      document.getElementById('veiculosScheduling').innerHTML = '';
+      contadorVeiculosScheduling = 0;
+      adicionarVeiculoScheduling();
+    }
+
+    function gerarScheduling() {
+      let listaVeiculos = '';
+
+      for (let i = 1; i <= contadorVeiculosScheduling; i++) {
+        const card = document.getElementById(`veiculoCard${i}`);
+
+        if (card) {
+          const veiculo = valor(`sVeiculo${i}`);
+          const quantidade = valor(`sQuantidade${i}`) || '1';
+          const modalidade = valor(`sModalidade${i}`);
+
+          if (veiculo) {
+            listaVeiculos += `${veiculo}-${quantidade}\n${modalidade}\n\n`;
+          }
+        }
+      }
+
+      const mensagem = `Ajuste de Schedulling
+MLP: ${valor('sMlp')}
+Data: ${valor('sData')} Ciclo  ${valor('sCiclo')}
+${valor('sAcao')} 
+
+${listaVeiculos.trim()}
+
+
+
+
+OBS: ${valor('sObs')}`;
+
+      document.getElementById('resultadoScheduling').value = mensagem;
+    }
+
+    function gerarMensagemCliente() {
+      const tipo = valor('clienteTipo');
+      const nome = valor('clienteNome') || 'cliente';
+      const rota = valor('clienteRota');
+      const parada = valor('clienteParada');
+
+      let mensagem = '';
+
+      if (tipo === 'ausente') {
+        mensagem = `Olá, ${nome}. Tudo bem?
+
+Sou da transportadora CoopMetro, responsável pela sua entrega do Mercado Livre.
+
+Identificamos que não havia ninguém no endereço no momento da tentativa de entrega.
+
+Rota: ${rota}
+Parada: ${parada}
+
+Poderia confirmar, por gentileza, se há alguém disponível para receber o pacote ou se existe alguma orientação para facilitar a entrega?`;
+      }
+
+      if (tipo === 'comercio') {
+        mensagem = `Olá, ${nome}. Tudo bem?
+
+Sou da transportadora CoopMetro, responsável pela sua entrega do Mercado Livre.
+
+No momento da tentativa de entrega, o comércio estava fechado.
+
+Rota: ${rota}
+Parada: ${parada}
+
+Poderia informar, por gentileza, o melhor horário para recebimento ou se há alguém autorizado a receber o pacote?`;
+      }
+
+      if (tipo === 'condominio') {
+        mensagem = `Olá, ${nome}. Tudo bem?
+
+Sou da transportadora CoopMetro, responsável pela sua entrega do Mercado Livre.
+
+Sua entrega está em condomínio e precisamos confirmar algumas informações para agilizar o acesso do motorista.
+
+Rota: ${rota}
+Parada: ${parada}
+
+Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou autorização na portaria, caso seja necessário?`;
+      }
+
+      document.getElementById('resultadoCliente').value = mensagem;
+    }
+
+
+    function parseCSV(texto) {
+      texto = texto.replace(/^\uFEFF/, '');
+      const linhas = [];
+      let linha = [];
+      let campo = '';
+      let dentroAspas = false;
+
+      for (let i = 0; i < texto.length; i++) {
+        const char = texto[i];
+        const proximo = texto[i + 1];
+
+        if (char === '"' && dentroAspas && proximo === '"') {
+          campo += '"';
+          i++;
+        } else if (char === '"') {
+          dentroAspas = !dentroAspas;
+        } else if (char === ',' && !dentroAspas) {
+          linha.push(campo);
+          campo = '';
+        } else if ((char === '\n' || char === '\r') && !dentroAspas) {
+          if (char === '\r' && proximo === '\n') i++;
+          linha.push(campo);
+          if (linha.some(valor => valor.trim() !== '')) {
+            linhas.push(linha);
+          }
+          linha = [];
+          campo = '';
+        } else {
+          campo += char;
+        }
+      }
+
+      if (campo.length > 0 || linha.length > 0) {
+        linha.push(campo);
+        if (linha.some(valor => valor.trim() !== '')) {
+          linhas.push(linha);
+        }
+      }
+
+      return linhas;
+    }
+
+    function carregarCsvEscala(event) {
+      const arquivo = event.target.files[0];
+
+      if (!arquivo) return;
+
+      const leitor = new FileReader();
+
+      leitor.onload = function(e) {
+        const texto = e.target.result;
+        const linhas = parseCSV(texto);
+
+        if (!linhas.length) {
+          alert('Não foi possível ler o CSV.');
+          return;
+        }
+
+        colunasEscalaCsv = linhas[0].map(coluna => coluna.trim());
+        dadosEscalaCsv = linhas.slice(1).map(linha => {
+          const obj = {};
+          colunasEscalaCsv.forEach((coluna, index) => {
+            obj[coluna] = linha[index] ? linha[index].trim() : '';
+          });
+          return obj;
+        });
+
+        montarTabelaCsvCompleto();
+        montarTabelaEscalaSimplificada();
+        document.getElementById('areaImagemEscala').innerHTML = '';
+      };
+
+      leitor.readAsText(arquivo, 'UTF-8');
+    }
+
+    function montarTabelaCsvCompleto() {
+      const tabela = document.getElementById('tabelaCsvCompleto');
+      const thead = tabela.querySelector('thead');
+      const tbody = tabela.querySelector('tbody');
+
+      const normalizarColuna = texto => String(texto || '')
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, ' ')
+        .replace(/:/g, '');
+
+      const colunasOcultas = [
+        'PLACA',
+        'TIPO DE ROTA',
+        'CLUSTER ID',
+        'ID DA ROTA',
+        'ATENDER COM'
+      ];
+
+      const colunasVisiveis = colunasEscalaCsv.filter(coluna => {
+        return !colunasOcultas.includes(normalizarColuna(coluna));
+      });
+
+      thead.innerHTML = `
+        <tr>
+          ${colunasVisiveis.map(coluna => `<th>${coluna}</th>`).join('')}
+        </tr>
+      `;
+
+      tbody.innerHTML = dadosEscalaCsv.map(linha => `
+        <tr>
+          ${colunasVisiveis.map(coluna => `<td class="${normalizarColuna(coluna) === 'REGIAO' || normalizarColuna(coluna) === 'REGIÃO' ? 'celula-regiao' : ''}" title="${linha[coluna] || ''}">${linha[coluna] || ''}</td>`).join('')}
+        </tr>
+      `).join('');
+    }
+
+    function montarTabelaEscalaSimplificada() {
+      const tbody = document.querySelector('#tabelaEscalaSimplificada tbody');
+
+      if (!dadosEscalaCsv.length) {
+        tbody.innerHTML = '<tr><td colspan="5">Suba um CSV para montar a escala.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = dadosEscalaCsv.map((linha, index) => {
+        const onda = linha['Onda'] || '';
+        const rotaOtimizada = linha['Rota otimizada'] || linha['Rota Otimizada'] || '';
+        const doca = linha['Doca'] || '';
+        const transportadora = 'COOPMETRO';
+
+        return `
+          <tr>
+            <td>${onda}</td>
+            <td>${rotaOtimizada}</td>
+            <td>${doca}</td>
+            <td>${transportadora}</td>
+            <td>
+              <input class="driver-input" id="driverEscala${index}" placeholder="Preencher driver" />
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function quebrarTextoCanvas(ctx, texto, larguraMaxima) {
+      const palavras = String(texto || '').split(' ');
+      const linhas = [];
+      let linhaAtual = '';
+
+      palavras.forEach(palavra => {
+        const teste = linhaAtual ? linhaAtual + ' ' + palavra : palavra;
+        const medida = ctx.measureText(teste).width;
+
+        if (medida > larguraMaxima && linhaAtual) {
+          linhas.push(linhaAtual);
+          linhaAtual = palavra;
+        } else {
+          linhaAtual = teste;
+        }
+      });
+
+      if (linhaAtual) linhas.push(linhaAtual);
+      return linhas;
+    }
+
+    function gerarImagemEscala() {
+      if (!dadosEscalaCsv.length) {
+        alert('Suba um CSV antes de gerar a imagem da escala.');
+        return;
+      }
+
+      const escala = dadosEscalaCsv.map((linha, index) => ({
+        onda: linha['Onda'] || '',
+        rota: linha['Rota otimizada'] || linha['Rota Otimizada'] || '',
+        doca: linha['Doca'] || '',
+        transportadora: 'COOPMETRO',
+        driver: valor(`driverEscala${index}`)
+      }));
+
+      const canvas = document.getElementById('canvasEscala');
+      const ctx = canvas.getContext('2d');
+
+      const largura = 1400;
+      const margem = 50;
+      const alturaCabecalho = 120;
+      const alturaLinha = 72;
+      const altura = alturaCabecalho + 70 + escala.length * alturaLinha + 60;
+
+      canvas.width = largura;
+      canvas.height = altura;
+
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, largura, altura);
+
+      ctx.fillStyle = 'var(--primary)';
+      ctx.fillRect(0, 0, largura, alturaCabecalho);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 42px Arial';
+      ctx.fillText('ESCALA COOPMETRO', margem, 55);
+
+      ctx.font = '24px Arial';
+      const dataHoje = new Date().toLocaleDateString('pt-BR');
+      ctx.fillText(`Data: ${dataHoje}`, margem, 92);
+
+      const inicioY = alturaCabecalho + 35;
+      const colunas = [
+        { titulo: 'ONDA', x: margem, w: 180 },
+        { titulo: 'ROTA OTIMIZADA', x: 230, w: 260 },
+        { titulo: 'DOCA', x: 520, w: 120 },
+        { titulo: 'TRANSPORTADORA', x: 670, w: 260 },
+        { titulo: 'DRIVER', x: 960, w: 360 }
+      ];
+
+      ctx.fillStyle = 'var(--secondary)';
+      ctx.fillRect(margem, inicioY, largura - margem * 2, 44);
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 22px Arial';
+      colunas.forEach(coluna => {
+        ctx.fillText(coluna.titulo, coluna.x, inicioY + 29);
+      });
+
+      let y = inicioY + 44;
+
+      escala.forEach((item, index) => {
+        ctx.fillStyle = index % 2 === 0 ? 'var(--bg)' : '#ffffff';
+        ctx.fillRect(margem, y, largura - margem * 2, alturaLinha);
+
+        ctx.strokeStyle = 'var(--line)';
+        ctx.strokeRect(margem, y, largura - margem * 2, alturaLinha);
+
+        ctx.fillStyle = 'var(--text)';
+        ctx.font = '22px Arial';
+
+        ctx.fillText(item.onda, colunas[0].x, y + 43);
+        ctx.fillText(item.rota, colunas[1].x, y + 43);
+        ctx.fillText(item.doca, colunas[2].x, y + 43);
+        ctx.fillText(item.transportadora, colunas[3].x, y + 43);
+
+        const linhasDriver = quebrarTextoCanvas(ctx, item.driver || '', colunas[4].w);
+        if (linhasDriver.length) {
+          linhasDriver.slice(0, 2).forEach((linhaTexto, linhaIndex) => {
+            ctx.fillText(linhaTexto, colunas[4].x, y + 32 + linhaIndex * 24);
+          });
+        } else {
+          ctx.fillStyle = '#98a2b3';
+          ctx.fillText('________________', colunas[4].x, y + 43);
+        }
+
+        y += alturaLinha;
+      });
+
+      ctx.fillStyle = 'var(--primary)';
+      ctx.font = 'bold 20px Arial';
+      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 25);
+
+      const imagem = canvas.toDataURL('image/png');
+
+      document.getElementById('areaImagemEscala').innerHTML = `
+        <img class="preview-image" src="${imagem}" alt="Escala gerada" />
+        <br />
+        <a class="download-link" href="${imagem}" download="escala_coopmetro.png">Baixar imagem da escala</a>
+      `;
+    }
+
+    function limparEscala() {
+      dadosEscalaCsv = [];
+      colunasEscalaCsv = [];
+      document.getElementById('arquivoEscalaCsv').value = '';
+      document.querySelector('#tabelaCsvCompleto thead').innerHTML = '<tr><th>Aguardando CSV...</th></tr>';
+      document.querySelector('#tabelaCsvCompleto tbody').innerHTML = '';
+      document.querySelector('#tabelaEscalaSimplificada tbody').innerHTML = '<tr><td colspan="5">Suba um CSV para montar a escala.</td></tr>';
+      document.getElementById('areaImagemEscala').innerHTML = '';
+    }
+
+
+
+    function gerarFechamentoRota() {
+      const mensagem = `Fechamento de Rota
+Transportadora: ${valor('frTransportadora')}
+Driver: ${valor('frDriver')}
+Id rota: ${valor('frIdRota')}
+Motivo: ${valor('frMotivo')}`;
+
+      document.getElementById('resultadoFechamentoRota').value = mensagem;
+    }
+
+    function limparCamposFechamentoRota() {
+      const campos = [
+        'frDriver',
+        'frIdRota',
+        'frMotivo'
+      ];
+
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      document.getElementById('frTransportadora').value = 'CoopMetro';
+      document.getElementById('resultadoFechamentoRota').value = '';
+    }
+
+
+    function copiarMensagem(id) {
+      const campo = document.getElementById(id);
+
+      if (!campo.value.trim()) {
+        alert('Nenhuma mensagem foi gerada ainda.');
+        return;
+      }
+
+      campo.select();
+      campo.setSelectionRange(0, 99999);
+      document.execCommand('copy');
+
+      alert('Mensagem copiada com sucesso!');
+    }
+
+    function limparResultado(id) {
+      document.getElementById(id).value = '';
+    }
+
+    function limparCamposAmbulancia() {
+      const campos = [
+        'semana',
+        'regiao',
+        'driver',
+        'rotaOriginal',
+        'rotaAberta',
+        'rota',
+        'spr',
+        'paradas',
+        'pacotesPendentes',
+        'condominio',
+        'complementoMotivo'
+      ];
+
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      document.getElementById('resultadoAmbulancia').value = '';
+      preencherDataAtual();
+    }
+
+    function limparCamposHora() {
+      const campos = [
+        'hhMonitor',
+        'hhHorario',
+        'hhSemAtividade',
+        'hhInsucessos',
+        'hhAtraso',
+        'hhTratativa',
+        'hhSemReversao',
+        'hhRevertidos',
+        'hhPendentes'
+      ];
+
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      document.getElementById('hhMlp').value = 'COOPMETRO';
+      document.getElementById('resultadoHora').value = '';
+      preencherHorarioAtual();
+    }
+
+    function limparCamposScheduling() {
+      const campos = [
+        'sMlp',
+        'sData',
+        'sObs'
+      ];
+
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      document.getElementById('sCiclo').value = 'PM';
+      document.getElementById('sAcao').value = 'Adicionar';
+      document.getElementById('resultadoScheduling').value = '';
+
+      limparVeiculosScheduling();
+      preencherDataAtual();
+    }
+
+    function limparCamposCliente() {
+      const campos = [
+        'clienteNome',
+        'clienteRota',
+        'clienteParada'
+      ];
+
+      campos.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      document.getElementById('clienteTipo').value = 'ausente';
+      document.getElementById('resultadoCliente').value = '';
+    }
+
+    function preencherDataAtual() {
+      const hoje = new Date();
+      const dia = String(hoje.getDate()).padStart(2, '0');
+      const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+      const ano = hoje.getFullYear();
+      const dataFormatada = `${dia}/${mes}/${ano}`;
+
+      const camposData = ['data', 'fData', 'sData'];
+
+      camposData.forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo && !campo.value) campo.value = dataFormatada;
+      });
+    }
+
+    function preencherHorarioAtual() {
+      const agora = new Date();
+      const hora = String(agora.getHours()).padStart(2, '0');
+      const minuto = String(agora.getMinutes()).padStart(2, '0');
+
+      const campo = document.getElementById('hhHorario');
+      if (campo && !campo.value) campo.value = `${hora}:${minuto}`;
+    }
+
+    preencherDataAtual();
+    preencherHorarioAtual();
+    atualizarRelogio();
+    setInterval(atualizarRelogio, 1000);
+
+    alternarRotaAberta();
+    alternarCondominio();
+    adicionarRotaOfensora();
+    adicionarVeiculoScheduling();
+  </script>
+</body>
+</html>
