@@ -591,24 +591,176 @@
       }
     }
   
-    .celula-driver-escala {
-      min-width: 230px;
-      position: sticky;
-      right: 0;
+    .escala-panel {
       background: #ffffff;
-      z-index: 2;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      margin: 18px 0;
+      box-shadow: 0 12px 32px rgba(18, 60, 105, 0.08);
+    }
+
+    .escala-panel h4 {
+      margin: 0 0 12px;
+      color: var(--primary);
+      font-size: 17px;
+    }
+
+    .escala-inline-form {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(150px, 1fr)) auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .escala-inline-form.prioritarios {
+      grid-template-columns: minmax(240px, 1fr) auto;
+    }
+
+    .escala-inline-form label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .escala-inline-form input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-family: inherit;
+      color: var(--text);
+      background: #ffffff;
+    }
+
+    .mini-action {
+      border: none;
+      border-radius: 10px;
+      height: 38px;
+      padding: 0 14px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #ffffff;
+      background: var(--primary);
+      white-space: nowrap;
+    }
+
+    .mini-action.remove {
+      background: #b42318;
+      height: 30px;
+      padding: 0 10px;
+      font-size: 12px;
+    }
+
+    .lista-prioritarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .prioritario-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 10px 8px 12px;
+      background: #eef6ff;
+      border: 1px solid #b9d9ff;
+      color: var(--primary-dark);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .prioritario-chip button {
+      border: none;
+      border-radius: 999px;
+      background: #b42318;
+      color: white;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-weight: bold;
+      line-height: 1;
+    }
+
+    .suporte-table-wrapper {
+      overflow: auto;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    .suporte-table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+      background: white;
+      font-size: 13px;
+    }
+
+    .suporte-table th {
+      background: var(--primary);
+      color: white;
+      padding: 9px;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .suporte-table td {
+      border-top: 1px solid var(--line);
+      padding: 8px 9px;
+      vertical-align: middle;
+    }
+
+    .suporte-vazio {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    .excel-wrapper {
+      max-height: 78vh !important;
+      overflow-x: auto !important;
+      overflow-y: auto !important;
+      padding-bottom: 30px !important;
+      scroll-behavior: smooth;
+    }
+
+    .excel-table {
+      min-width: max-content !important;
+    }
+
+    .celula-driver-escala {
+      min-width: 260px !important;
+      position: static !important;
+      right: auto !important;
+      background: #ffffff !important;
+      z-index: auto !important;
+      overflow: visible !important;
     }
 
     .excel-table th.coluna-driver-fixa {
-      position: sticky;
-      right: 0;
-      z-index: 4;
+      min-width: 260px !important;
+      position: static !important;
+      right: auto !important;
+      z-index: auto !important;
+      background: var(--primary) !important;
+      color: #ffffff !important;
     }
 
     .campo-driver-escala {
-      width: 100%;
-      min-width: 190px;
-      height: 36px;
+      position: relative !important;
+      z-index: 10 !important;
+      pointer-events: auto !important;
+      width: 100% !important;
+      min-width: 220px !important;
+      height: 38px !important;
+      display: block !important;
+      box-sizing: border-box !important;
       border: 1px solid var(--line);
       border-radius: 10px;
       padding: 7px 10px;
@@ -622,6 +774,785 @@
     .campo-driver-escala:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+    }
+
+    #areaImagemEscala {
+      margin-top: 18px !important;
+      overflow-x: auto !important;
+    }
+
+    .preview-image {
+      max-width: 100% !important;
+      height: auto !important;
+      display: block !important;
+    }
+
+    @media (max-width: 900px) {
+      .escala-inline-form,
+      .escala-inline-form.prioritarios {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  
+    /* ===== VISUAL PREMIUM COMPLETO - PRESERVANDO FUNÇÕES ===== */
+
+    :root {
+      --primary: #0b2745;
+      --primary-dark: #061a2f;
+      --secondary: #f59e0b;
+      --accent: #14b8a6;
+      --bg: #eef4f9;
+      --card: #ffffff;
+      --text: #101828;
+      --muted: #667085;
+      --line: #d8e2ec;
+      --soft: #f8fafc;
+      --danger: #b42318;
+      --success: #16a34a;
+      --shadow-premium: 0 18px 44px rgba(11, 39, 69, 0.12);
+      --shadow-soft-premium: 0 10px 26px rgba(11, 39, 69, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(20, 184, 166, 0.18), transparent 28%),
+        radial-gradient(circle at 90% 4%, rgba(245, 158, 11, 0.18), transparent 30%),
+        linear-gradient(135deg, #edf4fa 0%, #f8fafc 46%, #eef8f7 100%) !important;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(11, 39, 69, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11, 39, 69, 0.035) 1px, transparent 1px);
+      background-size: 44px 44px;
+      opacity: 0.75;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent 85%);
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      margin: 18px auto 0;
+      width: min(1500px, calc(100% - 28px));
+      border-radius: 30px;
+      padding: 28px 30px;
+      text-align: left;
+      background:
+        linear-gradient(135deg, rgba(6, 26, 47, 0.98), rgba(11, 39, 69, 0.96) 56%, rgba(20, 184, 166, 0.82)),
+        radial-gradient(circle at 92% 0%, rgba(245, 158, 11, 0.7), transparent 32%) !important;
+      box-shadow: 0 26px 70px rgba(6, 26, 47, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 999px;
+      right: -120px;
+      top: -150px;
+      background: radial-gradient(circle, rgba(245, 158, 11, 0.44), transparent 65%);
+    }
+
+    header::after {
+      content: "VERSÃO PREMIUM • COOPMETRO";
+      position: absolute;
+      top: 22px;
+      right: 24px;
+      z-index: 2;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: rgba(255,255,255,0.92);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(10px);
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      justify-content: flex-start !important;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-logo {
+      width: 82px !important;
+      height: 82px !important;
+      padding: 10px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.24);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.22), 0 16px 35px rgba(0,0,0,0.18);
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-text h1 {
+      font-size: clamp(30px, 3vw, 46px) !important;
+      letter-spacing: -1px;
+      line-height: 1.04;
+    }
+
+    .brand-text p {
+      max-width: 850px;
+      font-size: 16px !important;
+      color: rgba(255,255,255,0.86);
+    }
+
+    .container {
+      max-width: 1500px !important;
+      margin: 18px auto 36px !important;
+      padding: 0 14px !important;
+    }
+
+    .tabs {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)) !important;
+      gap: 10px !important;
+      padding: 10px !important;
+      margin-bottom: 18px !important;
+      border-radius: 24px !important;
+      background: rgba(255,255,255,0.74) !important;
+      border: 1px solid rgba(216,226,236,0.95) !important;
+      box-shadow: var(--shadow-soft-premium) !important;
+      backdrop-filter: blur(14px);
+    }
+
+    .tab-button {
+      min-height: 48px !important;
+      border-radius: 16px !important;
+      padding: 12px 12px !important;
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid transparent !important;
+      font-weight: 800 !important;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+    }
+
+    .tab-button:hover {
+      background: rgba(11, 39, 69, 0.06) !important;
+      transform: translateY(-2px);
+    }
+
+    .tab-button.active {
+      color: #fff !important;
+      background: linear-gradient(135deg, var(--primary), #123c69) !important;
+      box-shadow: 0 12px 28px rgba(11,39,69,0.22) !important;
+    }
+
+    .tab-content {
+      border-radius: 26px !important;
+      padding: 24px !important;
+      background: rgba(255,255,255,0.94) !important;
+      border: 1px solid rgba(216,226,236,0.95) !important;
+      box-shadow: var(--shadow-premium) !important;
+      backdrop-filter: blur(16px);
+    }
+
+    .aviso-atualizacao {
+      background: linear-gradient(135deg, #fff1f0, #fff7ed) !important;
+      color: #b42318 !important;
+      border: 1px solid #fda29b !important;
+      border-left: 7px solid #d92d20 !important;
+      border-radius: 18px !important;
+      padding: 14px 16px !important;
+      margin: 0 0 20px !important;
+      font-weight: 800 !important;
+      line-height: 1.42;
+      box-shadow: 0 10px 22px rgba(217,45,32,0.08);
+    }
+
+    .info-box {
+      border-radius: 18px !important;
+      padding: 16px 18px !important;
+      color: var(--primary) !important;
+      background: linear-gradient(135deg, #eef6ff, #f7fbff) !important;
+      border: 1px solid #cfe4ff !important;
+      box-shadow: 0 10px 22px rgba(11,39,69,0.06);
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    .excel-note {
+      border-radius: 18px !important;
+      padding: 14px 16px !important;
+      color: #0f766e !important;
+      background: linear-gradient(135deg, #ecfdf9, #f7fffd) !important;
+      border: 1px solid #b8efe5 !important;
+      font-weight: 700;
+    }
+
+    .section-title {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      margin: 24px 0 14px !important;
+      color: var(--primary) !important;
+      font-size: 21px !important;
+      letter-spacing: -0.2px;
+    }
+
+    .section-title::before {
+      content: "";
+      width: 10px;
+      height: 28px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, var(--secondary), var(--accent));
+      box-shadow: 0 8px 16px rgba(245,158,11,0.22);
+    }
+
+    .form-grid,
+    .form-grid-2 {
+      gap: 16px !important;
+    }
+
+    .form-group {
+      min-width: 0;
+    }
+
+    label {
+      color: var(--primary) !important;
+      font-size: 13px !important;
+      font-weight: 800 !important;
+      margin-bottom: 7px !important;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #cfd8e3 !important;
+      border-radius: 14px !important;
+      padding: 12px !important;
+      background: rgba(255,255,255,0.98) !important;
+      color: var(--text) !important;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    textarea {
+      line-height: 1.48;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 0 4px rgba(20,184,166,0.13) !important;
+    }
+
+    input[type="file"] {
+      background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+      cursor: pointer;
+    }
+
+    .actions {
+      gap: 10px !important;
+      margin-top: 18px !important;
+    }
+
+    button.action,
+    .download-link,
+    .mini-action {
+      border-radius: 14px !important;
+      min-height: 42px !important;
+      padding: 11px 16px !important;
+      font-weight: 900 !important;
+      box-shadow: 0 12px 24px rgba(11,39,69,0.14) !important;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+
+    button.action:hover,
+    .download-link:hover,
+    .mini-action:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
+    }
+
+    button.action.generate,
+    .download-link {
+      background: linear-gradient(135deg, var(--success), #0f766e) !important;
+    }
+
+    button.action.copy {
+      background: linear-gradient(135deg, var(--primary), #164e7a) !important;
+    }
+
+    button.action.clear,
+    button.action.danger,
+    .mini-action.remove {
+      background: linear-gradient(135deg, var(--danger), #991b1b) !important;
+    }
+
+    button.action.add,
+    .mini-action {
+      background: linear-gradient(135deg, var(--secondary), #d97706) !important;
+    }
+
+    textarea[id^="resultado"],
+    textarea[readonly] {
+      background: #07192d !important;
+      color: #f8fafc !important;
+      border-color: rgba(255,255,255,0.12) !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    }
+
+    .escala-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 22px !important;
+      padding: 18px 18px 18px 22px !important;
+      margin: 18px 0 !important;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,250,252,0.95)) !important;
+      border: 1px solid rgba(216,226,236,0.95) !important;
+      box-shadow: 0 16px 36px rgba(11,39,69,0.09);
+    }
+
+    .escala-panel::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 6px;
+      height: 100%;
+      background: linear-gradient(180deg, var(--secondary), var(--accent));
+    }
+
+    .escala-panel h4 {
+      margin: 0 0 14px !important;
+      font-size: 18px !important;
+      color: var(--primary) !important;
+      letter-spacing: -0.2px;
+    }
+
+    .escala-inline-form {
+      display: grid !important;
+      grid-template-columns: repeat(5, minmax(150px, 1fr)) auto !important;
+      gap: 11px !important;
+      align-items: end !important;
+    }
+
+    .escala-inline-form.prioritarios {
+      grid-template-columns: minmax(240px, 1fr) auto !important;
+    }
+
+    .lista-prioritarios {
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 8px !important;
+      margin-top: 13px !important;
+    }
+
+    .prioritario-chip {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+      border-radius: 999px !important;
+      padding: 9px 10px 9px 13px !important;
+      background: linear-gradient(135deg, #eef6ff, #e6fffb) !important;
+      border: 1px solid #b9d9ff !important;
+      color: var(--primary-dark) !important;
+      font-weight: 900 !important;
+      box-shadow: 0 8px 18px rgba(11,39,69,0.07);
+    }
+
+    .prioritario-chip button {
+      border: none;
+      border-radius: 999px;
+      background: #b42318;
+      color: white;
+      width: 22px;
+      height: 22px;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0 !important;
+      min-height: 22px !important;
+    }
+
+    .excel-wrapper,
+    .suporte-table-wrapper {
+      border-radius: 18px !important;
+      border: 1px solid rgba(216,226,236,0.95) !important;
+      background: #ffffff !important;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 10px 24px rgba(11,39,69,0.06);
+    }
+
+    .excel-wrapper {
+      max-height: 78vh !important;
+      overflow-x: auto !important;
+      overflow-y: auto !important;
+      padding-bottom: 30px !important;
+    }
+
+    .excel-table,
+    .suporte-table {
+      border-collapse: separate !important;
+      border-spacing: 0 !important;
+      background: white !important;
+    }
+
+    .excel-table {
+      min-width: max-content !important;
+    }
+
+    .suporte-table {
+      width: 100%;
+      min-width: 860px !important;
+    }
+
+    .excel-table th,
+    .suporte-table th {
+      background: linear-gradient(135deg, var(--primary), #123c69) !important;
+      color: white !important;
+      padding: 12px 11px !important;
+      font-weight: 900 !important;
+      border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+      white-space: nowrap !important;
+      text-align: left !important;
+    }
+
+    .excel-table td,
+    .suporte-table td {
+      border-bottom: 1px solid #edf2f7 !important;
+      padding: 10px 11px !important;
+      color: #1d2939 !important;
+      background: white !important;
+      vertical-align: middle !important;
+    }
+
+    .excel-table tbody tr:nth-child(even) td,
+    .suporte-table tbody tr:nth-child(even) td {
+      background: #f8fbff !important;
+    }
+
+    .excel-table tbody tr:hover td,
+    .suporte-table tbody tr:hover td {
+      background: #eef7ff !important;
+    }
+
+    .celula-regiao {
+      max-width: 420px;
+      min-width: 280px;
+      white-space: normal;
+      line-height: 1.35;
+    }
+
+    .celula-driver-escala,
+    .excel-table th.coluna-driver-fixa {
+      min-width: 280px !important;
+      position: static !important;
+      right: auto !important;
+      z-index: auto !important;
+    }
+
+    .campo-driver-escala {
+      width: 100% !important;
+      min-width: 230px !important;
+      height: 40px !important;
+      display: block !important;
+      pointer-events: auto !important;
+      color: var(--text) !important;
+      background: #ffffff !important;
+    }
+
+    .suporte-vazio {
+      color: var(--muted) !important;
+      font-size: 13px;
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #f8fafc;
+      border: 1px dashed #cfd8e3;
+    }
+
+    .preview-image {
+      max-width: 100% !important;
+      height: auto !important;
+      display: block !important;
+      border-radius: 18px;
+      box-shadow: var(--shadow-premium);
+      border: 1px solid rgba(216,226,236,0.95);
+      margin-bottom: 12px;
+    }
+
+    .popup-overlay {
+      background: rgba(6,26,47,0.74) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    .popup-card {
+      border-radius: 28px !important;
+      padding: 30px !important;
+      background: linear-gradient(135deg, rgba(255,255,255,0.99), rgba(248,250,252,0.97)) !important;
+      border: 1px solid rgba(255,255,255,0.75) !important;
+      box-shadow: 0 34px 90px rgba(0,0,0,0.28) !important;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .popup-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 9px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent), var(--primary));
+    }
+
+    .popup-card h2 {
+      color: var(--primary) !important;
+      font-size: 28px !important;
+      letter-spacing: -0.5px;
+    }
+
+    .popup-button {
+      border-radius: 16px !important;
+      background: linear-gradient(135deg, var(--primary), var(--accent)) !important;
+      box-shadow: 0 14px 28px rgba(11,39,69,0.22);
+    }
+
+    .hidden,
+    #canvasEscala.hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 900px) {
+      header {
+        width: min(100% - 18px, 1500px);
+        margin-top: 10px;
+        padding: 22px;
+      }
+
+      header::after {
+        position: static;
+        display: inline-block;
+        margin-bottom: 14px;
+      }
+
+      .brand {
+        justify-content: center !important;
+      }
+
+      .brand-text {
+        text-align: center;
+      }
+
+      .tabs {
+        grid-template-columns: 1fr 1fr !important;
+      }
+
+      .tab-content {
+        padding: 18px !important;
+      }
+
+      .escala-inline-form,
+      .escala-inline-form.prioritarios {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        padding: 0 8px !important;
+      }
+
+      .tabs {
+        grid-template-columns: 1fr !important;
+      }
+
+      .brand-logo {
+        width: 64px !important;
+        height: 64px !important;
+      }
+
+      .brand-text h1 {
+        font-size: 26px !important;
+      }
+    }
+
+  
+    /* ===== ABA FROTAS ===== */
+    .frotas-toolbar {
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto auto;
+      gap: 12px;
+      align-items: end;
+      margin-bottom: 16px;
+    }
+
+    .frotas-card {
+      border-radius: 22px;
+      padding: 18px;
+      margin: 18px 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,250,252,0.95));
+      border: 1px solid rgba(216,226,236,0.95);
+      box-shadow: 0 16px 36px rgba(11,39,69,0.09);
+    }
+
+    .frotas-card h4 {
+      margin: 0 0 14px;
+      color: var(--primary);
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+
+    .frota-form-grid {
+      display: grid;
+      grid-template-columns: 110px 1.4fr 150px 170px 130px 150px auto;
+      gap: 10px;
+      align-items: end;
+    }
+
+    .frota-form-grid label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: var(--primary);
+      font-weight: 850;
+    }
+
+    .frotas-resumo {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .frota-stat {
+      border-radius: 18px;
+      padding: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(216,226,236,0.95);
+      box-shadow: 0 10px 24px rgba(11,39,69,0.07);
+    }
+
+    .frota-stat span {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .frota-stat strong {
+      display: block;
+      margin-top: 6px;
+      color: var(--primary);
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .frotas-table-wrapper {
+      overflow: auto;
+      border-radius: 18px;
+      border: 1px solid rgba(216,226,236,0.95);
+      background: #ffffff;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 10px 24px rgba(11,39,69,0.06);
+      max-height: 74vh;
+    }
+
+    .frotas-table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: white;
+      font-size: 13px;
+    }
+
+    .frotas-table th {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      background: linear-gradient(135deg, var(--primary), #123c69);
+      color: white;
+      padding: 12px 11px;
+      text-align: left;
+      white-space: nowrap;
+      font-weight: 900;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .frotas-table td {
+      border-bottom: 1px solid #edf2f7;
+      padding: 10px 11px;
+      color: #1d2939;
+      background: white;
+      vertical-align: middle;
+    }
+
+    .frotas-table tbody tr:nth-child(even) td { background: #f8fbff; }
+    .frotas-table tbody tr:hover td { background: #eef7ff; }
+
+    .frota-status-sim,
+    .frota-status-nao,
+    .frota-tipo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .frota-status-sim {
+      min-width: 62px;
+      color: #065f46;
+      background: #d1fae5;
+    }
+
+    .frota-status-nao {
+      min-width: 62px;
+      color: #991b1b;
+      background: #fee2e2;
+    }
+
+    .frota-tipo {
+      color: var(--primary);
+      background: #eef6ff;
+      border: 1px solid #cfe4ff;
+      font-weight: 850;
+    }
+
+    .frota-remove {
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #dc2626, #991b1b);
+      color: white;
+      font-weight: 900;
+      cursor: pointer;
+      padding: 8px 10px;
+    }
+
+    .frota-vazio {
+      padding: 22px;
+      text-align: center;
+      color: var(--muted);
+      font-weight: 750;
+    }
+
+    @media (max-width: 1100px) {
+      .frota-form-grid,
+      .frotas-toolbar,
+      .frotas-resumo {
+        grid-template-columns: 1fr;
+      }
     }
 
   </style>
@@ -666,7 +1597,7 @@
         passe o feedback para a <strong>Supervisora Samara</strong>.
       </p>
 
-      <button class="popup-button" onclick="fecharPopupInicial(); document.getElementById('popupInicial')?.classList.add('hidden-popup');">Entendi, acessar sistema</button>
+      <button class="popup-button" onclick="fecharPopupInicial()">Entendi, acessar sistema</button>
     </div>
   </div>
 
@@ -699,13 +1630,14 @@
 
   <div class="container">
     <div class="tabs">
-      <button class="tab-button active" onclick="abrirAba('ambulancia', this)">Solicitação / Ambulância</button>
-      <button class="tab-button" onclick="abrirAba('hora', this)">Hora em Hora</button>
-      <button class="tab-button" onclick="abrirAba('fechamento', this)">Fechamento</button>
-      <button class="tab-button" onclick="abrirAba('scheduling', this)">Scheduling</button>
-      <button class="tab-button" onclick="abrirAba('clientes', this)">Mensagens Clientes</button>
-      <button class="tab-button" onclick="abrirAba('escala', this)">Gerador de Escala</button>
-      <button class="tab-button" onclick="abrirAba('fechamentoRota', this)">Fechamento de Rota</button>
+      <button class="tab-button active" onclick="abrirAba('ambulancia', this)">🚑 Solicitação / Ambulância</button>
+      <button class="tab-button" onclick="abrirAba('hora', this)">⏱️ Hora em Hora</button>
+      <button class="tab-button" onclick="abrirAba('fechamento', this)">📊 Fechamento</button>
+      <button class="tab-button" onclick="abrirAba('scheduling', this)">🗓️ Scheduling</button>
+      <button class="tab-button" onclick="abrirAba('clientes', this)">💬 Mensagens Clientes</button>
+      <button class="tab-button" onclick="abrirAba('escala', this)">🚛 Gerador de Escala</button>
+        <button class="tab-button" data-tab="frotas" onclick="abrirAba('frotas')">🚚 Frotas</button>
+      <button class="tab-button" onclick="abrirAba('fechamentoRota', this)">✅ Fechamento de Rota</button>
     </div>
 
     <section id="ambulancia" class="tab-content active">
@@ -1104,9 +2036,15 @@
     </section>
 
     
+    
     <section id="escala" class="tab-content">
+      <div class="aviso-atualizacao">
+        ⚠️ Antes de começar, aperte <strong>CTRL + F5</strong> para carregar a versão mais recente do sistema. Pode ter havido atualizações.
+      </div>
+
       <div class="info-box">
         Suba o CSV da operação para visualizar os dados formatados, preencher os drivers e gerar a imagem da escala para download.
+        A tabela suporta turnos com mais de 20 rotas e mantém as informações salvas mesmo se a página for atualizada ou fechada.
       </div>
 
       <div class="form-grid">
@@ -1116,9 +2054,50 @@
         </div>
       </div>
 
+      <div class="escala-panel">
+        <h4>Motoristas prioritários</h4>
+        <div class="escala-inline-form prioritarios">
+          <div>
+            <label>Motorista prioritário</label>
+            <input id="prioritarioNome" placeholder="Ex: Lucas da Silva" />
+          </div>
+          <button class="mini-action" type="button" onclick="adicionarMotoristaPrioritario()">Adicionar</button>
+        </div>
+        <div id="listaPrioritarios" class="lista-prioritarios"></div>
+      </div>
+
+      <div class="escala-panel">
+        <h4>Ambulância / Suporte</h4>
+        <div class="escala-inline-form">
+          <div>
+            <label>Rota</label>
+            <input id="suporteRota" placeholder="Ex: C12_PM1" />
+          </div>
+          <div>
+            <label>Motorista</label>
+            <input id="suporteMotorista" placeholder="Motorista da rota" />
+          </div>
+          <div>
+            <label>Rota aberta</label>
+            <input id="suporteRotaAberta" placeholder="Ex: C12_PM1_A" />
+          </div>
+          <div>
+            <label>Motorista da rota aberta</label>
+            <input id="suporteMotoristaAberta" placeholder="Motorista apoio" />
+          </div>
+          <div>
+            <label>Ambulância/Suporte</label>
+            <input id="suporteNome" placeholder="Ex: Rakner / Ambulância" />
+          </div>
+          <button class="mini-action" type="button" onclick="adicionarAmbulanciaSuporte()">Adicionar</button>
+        </div>
+
+        <div id="areaAmbulanciasSuporte"></div>
+      </div>
+
       <h3 class="section-title">CSV formatado com Driver</h3>
       <div class="excel-note">
-        Preencha a coluna Driver diretamente na tabela. A imagem será gerada apenas com Onda, Rota Otimizada, Doca, Transportadora e Driver.
+        Preencha a coluna Driver diretamente na tabela. A imagem será gerada apenas com as rotas que tiverem Driver preenchido.
       </div>
 
       <div class="excel-wrapper">
@@ -1140,6 +2119,95 @@
       <canvas id="canvasEscala" class="hidden"></canvas>
       <div id="areaImagemEscala"></div>
     </section>
+
+
+    <section id="frotas" class="tab-content">
+      <div class="aviso-atualizacao">
+        ⚠️ Antes de começar, aperte <strong>CTRL + F5</strong> para carregar a versão mais recente do sistema. Pode ter havido atualizações.
+      </div>
+
+      <div class="info-box">
+        Suba a planilha/CSV de frotas no padrão da operação. O sistema lê automaticamente os motoristas, tipo de veículo, placa e disponibilidade.
+        Você também pode acrescentar ou excluir motoristas manualmente. As informações ficam salvas mesmo com F5 ou fechando a página.
+      </div>
+
+      <div class="frotas-toolbar">
+        <div class="form-group">
+          <label>Planilha/CSV de frotas</label>
+          <input type="file" id="arquivoFrotas" accept=".csv,.txt,text/csv" onchange="carregarArquivoFrotas(event)" />
+        </div>
+        <button class="action generate" type="button" onclick="document.getElementById('arquivoFrotas').click()">Subir planilha</button>
+        <button class="action clear" type="button" onclick="limparFrotas()">Limpar frotas</button>
+      </div>
+
+      <div class="frotas-card">
+        <h4>Adicionar motorista manualmente</h4>
+        <div class="frota-form-grid">
+          <div>
+            <label>Disponível?</label>
+            <select id="frotaDisponivel">
+              <option value="Sim">Sim</option>
+              <option value="Não">Não</option>
+            </select>
+          </div>
+          <div>
+            <label>Motorista</label>
+            <input id="frotaMotorista" placeholder="Nome do motorista" />
+          </div>
+          <div>
+            <label>ID motorista</label>
+            <input id="frotaIdMotorista" placeholder="ID" />
+          </div>
+          <div>
+            <label>Tipo de veículo</label>
+            <select id="frotaTipoVeiculo">
+              <option value="Utilitários">Utilitários</option>
+              <option value="PASSEIO">PASSEIO</option>
+              <option value="VUC">VUC</option>
+            </select>
+          </div>
+          <div>
+            <label>Placa</label>
+            <input id="frotaPlaca" placeholder="ABC1D23" />
+          </div>
+          <div>
+            <label>Observação</label>
+            <input id="frotaObs" placeholder="Opcional" />
+          </div>
+          <button class="mini-action" type="button" onclick="adicionarFrotaManual()">Adicionar</button>
+        </div>
+      </div>
+
+      <div class="frotas-resumo">
+        <div class="frota-stat"><span>Total</span><strong id="frotaTotal">0</strong></div>
+        <div class="frota-stat"><span>Disponíveis</span><strong id="frotaDisponiveis">0</strong></div>
+        <div class="frota-stat"><span>Utilitários</span><strong id="frotaUtilitarios">0</strong></div>
+        <div class="frota-stat"><span>VUC</span><strong id="frotaVuc">0</strong></div>
+      </div>
+
+      <h3 class="section-title">Lista de Frotas</h3>
+
+      <div class="frotas-table-wrapper">
+        <table id="tabelaFrotas" class="frotas-table">
+          <thead>
+            <tr>
+              <th>Disponível?</th>
+              <th>Motorista</th>
+              <th>ID motorista</th>
+              <th>Tipo de veículo</th>
+              <th>Placa</th>
+              <th>Observação</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="7" class="frota-vazio">Nenhuma frota carregada ainda.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+
 
 
 
@@ -1199,6 +2267,9 @@
     let contadorVeiculosScheduling = 0;
     let dadosEscalaCsv = [];
     let colunasEscalaCsv = [];
+    let motoristasPrioritarios = [];
+    let ambulanciasSuporte = [];
+    let dadosFrotas = [];
 
     let alarmeHoraAtivo = false;
     let intervaloAlarmeHora = null;
@@ -1677,6 +2748,8 @@ ${justificativas}`;
       document.getElementById('veiculosScheduling').innerHTML = '';
       contadorVeiculosScheduling = 0;
       adicionarVeiculoScheduling();
+    restaurarEstadoEscala();
+    restaurarEstadoFrotas();
     }
 
     function gerarScheduling() {
@@ -1761,6 +2834,370 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       document.getElementById('resultadoCliente').value = mensagem;
     }
 
+
+
+    function salvarEstadoEscala() {
+      try {
+        const drivers = {};
+        document.querySelectorAll('.campo-driver-escala').forEach(campo => {
+          drivers[campo.id] = campo.value;
+        });
+
+        const estado = {
+          colunas: colunasEscalaCsv || [],
+          dados: dadosEscalaCsv || [],
+          drivers,
+          prioritarios: motoristasPrioritarios || [],
+          suporte: ambulanciasSuporte || []
+        };
+
+        localStorage.setItem('dispatcherdesk_estado_escala', JSON.stringify(estado));
+      } catch (erro) {
+        console.warn('Não foi possível salvar a escala no navegador.', erro);
+      }
+    }
+
+    function restaurarEstadoEscala() {
+      try {
+        const salvo = localStorage.getItem('dispatcherdesk_estado_escala');
+        if (!salvo) {
+          renderizarMotoristasPrioritarios();
+          renderizarAmbulanciasSuporte();
+          return;
+        }
+
+        const estado = JSON.parse(salvo);
+
+        if (estado && Array.isArray(estado.colunas) && Array.isArray(estado.dados)) {
+          colunasEscalaCsv = estado.colunas;
+          dadosEscalaCsv = estado.dados;
+          montarTabelaCsvCompleto();
+
+          setTimeout(() => {
+            Object.entries(estado.drivers || {}).forEach(([id, valorSalvo]) => {
+              const campo = document.getElementById(id);
+              if (campo) campo.value = valorSalvo;
+            });
+          }, 0);
+        }
+
+        motoristasPrioritarios = Array.isArray(estado.prioritarios) ? estado.prioritarios : [];
+        ambulanciasSuporte = Array.isArray(estado.suporte) ? estado.suporte : [];
+
+        renderizarMotoristasPrioritarios();
+        renderizarAmbulanciasSuporte();
+      } catch (erro) {
+        console.warn('Não foi possível restaurar a escala salva.', erro);
+      }
+    }
+
+    function limparEstadoEscalaSalvo() {
+      try {
+        localStorage.removeItem('dispatcherdesk_estado_escala');
+      } catch (erro) {
+        console.warn('Não foi possível limpar a escala salva.', erro);
+      }
+    }
+
+    function adicionarMotoristaPrioritario() {
+      const campo = document.getElementById('prioritarioNome');
+      const nome = campo ? campo.value.trim() : '';
+      if (!nome) { alert('Informe o nome do motorista prioritário.'); return; }
+      motoristasPrioritarios.push(nome);
+      if (campo) campo.value = '';
+      renderizarMotoristasPrioritarios();
+      salvarEstadoEscala();
+    }
+
+    function removerMotoristaPrioritario(index) {
+      motoristasPrioritarios.splice(index, 1);
+      renderizarMotoristasPrioritarios();
+      salvarEstadoEscala();
+    }
+
+    function renderizarMotoristasPrioritarios() {
+      const area = document.getElementById('listaPrioritarios');
+      if (!area) return;
+      if (!motoristasPrioritarios.length) {
+        area.innerHTML = '<div class="suporte-vazio">Nenhum motorista prioritário adicionado.</div>';
+        return;
+      }
+      area.innerHTML = motoristasPrioritarios.map((nome, index) => `
+        <span class="prioritario-chip">${nome}<button type="button" onclick="removerMotoristaPrioritario(${index})">×</button></span>
+      `).join('');
+    }
+
+    function adicionarAmbulanciaSuporte() {
+      const item = {
+        rota: valor('suporteRota'),
+        motorista: valor('suporteMotorista'),
+        rotaAberta: valor('suporteRotaAberta'),
+        motoristaAberta: valor('suporteMotoristaAberta'),
+        suporte: valor('suporteNome')
+      };
+      const temInformacao = Object.values(item).some(valorItem => String(valorItem || '').trim());
+      if (!temInformacao) { alert('Preencha pelo menos uma informação da ambulância/suporte.'); return; }
+      ambulanciasSuporte.push(item);
+      ['suporteRota', 'suporteMotorista', 'suporteRotaAberta', 'suporteMotoristaAberta', 'suporteNome'].forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+      renderizarAmbulanciasSuporte();
+      salvarEstadoEscala();
+    }
+
+    function removerAmbulanciaSuporte(index) {
+      ambulanciasSuporte.splice(index, 1);
+      renderizarAmbulanciasSuporte();
+      salvarEstadoEscala();
+    }
+
+    function renderizarAmbulanciasSuporte() {
+      const area = document.getElementById('areaAmbulanciasSuporte');
+      if (!area) return;
+      if (!ambulanciasSuporte.length) {
+        area.innerHTML = '<div class="suporte-vazio">Nenhuma ambulância/suporte adicionada.</div>';
+        return;
+      }
+      area.innerHTML = `
+        <div class="suporte-table-wrapper"><table class="suporte-table"><thead><tr>
+          <th>Rota</th><th>Motorista</th><th>Rota aberta</th><th>Motorista</th><th>Ambulância/Suporte</th><th>Ação</th>
+        </tr></thead><tbody>
+          ${ambulanciasSuporte.map((item, index) => `
+            <tr><td>${item.rota || '-'}</td><td>${item.motorista || '-'}</td><td>${item.rotaAberta || '-'}</td><td>${item.motoristaAberta || '-'}</td><td>${item.suporte || '-'}</td><td><button class="mini-action remove" type="button" onclick="removerAmbulanciaSuporte(${index})">Remover</button></td></tr>
+          `).join('')}
+        </tbody></table></div>`;
+    }
+
+
+    function salvarEstadoCamposGerais() {
+      try {
+        const campos = {};
+
+        document.querySelectorAll('input, select, textarea').forEach(campo => {
+          if (!campo.id || campo.type === 'file') return;
+          if (campo.classList.contains('campo-driver-escala')) return;
+          campos[campo.id] = campo.value;
+        });
+
+        localStorage.setItem('dispatcherdesk_estado_campos_gerais', JSON.stringify(campos));
+      } catch (erro) {
+        console.warn('Não foi possível salvar os campos gerais.', erro);
+      }
+    }
+
+    function restaurarEstadoCamposGerais() {
+      try {
+        const salvo = localStorage.getItem('dispatcherdesk_estado_campos_gerais');
+        if (!salvo) return;
+
+        const campos = JSON.parse(salvo);
+
+        Object.entries(campos || {}).forEach(([id, valorSalvo]) => {
+          const campo = document.getElementById(id);
+          if (campo && campo.type !== 'file' && !campo.classList.contains('campo-driver-escala')) {
+            campo.value = valorSalvo;
+          }
+        });
+      } catch (erro) {
+        console.warn('Não foi possível restaurar os campos gerais.', erro);
+      }
+    }
+
+    function ativarSalvamentoCamposGerais() {
+      document.addEventListener('input', event => {
+        const alvo = event.target;
+        if (alvo && ['INPUT', 'SELECT', 'TEXTAREA'].includes(alvo.tagName)) {
+          salvarEstadoCamposGerais();
+        }
+      });
+
+      document.addEventListener('change', event => {
+        const alvo = event.target;
+        if (alvo && ['INPUT', 'SELECT', 'TEXTAREA'].includes(alvo.tagName)) {
+          salvarEstadoCamposGerais();
+        }
+      });
+    }
+
+    function salvarEstadoEscala() {
+      try {
+        const drivers = {};
+
+        document.querySelectorAll('.campo-driver-escala').forEach(campo => {
+          drivers[campo.id] = campo.value;
+        });
+
+        const estado = {
+          colunas: colunasEscalaCsv || [],
+          dados: dadosEscalaCsv || [],
+          drivers,
+          prioritarios: motoristasPrioritarios || [],
+          suporte: ambulanciasSuporte || []
+        };
+
+        localStorage.setItem('dispatcherdesk_estado_escala', JSON.stringify(estado));
+      } catch (erro) {
+        console.warn('Não foi possível salvar a escala no navegador.', erro);
+      }
+    }
+
+    function restaurarEstadoEscala() {
+      try {
+        const salvo = localStorage.getItem('dispatcherdesk_estado_escala');
+
+        if (!salvo) {
+          renderizarMotoristasPrioritarios();
+          renderizarAmbulanciasSuporte();
+          return;
+        }
+
+        const estado = JSON.parse(salvo);
+
+        motoristasPrioritarios = Array.isArray(estado.prioritarios) ? estado.prioritarios : [];
+        ambulanciasSuporte = Array.isArray(estado.suporte) ? estado.suporte : [];
+
+        if (estado && Array.isArray(estado.colunas) && Array.isArray(estado.dados)) {
+          colunasEscalaCsv = estado.colunas;
+          dadosEscalaCsv = estado.dados;
+          montarTabelaCsvCompleto();
+
+          setTimeout(() => {
+            Object.entries(estado.drivers || {}).forEach(([id, valorSalvo]) => {
+              const campo = document.getElementById(id);
+              if (campo) campo.value = valorSalvo;
+            });
+          }, 0);
+        }
+
+        renderizarMotoristasPrioritarios();
+        renderizarAmbulanciasSuporte();
+      } catch (erro) {
+        console.warn('Não foi possível restaurar a escala salva.', erro);
+      }
+    }
+
+    function limparEstadoEscalaSalvo() {
+      try {
+        localStorage.removeItem('dispatcherdesk_estado_escala');
+      } catch (erro) {
+        console.warn('Não foi possível limpar a escala salva.', erro);
+      }
+    }
+
+    function adicionarMotoristaPrioritario() {
+      const campo = document.getElementById('prioritarioNome');
+      const nome = campo ? campo.value.trim() : '';
+
+      if (!nome) {
+        alert('Informe o nome do motorista prioritário.');
+        return;
+      }
+
+      motoristasPrioritarios.push(nome);
+      if (campo) campo.value = '';
+
+      renderizarMotoristasPrioritarios();
+      salvarEstadoEscala();
+      salvarEstadoCamposGerais();
+    }
+
+    function removerMotoristaPrioritario(index) {
+      motoristasPrioritarios.splice(index, 1);
+      renderizarMotoristasPrioritarios();
+      salvarEstadoEscala();
+    }
+
+    function renderizarMotoristasPrioritarios() {
+      const area = document.getElementById('listaPrioritarios');
+      if (!area) return;
+
+      if (!motoristasPrioritarios.length) {
+        area.innerHTML = '<div class="suporte-vazio">Nenhum motorista prioritário adicionado.</div>';
+        return;
+      }
+
+      area.innerHTML = motoristasPrioritarios.map((nome, index) => `
+        <span class="prioritario-chip">
+          ${nome}
+          <button type="button" onclick="removerMotoristaPrioritario(${index})">×</button>
+        </span>
+      `).join('');
+    }
+
+    function adicionarAmbulanciaSuporte() {
+      const item = {
+        rota: valor('suporteRota'),
+        motorista: valor('suporteMotorista'),
+        rotaAberta: valor('suporteRotaAberta'),
+        motoristaAberta: valor('suporteMotoristaAberta'),
+        suporte: valor('suporteNome')
+      };
+
+      const temInformacao = Object.values(item).some(valorItem => String(valorItem || '').trim());
+
+      if (!temInformacao) {
+        alert('Preencha pelo menos uma informação da ambulância/suporte.');
+        return;
+      }
+
+      ambulanciasSuporte.push(item);
+
+      ['suporteRota', 'suporteMotorista', 'suporteRotaAberta', 'suporteMotoristaAberta', 'suporteNome'].forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      renderizarAmbulanciasSuporte();
+      salvarEstadoEscala();
+      salvarEstadoCamposGerais();
+    }
+
+    function removerAmbulanciaSuporte(index) {
+      ambulanciasSuporte.splice(index, 1);
+      renderizarAmbulanciasSuporte();
+      salvarEstadoEscala();
+    }
+
+    function renderizarAmbulanciasSuporte() {
+      const area = document.getElementById('areaAmbulanciasSuporte');
+      if (!area) return;
+
+      if (!ambulanciasSuporte.length) {
+        area.innerHTML = '<div class="suporte-vazio">Nenhuma ambulância/suporte adicionada.</div>';
+        return;
+      }
+
+      area.innerHTML = `
+        <div class="suporte-table-wrapper">
+          <table class="suporte-table">
+            <thead>
+              <tr>
+                <th>Rota</th>
+                <th>Motorista</th>
+                <th>Rota aberta</th>
+                <th>Motorista</th>
+                <th>Ambulância/Suporte</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ambulanciasSuporte.map((item, index) => `
+                <tr>
+                  <td>${item.rota || '-'}</td>
+                  <td>${item.motorista || '-'}</td>
+                  <td>${item.rotaAberta || '-'}</td>
+                  <td>${item.motoristaAberta || '-'}</td>
+                  <td>${item.suporte || '-'}</td>
+                  <td><button class="mini-action remove" type="button" onclick="removerAmbulanciaSuporte(${index})">Remover</button></td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
     function parseCSV(texto) {
       texto = String(texto || '').replace(/^\uFEFF/, '');
       const linhas = [];
@@ -1783,11 +3220,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         } else if ((char === '\n' || char === '\r') && !dentroAspas) {
           if (char === '\r' && proximo === '\n') i++;
           linha.push(campo);
-
-          if (linha.some(valor => String(valor).trim() !== '')) {
-            linhas.push(linha);
-          }
-
+          if (linha.some(valor => String(valor).trim() !== '')) linhas.push(linha);
           linha = [];
           campo = '';
         } else {
@@ -1797,9 +3230,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
 
       if (campo.length > 0 || linha.length > 0) {
         linha.push(campo);
-        if (linha.some(valor => String(valor).trim() !== '')) {
-          linhas.push(linha);
-        }
+        if (linha.some(valor => String(valor).trim() !== '')) linhas.push(linha);
       }
 
       return linhas;
@@ -1837,8 +3268,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       const leitor = new FileReader();
 
       leitor.onload = function(e) {
-        const texto = e.target.result;
-        const linhas = parseCSV(texto);
+        const linhas = parseCSV(e.target.result);
 
         if (!linhas.length) {
           alert('Não foi possível ler o CSV.');
@@ -1858,6 +3288,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         });
 
         montarTabelaCsvCompleto();
+        salvarEstadoEscala();
 
         const areaImagem = document.getElementById('areaImagemEscala');
         if (areaImagem) areaImagem.innerHTML = '';
@@ -1873,17 +3304,8 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       const thead = tabela.querySelector('thead');
       const tbody = tabela.querySelector('tbody');
 
-      const colunasOcultas = [
-        'PLACA',
-        'TIPO DE ROTA',
-        'CLUSTER ID',
-        'ID DA ROTA',
-        'ATENDER COM'
-      ];
-
-      const colunasVisiveis = colunasEscalaCsv.filter(coluna => {
-        return !colunasOcultas.includes(normalizarColunaEscala(coluna));
-      });
+      const colunasOcultas = ['PLACA', 'TIPO DE ROTA', 'CLUSTER ID', 'ID DA ROTA', 'ATENDER COM'];
+      const colunasVisiveis = colunasEscalaCsv.filter(coluna => !colunasOcultas.includes(normalizarColunaEscala(coluna)));
 
       thead.innerHTML = `
         <tr>
@@ -1900,10 +3322,33 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
             </td>
           `).join('')}
           <td class="celula-driver-escala">
-            <input type="text" class="campo-driver-escala" id="driverEscala${index}" placeholder="Preencher driver" />
+            <input type="text" class="campo-driver-escala" id="driverEscala${index}" placeholder="Preencher driver" oninput="salvarEstadoEscala()" />
           </td>
         </tr>
       `).join('');
+    }
+
+    function desenharTextoLimitado(ctx, texto, x, y, larguraMaxima, alturaLinha, limiteLinhas = 1) {
+      const palavras = String(texto || '').split(' ');
+      const linhas = [];
+      let linhaAtual = '';
+
+      palavras.forEach(palavra => {
+        const teste = linhaAtual ? `${linhaAtual} ${palavra}` : palavra;
+
+        if (ctx.measureText(teste).width > larguraMaxima && linhaAtual) {
+          linhas.push(linhaAtual);
+          linhaAtual = palavra;
+        } else {
+          linhaAtual = teste;
+        }
+      });
+
+      if (linhaAtual) linhas.push(linhaAtual);
+
+      linhas.slice(0, limiteLinhas).forEach((linha, index) => {
+        ctx.fillText(linha, x, y + index * alturaLinha);
+      });
     }
 
     function gerarImagemEscala() {
@@ -1912,68 +3357,84 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         return;
       }
 
-      const escala = dadosEscalaCsv.map((linha, index) => ({
-        onda: obterValorEscala(linha, ['Onda']),
-        rota: obterValorEscala(linha, ['Rota otimizada', 'Rota Otimizada']),
-        doca: obterValorEscala(linha, ['Doca']),
-        transportadora: 'COOPMETRO',
-        driver: valor(`driverEscala${index}`)
-      }));
+      const escala = dadosEscalaCsv
+        .map((linha, index) => ({
+          onda: obterValorEscala(linha, ['Onda']),
+          rota: obterValorEscala(linha, ['Rota otimizada', 'Rota Otimizada']),
+          doca: obterValorEscala(linha, ['Doca']),
+          transportadora: 'COOPMETRO',
+          driver: valor(`driverEscala${index}`)
+        }))
+        .filter(item => String(item.driver || '').trim());
+
+      if (!escala.length) {
+        alert('Preencha pelo menos um Driver para gerar a imagem da escala.');
+        return;
+      }
+
+      salvarEstadoEscala();
 
       const canvas = document.getElementById('canvasEscala');
       const ctx = canvas.getContext('2d');
 
-      const largura = 1500;
-      const margem = 55;
-      const alturaCabecalho = 130;
-      const alturaLinha = 76;
-      const altura = alturaCabecalho + 74 + escala.length * alturaLinha + 70;
+      const largura = 1700;
+      const margem = 60;
+      const alturaCabecalho = 165;
+      const alturaTabelaCabecalho = 56;
+      const alturaLinha = escala.length > 18 ? 62 : 72;
+      const alturaPrioritarios = motoristasPrioritarios.length ? 105 : 0;
+      const alturaSuporte = ambulanciasSuporte.length ? 85 + ambulanciasSuporte.length * 58 : 0;
+      const altura = alturaCabecalho + alturaTabelaCabecalho + escala.length * alturaLinha + alturaPrioritarios + alturaSuporte + 95;
 
       canvas.width = largura;
       canvas.height = altura;
 
       const corPrimaria = '#123c69';
+      const corPrimariaEscura = '#0b2745';
       const corSecundaria = '#f5a623';
-      const corFundo = '#eef3f8';
+      const corFundo = '#f4f8fc';
       const corTexto = '#172033';
       const corLinha = '#d7e0ea';
-      const corCinza = '#98a2b3';
+      const corVerde = '#14b8a6';
 
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, largura, altura);
 
-      ctx.fillStyle = corPrimaria;
+      const grad = ctx.createLinearGradient(0, 0, largura, alturaCabecalho);
+      grad.addColorStop(0, corPrimariaEscura);
+      grad.addColorStop(0.55, corPrimaria);
+      grad.addColorStop(1, '#1f7a8c');
+      ctx.fillStyle = grad;
       ctx.fillRect(0, 0, largura, alturaCabecalho);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 44px Arial';
-      ctx.fillText('ESCALA COOPMETRO', margem, 58);
+      ctx.font = 'bold 52px Arial';
+      ctx.fillText('ESCALA COOPMETRO', margem, 72);
 
-      ctx.font = '24px Arial';
+      ctx.font = '26px Arial';
       const dataHoje = new Date().toLocaleDateString('pt-BR');
-      ctx.fillText(`Data: ${dataHoje}`, margem, 96);
+      ctx.fillText(`Data: ${dataHoje}  •  Rotas preenchidas: ${escala.length}`, margem, 113);
 
-      const inicioY = alturaCabecalho + 38;
+      ctx.fillStyle = corSecundaria;
+      ctx.fillRect(margem, alturaCabecalho - 12, 360, 8);
 
+      const inicioY = alturaCabecalho + 28;
       const colunas = [
         { titulo: 'ONDA', x: margem, w: 180 },
-        { titulo: 'ROTA OTIMIZADA', x: 250, w: 260 },
-        { titulo: 'DOCA', x: 545, w: 110 },
-        { titulo: 'TRANSPORTADORA', x: 700, w: 260 },
-        { titulo: 'DRIVER', x: 1005, w: 410 }
+        { titulo: 'ROTA OTIMIZADA', x: 255, w: 330 },
+        { titulo: 'DOCA', x: 620, w: 130 },
+        { titulo: 'TRANSPORTADORA', x: 790, w: 285 },
+        { titulo: 'DRIVER', x: 1110, w: 500 }
       ];
 
       ctx.fillStyle = corSecundaria;
-      ctx.fillRect(margem, inicioY, largura - margem * 2, 46);
+      ctx.fillRect(margem, inicioY, largura - margem * 2, alturaTabelaCabecalho);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 22px Arial';
+      ctx.font = 'bold 26px Arial';
+      colunas.forEach(coluna => ctx.fillText(coluna.titulo, coluna.x, inicioY + 37));
 
-      colunas.forEach(coluna => {
-        ctx.fillText(coluna.titulo, coluna.x, inicioY + 31);
-      });
-
-      let y = inicioY + 46;
+      let y = inicioY + alturaTabelaCabecalho;
 
       escala.forEach((item, index) => {
         ctx.fillStyle = index % 2 === 0 ? corFundo : '#ffffff';
@@ -1982,28 +3443,104 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         ctx.strokeStyle = corLinha;
         ctx.strokeRect(margem, y, largura - margem * 2, alturaLinha);
 
+        const centroLinha = y + (alturaLinha / 2) + 9;
+
         ctx.fillStyle = corTexto;
-        ctx.font = '22px Arial';
+        ctx.font = 'bold 25px Arial';
+        ctx.fillText(item.onda || '', colunas[0].x, centroLinha);
+        desenharTextoLimitado(ctx, item.rota || '', colunas[1].x, centroLinha, colunas[1].w, 24, 1);
+        ctx.fillText(item.doca || '', colunas[2].x, centroLinha);
 
-        ctx.fillText(item.onda || '', colunas[0].x, y + 46);
-        ctx.fillText(item.rota || '', colunas[1].x, y + 46);
-        ctx.fillText(item.doca || '', colunas[2].x, y + 46);
-        ctx.fillText(item.transportadora || '', colunas[3].x, y + 46);
+        ctx.font = 'bold 23px Arial';
+        ctx.fillText(item.transportadora || '', colunas[3].x, centroLinha);
 
-        if ((item.driver || '').trim()) {
-          ctx.fillStyle = corTexto;
-          ctx.fillText(item.driver, colunas[4].x, y + 46);
-        } else {
-          ctx.fillStyle = corCinza;
-          ctx.fillText('________________', colunas[4].x, y + 46);
-        }
+        ctx.fillStyle = corPrimariaEscura;
+        ctx.font = 'bold 27px Arial';
+        desenharTextoLimitado(ctx, item.driver || '', colunas[4].x, centroLinha, colunas[4].w, 24, 1);
 
         y += alturaLinha;
       });
 
+      if (motoristasPrioritarios.length) {
+        y += 34;
+        ctx.fillStyle = corPrimaria;
+        ctx.font = 'bold 30px Arial';
+        ctx.fillText('MOTORISTAS PRIORITÁRIOS', margem, y);
+
+        y += 24;
+        let chipX = margem;
+        let chipY = y + 18;
+
+        motoristasPrioritarios.forEach(nome => {
+          ctx.font = 'bold 23px Arial';
+          const larguraChip = Math.min(ctx.measureText(nome).width + 46, 430);
+
+          if (chipX + larguraChip > largura - margem) {
+            chipX = margem;
+            chipY += 48;
+          }
+
+          ctx.fillStyle = '#eaf4ff';
+          ctx.fillRect(chipX, chipY - 30, larguraChip, 38);
+          ctx.strokeStyle = '#b9d9ff';
+          ctx.strokeRect(chipX, chipY - 30, larguraChip, 38);
+
+          ctx.fillStyle = corPrimariaEscura;
+          desenharTextoLimitado(ctx, nome, chipX + 18, chipY - 5, larguraChip - 34, 20, 1);
+
+          chipX += larguraChip + 12;
+        });
+
+        y = chipY + 42;
+      }
+
+      if (ambulanciasSuporte.length) {
+        y += 18;
+        ctx.fillStyle = corPrimaria;
+        ctx.font = 'bold 30px Arial';
+        ctx.fillText('AMBULÂNCIA / SUPORTE', margem, y);
+
+        y += 24;
+        const suporteCols = [
+          { titulo: 'ROTA', x: margem, w: 230 },
+          { titulo: 'MOTORISTA', x: 300, w: 300 },
+          { titulo: 'ROTA ABERTA', x: 630, w: 250 },
+          { titulo: 'MOTORISTA', x: 910, w: 310 },
+          { titulo: 'AMBULÂNCIA/SUPORTE', x: 1250, w: 360 }
+        ];
+
+        ctx.fillStyle = corVerde;
+        ctx.fillRect(margem, y, largura - margem * 2, 46);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 21px Arial';
+        suporteCols.forEach(coluna => ctx.fillText(coluna.titulo, coluna.x, y + 31));
+
+        y += 46;
+
+        ambulanciasSuporte.forEach((item, index) => {
+          ctx.fillStyle = index % 2 === 0 ? '#f0fbf9' : '#ffffff';
+          ctx.fillRect(margem, y, largura - margem * 2, 58);
+          ctx.strokeStyle = corLinha;
+          ctx.strokeRect(margem, y, largura - margem * 2, 58);
+
+          ctx.fillStyle = corTexto;
+          ctx.font = 'bold 21px Arial';
+          const linhaY = y + 36;
+
+          desenharTextoLimitado(ctx, item.rota || '-', suporteCols[0].x, linhaY, suporteCols[0].w, 20, 1);
+          desenharTextoLimitado(ctx, item.motorista || '-', suporteCols[1].x, linhaY, suporteCols[1].w, 20, 1);
+          desenharTextoLimitado(ctx, item.rotaAberta || '-', suporteCols[2].x, linhaY, suporteCols[2].w, 20, 1);
+          desenharTextoLimitado(ctx, item.motoristaAberta || '-', suporteCols[3].x, linhaY, suporteCols[3].w, 20, 1);
+          desenharTextoLimitado(ctx, item.suporte || '-', suporteCols[4].x, linhaY, suporteCols[4].w, 20, 1);
+
+          y += 58;
+        });
+      }
+
       ctx.fillStyle = corPrimaria;
-      ctx.font = 'bold 20px Arial';
-      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 28);
+      ctx.font = 'bold 22px Arial';
+      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 34);
 
       const imagem = canvas.toDataURL('image/png');
 
@@ -2017,6 +3554,9 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
     function limparEscala() {
       dadosEscalaCsv = [];
       colunasEscalaCsv = [];
+      motoristasPrioritarios = [];
+      ambulanciasSuporte = [];
+      limparEstadoEscalaSalvo();
 
       const arquivo = document.getElementById('arquivoEscalaCsv');
       const thead = document.querySelector('#tabelaCsvCompleto thead');
@@ -2027,6 +3567,10 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       if (thead) thead.innerHTML = '<tr><th>Aguardando CSV...</th></tr>';
       if (tbody) tbody.innerHTML = '';
       if (areaImagem) areaImagem.innerHTML = '';
+
+      renderizarMotoristasPrioritarios();
+      renderizarAmbulanciasSuporte();
+      salvarEstadoCamposGerais();
     }
 
 
@@ -2183,15 +3727,300 @@ Motivo: ${valor('frMotivo')}`;
       if (campo && !campo.value) campo.value = `${hora}:${minuto}`;
     }
 
+
+    function salvarEstadoFrotas() {
+      try {
+        localStorage.setItem('dispatcherdesk_estado_frotas', JSON.stringify(dadosFrotas || []));
+      } catch (erro) {
+        console.warn('Não foi possível salvar as frotas no navegador.', erro);
+      }
+    }
+
+    function restaurarEstadoFrotas() {
+      try {
+        const salvo = localStorage.getItem('dispatcherdesk_estado_frotas');
+        if (!salvo) {
+          renderizarFrotas();
+          return;
+        }
+
+        const dados = JSON.parse(salvo);
+        dadosFrotas = Array.isArray(dados) ? dados : [];
+        renderizarFrotas();
+      } catch (erro) {
+        console.warn('Não foi possível restaurar as frotas salvas.', erro);
+        renderizarFrotas();
+      }
+    }
+
+    function normalizarTextoFrota(texto) {
+      return String(texto || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, ' ')
+        .trim();
+    }
+
+    function detectarSeparadorFrota(texto) {
+      const primeiraLinha = String(texto || '').split(/\r?\n/).find(linha => linha.trim()) || '';
+      const separadores = [',', ';', '\t'];
+      let melhor = ',';
+      let maior = 0;
+
+      separadores.forEach(sep => {
+        const qtd = primeiraLinha.split(sep).length;
+        if (qtd > maior) {
+          maior = qtd;
+          melhor = sep;
+        }
+      });
+
+      return melhor;
+    }
+
+    function parseTabelaFrota(texto) {
+      texto = String(texto || '').replace(/^\uFEFF/, '');
+      const sep = detectarSeparadorFrota(texto);
+      const linhas = [];
+      let linha = [];
+      let campo = '';
+      let dentroAspas = false;
+
+      for (let i = 0; i < texto.length; i++) {
+        const char = texto[i];
+        const proximo = texto[i + 1];
+
+        if (char === '"' && dentroAspas && proximo === '"') {
+          campo += '"';
+          i++;
+        } else if (char === '"') {
+          dentroAspas = !dentroAspas;
+        } else if (char === sep && !dentroAspas) {
+          linha.push(campo.trim());
+          campo = '';
+        } else if ((char === '\n' || char === '\r') && !dentroAspas) {
+          if (char === '\r' && proximo === '\n') i++;
+          linha.push(campo.trim());
+          if (linha.some(valor => String(valor).trim() !== '')) linhas.push(linha);
+          linha = [];
+          campo = '';
+        } else {
+          campo += char;
+        }
+      }
+
+      if (campo.length > 0 || linha.length > 0) {
+        linha.push(campo.trim());
+        if (linha.some(valor => String(valor).trim() !== '')) linhas.push(linha);
+      }
+
+      return linhas;
+    }
+
+    function limparCelulaFrota(valor) {
+      return String(valor || '').replace(/\s+/g, ' ').trim();
+    }
+
+    function linhaEhTituloFrota(linha) {
+      const texto = normalizarTextoFrota(linha.join(' '));
+      if (!texto) return true;
+
+      if (texto === 'MOTORISTAS' || texto === 'PASSEIO' || texto === 'UTILITARIOS' || texto === 'VUC') return true;
+      if (texto.includes('ID MOTORISTA') || texto.includes('TIPO DE VEICULO')) return true;
+      if (texto.includes('MOTORISTAS') && texto.includes('PLACA')) return true;
+      if (texto === 'ID') return true;
+
+      return false;
+    }
+
+    function extrairFrotasDasLinhas(linhas) {
+      const resultado = [];
+      let categoriaAtual = '';
+
+      linhas.forEach(linhaOriginal => {
+        const linha = [...linhaOriginal];
+        const textoLinha = normalizarTextoFrota(linha.join(' '));
+
+        if (!textoLinha) return;
+
+        if (textoLinha.includes('PASSEIO')) categoriaAtual = 'PASSEIO';
+        if (textoLinha.includes('UTILITARIOS') || textoLinha.includes('UTILITARIO')) categoriaAtual = 'Utilitários';
+        if (textoLinha === 'VUC' || textoLinha.includes(' VUC ') || textoLinha.startsWith('VUC ')) categoriaAtual = 'VUC';
+
+        if (linhaEhTituloFrota(linha)) return;
+
+        const celulas = linha.map(limparCelulaFrota);
+        const disponivelBruto = celulas[0] || '';
+
+        const placa = [...celulas].reverse().find(valor => /^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/i.test(valor.replace(/[^a-zA-Z0-9]/g, ''))) || '';
+        const idMotorista = celulas.find(valor => /^\d{4,}$/.test(valor)) || '';
+
+        let tipo = categoriaAtual;
+        const tipoLinha = celulas.find(valor => {
+          const n = normalizarTextoFrota(valor);
+          return n.includes('PASSEIO') || n.includes('UTILITARIO') || n.includes('VUC');
+        });
+
+        if (tipoLinha) {
+          const n = normalizarTextoFrota(tipoLinha);
+          if (n.includes('PASSEIO')) tipo = 'PASSEIO';
+          else if (n.includes('VUC')) tipo = 'VUC';
+          else if (n.includes('UTILITARIO')) tipo = 'Utilitários';
+        }
+
+        const nome = celulas.find((valor, index) => {
+          const normalizado = normalizarTextoFrota(valor);
+          if (!normalizado) return false;
+          if (index === 0 && (normalizado === 'SIM' || normalizado === 'NAO' || normalizado === 'NÃO')) return false;
+          if (normalizado === 'SIM' || normalizado === 'NAO' || normalizado === 'NÃO') return false;
+          if (/^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/i.test(valor.replace(/[^a-zA-Z0-9]/g, ''))) return false;
+          if (/^\d+$/.test(valor)) return false;
+          if (normalizado.includes('PASSEIO') || normalizado.includes('UTILITARIO') || normalizado.includes('VUC')) return false;
+          if (normalizado === 'ID' || normalizado === 'PLACA') return false;
+          return true;
+        }) || '';
+
+        if (!nome) return;
+
+        resultado.push({
+          disponivel: normalizarTextoFrota(disponivelBruto).startsWith('N') ? 'Não' : 'Sim',
+          motorista: nome,
+          idMotorista,
+          tipoVeiculo: tipo || '',
+          placa,
+          obs: ''
+        });
+      });
+
+      return resultado;
+    }
+
+    function carregarArquivoFrotas(event) {
+      const arquivo = event.target.files[0];
+      if (!arquivo) return;
+
+      const leitor = new FileReader();
+
+      leitor.onload = function(e) {
+        const linhas = parseTabelaFrota(e.target.result);
+        const frotasExtraidas = extrairFrotasDasLinhas(linhas);
+
+        if (!frotasExtraidas.length) {
+          alert('Não consegui identificar motoristas nessa planilha. Exporte ou salve a planilha como CSV e tente novamente.');
+          return;
+        }
+
+        dadosFrotas = frotasExtraidas;
+        renderizarFrotas();
+        salvarEstadoFrotas();
+      };
+
+      leitor.readAsText(arquivo, 'UTF-8');
+    }
+
+    function adicionarFrotaManual() {
+      const motorista = valor('frotaMotorista');
+
+      if (!motorista) {
+        alert('Informe o nome do motorista.');
+        return;
+      }
+
+      dadosFrotas.push({
+        disponivel: valor('frotaDisponivel') || 'Sim',
+        motorista,
+        idMotorista: valor('frotaIdMotorista'),
+        tipoVeiculo: valor('frotaTipoVeiculo'),
+        placa: valor('frotaPlaca').toUpperCase(),
+        obs: valor('frotaObs')
+      });
+
+      ['frotaMotorista', 'frotaIdMotorista', 'frotaPlaca', 'frotaObs'].forEach(id => {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+
+      renderizarFrotas();
+      salvarEstadoFrotas();
+    }
+
+    function removerFrota(index) {
+      dadosFrotas.splice(index, 1);
+      renderizarFrotas();
+      salvarEstadoFrotas();
+    }
+
+    function limparFrotas() {
+      dadosFrotas = [];
+      const arquivo = document.getElementById('arquivoFrotas');
+      if (arquivo) arquivo.value = '';
+
+      try {
+        localStorage.removeItem('dispatcherdesk_estado_frotas');
+      } catch (erro) {
+        console.warn('Não foi possível limpar frotas salvas.', erro);
+      }
+
+      renderizarFrotas();
+    }
+
+    function renderizarFrotas() {
+      const tbody = document.querySelector('#tabelaFrotas tbody');
+      if (!tbody) return;
+
+      if (!dadosFrotas.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="frota-vazio">Nenhuma frota carregada ainda.</td></tr>';
+      } else {
+        tbody.innerHTML = dadosFrotas.map((item, index) => {
+          const disponivelNormalizado = normalizarTextoFrota(item.disponivel).startsWith('N') ? 'Não' : 'Sim';
+          const classeDisponivel = disponivelNormalizado === 'Sim' ? 'frota-status-sim' : 'frota-status-nao';
+
+          return `
+            <tr>
+              <td><span class="${classeDisponivel}">${disponivelNormalizado}</span></td>
+              <td><strong>${item.motorista || '-'}</strong></td>
+              <td>${item.idMotorista || '-'}</td>
+              <td><span class="frota-tipo">${item.tipoVeiculo || '-'}</span></td>
+              <td><strong>${item.placa || '-'}</strong></td>
+              <td>${item.obs || '-'}</td>
+              <td><button class="frota-remove" type="button" onclick="removerFrota(${index})">Excluir</button></td>
+            </tr>
+          `;
+        }).join('');
+      }
+
+      const total = dadosFrotas.length;
+      const disponiveis = dadosFrotas.filter(item => !normalizarTextoFrota(item.disponivel).startsWith('N')).length;
+      const utilitarios = dadosFrotas.filter(item => normalizarTextoFrota(item.tipoVeiculo).includes('UTILITARIO')).length;
+      const vucs = dadosFrotas.filter(item => normalizarTextoFrota(item.tipoVeiculo).includes('VUC')).length;
+
+      const elTotal = document.getElementById('frotaTotal');
+      const elDisponiveis = document.getElementById('frotaDisponiveis');
+      const elUtilitarios = document.getElementById('frotaUtilitarios');
+      const elVuc = document.getElementById('frotaVuc');
+
+      if (elTotal) elTotal.textContent = total;
+      if (elDisponiveis) elDisponiveis.textContent = disponiveis;
+      if (elUtilitarios) elUtilitarios.textContent = utilitarios;
+      if (elVuc) elVuc.textContent = vucs;
+    }
+
+
     preencherDataAtual();
     preencherHorarioAtual();
     atualizarRelogio();
     setInterval(atualizarRelogio, 1000);
 
-    alternarRotaAberta();
-    alternarCondominio();
     adicionarRotaOfensora();
     adicionarVeiculoScheduling();
+    restaurarEstadoCamposGerais();
+    restaurarEstadoEscala();
+    ativarSalvamentoCamposGerais();
+
+    alternarRotaAberta();
+    alternarCondominio();
   </script>
 </body>
 </html>
