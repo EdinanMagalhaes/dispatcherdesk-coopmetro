@@ -1555,6 +1555,22 @@
       }
     }
 
+  
+    /* ===== AJUSTES IMAGEM ESCALA PREMIUM ===== */
+    #cicloEscala {
+      font-weight: 900;
+      color: var(--primary);
+      background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+    }
+
+    #areaImagemEscala {
+      margin-top: 22px !important;
+    }
+
+    #areaImagemEscala .download-link {
+      margin-top: 10px;
+    }
+
   </style>
 </head>
 
@@ -2048,7 +2064,14 @@
       </div>
 
       <div class="form-grid">
-        <div class="form-group full">
+        <div class="form-group half">
+          <label>Ciclo da escala</label>
+          <select id="cicloEscala" onchange="salvarEstadoEscala()">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+        <div class="form-group half">
           <label>Arquivo CSV da escala</label>
           <input type="file" id="arquivoEscalaCsv" accept=".csv,text/csv" onchange="carregarCsvEscala(event)" />
         </div>
@@ -2847,6 +2870,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
           colunas: colunasEscalaCsv || [],
           dados: dadosEscalaCsv || [],
           drivers,
+          ciclo: valor('cicloEscala') || 'AM',
           prioritarios: motoristasPrioritarios || [],
           suporte: ambulanciasSuporte || []
         };
@@ -2883,6 +2907,9 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
 
         motoristasPrioritarios = Array.isArray(estado.prioritarios) ? estado.prioritarios : [];
         ambulanciasSuporte = Array.isArray(estado.suporte) ? estado.suporte : [];
+
+        const campoCicloEscala = document.getElementById('cicloEscala');
+        if (campoCicloEscala && estado.ciclo) campoCicloEscala.value = estado.ciclo;
 
         renderizarMotoristasPrioritarios();
         renderizarAmbulanciasSuporte();
@@ -3357,6 +3384,8 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         return;
       }
 
+      const ciclo = valor('cicloEscala') || 'AM';
+
       const escala = dadosEscalaCsv
         .map((linha, index) => ({
           onda: obterValorEscala(linha, ['Onda']),
@@ -3377,156 +3406,217 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       const canvas = document.getElementById('canvasEscala');
       const ctx = canvas.getContext('2d');
 
-      const largura = 1700;
-      const margem = 60;
-      const alturaCabecalho = 165;
-      const alturaTabelaCabecalho = 56;
-      const alturaLinha = escala.length > 18 ? 62 : 72;
-      const alturaPrioritarios = motoristasPrioritarios.length ? 105 : 0;
-      const alturaSuporte = ambulanciasSuporte.length ? 85 + ambulanciasSuporte.length * 58 : 0;
-      const altura = alturaCabecalho + alturaTabelaCabecalho + escala.length * alturaLinha + alturaPrioritarios + alturaSuporte + 95;
+      const largura = 1800;
+      const margem = 64;
+      const alturaCabecalho = 190;
+      const alturaTabelaCabecalho = 64;
+      const alturaLinha = escala.length > 22 ? 58 : escala.length > 16 ? 64 : 74;
+      const alturaSuporte = ambulanciasSuporte.length ? 104 + ambulanciasSuporte.length * 62 : 0;
+      const alturaRodape = 72;
+      const altura = alturaCabecalho + alturaTabelaCabecalho + escala.length * alturaLinha + alturaSuporte + alturaRodape + 58;
 
       canvas.width = largura;
       canvas.height = altura;
 
-      const corPrimaria = '#123c69';
-      const corPrimariaEscura = '#0b2745';
-      const corSecundaria = '#f5a623';
-      const corFundo = '#f4f8fc';
+      const corPrimaria = '#061a2f';
+      const corPrimaria2 = '#0b2745';
+      const corAzul = '#123c69';
+      const corDourado = '#f59e0b';
+      const corTeal = '#14b8a6';
+      const corFundo = '#f4f8fb';
+      const corFundoLinha = '#f8fbff';
       const corTexto = '#172033';
+      const corMuted = '#667085';
       const corLinha = '#d7e0ea';
-      const corVerde = '#14b8a6';
 
-      ctx.fillStyle = '#ffffff';
+      ctx.clearRect(0, 0, largura, altura);
+
+      ctx.fillStyle = '#eef4f9';
       ctx.fillRect(0, 0, largura, altura);
 
-      const grad = ctx.createLinearGradient(0, 0, largura, alturaCabecalho);
-      grad.addColorStop(0, corPrimariaEscura);
-      grad.addColorStop(0.55, corPrimaria);
-      grad.addColorStop(1, '#1f7a8c');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, largura, alturaCabecalho);
+      const bgGrad = ctx.createLinearGradient(0, 0, largura, altura);
+      bgGrad.addColorStop(0, '#eef4f9');
+      bgGrad.addColorStop(0.55, '#ffffff');
+      bgGrad.addColorStop(1, '#edf8f7');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, largura, altura);
+
+      // Card principal
+      ctx.fillStyle = '#ffffff';
+      ctx.shadowColor = 'rgba(6, 26, 47, 0.20)';
+      ctx.shadowBlur = 28;
+      ctx.shadowOffsetY = 12;
+      ctx.beginPath();
+      ctx.roundRect(34, 34, largura - 68, altura - 68, 34);
+      ctx.fill();
+      ctx.shadowColor = 'transparent';
+
+      // Cabeçalho premium
+      const headerGrad = ctx.createLinearGradient(34, 34, largura - 34, alturaCabecalho);
+      headerGrad.addColorStop(0, corPrimaria);
+      headerGrad.addColorStop(0.58, corAzul);
+      headerGrad.addColorStop(1, '#0f766e');
+
+      ctx.fillStyle = headerGrad;
+      ctx.beginPath();
+      ctx.roundRect(34, 34, largura - 68, alturaCabecalho, 34);
+      ctx.fill();
+
+      // Retângulo para cobrir arredondamento inferior do header
+      ctx.fillStyle = headerGrad;
+      ctx.fillRect(34, alturaCabecalho - 4, largura - 68, 38);
+
+      // Detalhe dourado
+      ctx.fillStyle = corDourado;
+      ctx.beginPath();
+      ctx.roundRect(margem, alturaCabecalho - 12, 380, 8, 999);
+      ctx.fill();
+
+      // Título
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 56px Arial';
+      ctx.fillText('ESCALA COOPMETRO', margem, 92);
+
+      ctx.font = '700 26px Arial';
+      const dataHoje = new Date().toLocaleDateString('pt-BR');
+      ctx.fillStyle = 'rgba(255,255,255,0.86)';
+      ctx.fillText(`Data: ${dataHoje}  •  Ciclo: ${ciclo}  •  Rotas com driver: ${escala.length}`, margem, 132);
+
+      // Badge ciclo
+      const badgeW = 205;
+      const badgeH = 72;
+      const badgeX = largura - margem - badgeW;
+      const badgeY = 68;
+
+      ctx.fillStyle = 'rgba(255,255,255,0.14)';
+      ctx.beginPath();
+      ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 22);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(255,255,255,0.24)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 52px Arial';
-      ctx.fillText('ESCALA COOPMETRO', margem, 72);
+      ctx.font = '800 18px Arial';
+      ctx.fillText('CICLO', badgeX + 26, badgeY + 29);
 
-      ctx.font = '26px Arial';
-      const dataHoje = new Date().toLocaleDateString('pt-BR');
-      ctx.fillText(`Data: ${dataHoje}  •  Rotas preenchidas: ${escala.length}`, margem, 113);
+      ctx.font = '900 34px Arial';
+      ctx.fillStyle = corDourado;
+      ctx.fillText(ciclo, badgeX + 26, badgeY + 60);
 
-      ctx.fillStyle = corSecundaria;
-      ctx.fillRect(margem, alturaCabecalho - 12, 360, 8);
+      const inicioY = alturaCabecalho + 36;
+      const tabelaX = margem;
+      const tabelaW = largura - margem * 2;
 
-      const inicioY = alturaCabecalho + 28;
       const colunas = [
-        { titulo: 'ONDA', x: margem, w: 180 },
-        { titulo: 'ROTA OTIMIZADA', x: 255, w: 330 },
-        { titulo: 'DOCA', x: 620, w: 130 },
-        { titulo: 'TRANSPORTADORA', x: 790, w: 285 },
-        { titulo: 'DRIVER', x: 1110, w: 500 }
+        { titulo: 'ONDA', x: tabelaX + 28, w: 170 },
+        { titulo: 'ROTA OTIMIZADA', x: tabelaX + 240, w: 360 },
+        { titulo: 'DOCA', x: tabelaX + 660, w: 150 },
+        { titulo: 'TRANSPORTADORA', x: tabelaX + 850, w: 300 },
+        { titulo: 'DRIVER', x: tabelaX + 1190, w: 475 }
       ];
 
-      ctx.fillStyle = corSecundaria;
-      ctx.fillRect(margem, inicioY, largura - margem * 2, alturaTabelaCabecalho);
+      // Cabeçalho da tabela
+      ctx.fillStyle = corDourado;
+      ctx.beginPath();
+      ctx.roundRect(tabelaX, inicioY, tabelaW, alturaTabelaCabecalho, 18);
+      ctx.fill();
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 26px Arial';
-      colunas.forEach(coluna => ctx.fillText(coluna.titulo, coluna.x, inicioY + 37));
+      ctx.font = '900 24px Arial';
+      colunas.forEach(coluna => {
+        ctx.fillText(coluna.titulo, coluna.x, inicioY + 41);
+      });
 
-      let y = inicioY + alturaTabelaCabecalho;
+      let y = inicioY + alturaTabelaCabecalho + 8;
 
       escala.forEach((item, index) => {
-        ctx.fillStyle = index % 2 === 0 ? corFundo : '#ffffff';
-        ctx.fillRect(margem, y, largura - margem * 2, alturaLinha);
+        const rowX = tabelaX;
+        const rowW = tabelaW;
+        const rowH = alturaLinha - 4;
+
+        ctx.fillStyle = index % 2 === 0 ? corFundoLinha : '#ffffff';
+        ctx.beginPath();
+        ctx.roundRect(rowX, y, rowW, rowH, 14);
+        ctx.fill();
 
         ctx.strokeStyle = corLinha;
-        ctx.strokeRect(margem, y, largura - margem * 2, alturaLinha);
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
 
-        const centroLinha = y + (alturaLinha / 2) + 9;
+        // Marcador lateral
+        ctx.fillStyle = index % 2 === 0 ? corTeal : corAzul;
+        ctx.beginPath();
+        ctx.roundRect(rowX, y, 8, rowH, 8);
+        ctx.fill();
+
+        const centroLinha = y + (rowH / 2) + 9;
 
         ctx.fillStyle = corTexto;
-        ctx.font = 'bold 25px Arial';
-        ctx.fillText(item.onda || '', colunas[0].x, centroLinha);
-        desenharTextoLimitado(ctx, item.rota || '', colunas[1].x, centroLinha, colunas[1].w, 24, 1);
-        ctx.fillText(item.doca || '', colunas[2].x, centroLinha);
+        ctx.font = '900 25px Arial';
+        desenharTextoLimitado(ctx, item.onda || '-', colunas[0].x, centroLinha, colunas[0].w, 24, 1);
 
-        ctx.font = 'bold 23px Arial';
-        ctx.fillText(item.transportadora || '', colunas[3].x, centroLinha);
+        ctx.font = '900 26px Arial';
+        desenharTextoLimitado(ctx, item.rota || '-', colunas[1].x, centroLinha, colunas[1].w, 24, 1);
 
-        ctx.fillStyle = corPrimariaEscura;
-        ctx.font = 'bold 27px Arial';
-        desenharTextoLimitado(ctx, item.driver || '', colunas[4].x, centroLinha, colunas[4].w, 24, 1);
+        ctx.font = '900 25px Arial';
+        desenharTextoLimitado(ctx, item.doca || '-', colunas[2].x, centroLinha, colunas[2].w, 24, 1);
+
+        ctx.font = '800 22px Arial';
+        ctx.fillStyle = corMuted;
+        desenharTextoLimitado(ctx, item.transportadora || 'COOPMETRO', colunas[3].x, centroLinha, colunas[3].w, 22, 1);
+
+        ctx.font = '900 28px Arial';
+        ctx.fillStyle = corPrimaria2;
+        desenharTextoLimitado(ctx, item.driver || '-', colunas[4].x, centroLinha, colunas[4].w, 26, 1);
 
         y += alturaLinha;
       });
 
-      if (motoristasPrioritarios.length) {
-        y += 34;
-        ctx.fillStyle = corPrimaria;
-        ctx.font = 'bold 30px Arial';
-        ctx.fillText('MOTORISTAS PRIORITÁRIOS', margem, y);
-
-        y += 24;
-        let chipX = margem;
-        let chipY = y + 18;
-
-        motoristasPrioritarios.forEach(nome => {
-          ctx.font = 'bold 23px Arial';
-          const larguraChip = Math.min(ctx.measureText(nome).width + 46, 430);
-
-          if (chipX + larguraChip > largura - margem) {
-            chipX = margem;
-            chipY += 48;
-          }
-
-          ctx.fillStyle = '#eaf4ff';
-          ctx.fillRect(chipX, chipY - 30, larguraChip, 38);
-          ctx.strokeStyle = '#b9d9ff';
-          ctx.strokeRect(chipX, chipY - 30, larguraChip, 38);
-
-          ctx.fillStyle = corPrimariaEscura;
-          desenharTextoLimitado(ctx, nome, chipX + 18, chipY - 5, larguraChip - 34, 20, 1);
-
-          chipX += larguraChip + 12;
-        });
-
-        y = chipY + 42;
-      }
-
+      // Ambulância/Suporte continua aparecendo, mas motoristas prioritários não aparecem na imagem.
       if (ambulanciasSuporte.length) {
-        y += 18;
-        ctx.fillStyle = corPrimaria;
-        ctx.font = 'bold 30px Arial';
+        y += 34;
+
+        ctx.fillStyle = corPrimaria2;
+        ctx.font = '900 31px Arial';
         ctx.fillText('AMBULÂNCIA / SUPORTE', margem, y);
 
-        y += 24;
+        y += 18;
+
         const suporteCols = [
-          { titulo: 'ROTA', x: margem, w: 230 },
-          { titulo: 'MOTORISTA', x: 300, w: 300 },
-          { titulo: 'ROTA ABERTA', x: 630, w: 250 },
-          { titulo: 'MOTORISTA', x: 910, w: 310 },
-          { titulo: 'AMBULÂNCIA/SUPORTE', x: 1250, w: 360 }
+          { titulo: 'ROTA', x: margem + 24, w: 230 },
+          { titulo: 'MOTORISTA', x: margem + 300, w: 310 },
+          { titulo: 'ROTA ABERTA', x: margem + 660, w: 250 },
+          { titulo: 'MOTORISTA', x: margem + 950, w: 320 },
+          { titulo: 'AMBULÂNCIA/SUPORTE', x: margem + 1300, w: 390 }
         ];
 
-        ctx.fillStyle = corVerde;
-        ctx.fillRect(margem, y, largura - margem * 2, 46);
+        y += 16;
+        ctx.fillStyle = corTeal;
+        ctx.beginPath();
+        ctx.roundRect(margem, y, largura - margem * 2, 50, 16);
+        ctx.fill();
 
         ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 21px Arial';
-        suporteCols.forEach(coluna => ctx.fillText(coluna.titulo, coluna.x, y + 31));
+        ctx.font = '900 20px Arial';
+        suporteCols.forEach(coluna => ctx.fillText(coluna.titulo, coluna.x, y + 33));
 
-        y += 46;
+        y += 58;
 
         ambulanciasSuporte.forEach((item, index) => {
           ctx.fillStyle = index % 2 === 0 ? '#f0fbf9' : '#ffffff';
-          ctx.fillRect(margem, y, largura - margem * 2, 58);
-          ctx.strokeStyle = corLinha;
-          ctx.strokeRect(margem, y, largura - margem * 2, 58);
+          ctx.beginPath();
+          ctx.roundRect(margem, y, largura - margem * 2, 54, 14);
+          ctx.fill();
+
+          ctx.strokeStyle = '#ccefe9';
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
 
           ctx.fillStyle = corTexto;
-          ctx.font = 'bold 21px Arial';
-          const linhaY = y + 36;
+          ctx.font = '900 21px Arial';
+          const linhaY = y + 34;
 
           desenharTextoLimitado(ctx, item.rota || '-', suporteCols[0].x, linhaY, suporteCols[0].w, 20, 1);
           desenharTextoLimitado(ctx, item.motorista || '-', suporteCols[1].x, linhaY, suporteCols[1].w, 20, 1);
@@ -3534,22 +3624,33 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
           desenharTextoLimitado(ctx, item.motoristaAberta || '-', suporteCols[3].x, linhaY, suporteCols[3].w, 20, 1);
           desenharTextoLimitado(ctx, item.suporte || '-', suporteCols[4].x, linhaY, suporteCols[4].w, 20, 1);
 
-          y += 58;
+          y += 62;
         });
       }
 
-      ctx.fillStyle = corPrimaria;
-      ctx.font = 'bold 22px Arial';
-      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 34);
+      // Rodapé
+      ctx.fillStyle = '#f8fafc';
+      ctx.beginPath();
+      ctx.roundRect(margem, altura - 88, largura - margem * 2, 42, 14);
+      ctx.fill();
+
+      ctx.fillStyle = corPrimaria2;
+      ctx.font = '900 20px Arial';
+      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem + 20, altura - 61);
+
+      ctx.fillStyle = corMuted;
+      ctx.font = '700 18px Arial';
+      ctx.fillText('DispatcherDesk • Coopmetro', largura - margem - 300, altura - 61);
 
       const imagem = canvas.toDataURL('image/png');
 
       document.getElementById('areaImagemEscala').innerHTML = `
         <img class="preview-image" src="${imagem}" alt="Escala gerada" />
         <br />
-        <a class="download-link" href="${imagem}" download="escala_coopmetro.png">Baixar imagem da escala</a>
+        <a class="download-link" href="${imagem}" download="escala_coopmetro_${ciclo}.png">Baixar imagem da escala</a>
       `;
     }
+
 
     function limparEscala() {
       dadosEscalaCsv = [];
