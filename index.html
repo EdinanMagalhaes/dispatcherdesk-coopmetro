@@ -520,6 +520,21 @@
     }
 
 
+
+    .campo-regiao-escala {
+      width: 100%;
+      min-width: 220px;
+      min-height: 42px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      background: #ffffff;
+    }
+
     .excel-table td.celula-regiao {
       white-space: normal;
       min-width: 260px;
@@ -575,6 +590,40 @@
         grid-template-columns: 1fr;
       }
     }
+  
+    .celula-driver-escala {
+      min-width: 230px;
+      position: sticky;
+      right: 0;
+      background: #ffffff;
+      z-index: 2;
+    }
+
+    .excel-table th.coluna-driver-fixa {
+      position: sticky;
+      right: 0;
+      z-index: 4;
+    }
+
+    .campo-driver-escala {
+      width: 100%;
+      min-width: 190px;
+      height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 7px 10px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      background: #ffffff;
+      outline: none;
+    }
+
+    .campo-driver-escala:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+    }
+
   </style>
 </head>
 
@@ -617,7 +666,7 @@
         passe o feedback para a <strong>Supervisora Samara</strong>.
       </p>
 
-      <button class="popup-button" onclick="fecharPopupInicial()">Entendi, acessar sistema</button>
+      <button class="popup-button" onclick="fecharPopupInicial(); document.getElementById('popupInicial')?.classList.add('hidden-popup');">Entendi, acessar sistema</button>
     </div>
   </div>
 
@@ -1054,9 +1103,10 @@
       <textarea id="resultadoCliente" placeholder="A mensagem para cliente aparecerá aqui..."></textarea>
     </section>
 
+    
     <section id="escala" class="tab-content">
       <div class="info-box">
-        Suba o CSV da operação. Primeiro ele aparece formatado em colunas. Depois você pode gerar uma escala simplificada com Onda, Rota Otimizada, Doca, Transportadora COOPMETRO e campo para preencher o Driver.
+        Suba o CSV da operação para visualizar os dados formatados, preencher os drivers e gerar a imagem da escala para download.
       </div>
 
       <div class="form-grid">
@@ -1066,8 +1116,11 @@
         </div>
       </div>
 
-      <h3 class="section-title">CSV formatado completo</h3>
-      <div class="excel-note">Visual compacto estilo Excel. Passe o mouse sobre as linhas e role para os lados se precisar.</div>
+      <h3 class="section-title">CSV formatado com Driver</h3>
+      <div class="excel-note">
+        Preencha a coluna Driver diretamente na tabela. A imagem será gerada apenas com Onda, Rota Otimizada, Doca, Transportadora e Driver.
+      </div>
+
       <div class="excel-wrapper">
         <table id="tabelaCsvCompleto" class="excel-table">
           <thead>
@@ -1079,26 +1132,6 @@
         </table>
       </div>
 
-      <h3 class="section-title">Escala simplificada</h3>
-      <div class="table-wrapper">
-        <table id="tabelaEscalaSimplificada">
-          <thead>
-            <tr>
-              <th>Onda</th>
-              <th>Rota Otimizada</th>
-              <th>Doca</th>
-              <th>Transportadora</th>
-              <th>Driver</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td colspan="5">Suba um CSV para montar a escala.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
       <div class="actions">
         <button class="action generate" onclick="gerarImagemEscala()">Gerar escala em imagem</button>
         <button class="action clear" onclick="limparEscala()">Limpar escala</button>
@@ -1107,6 +1140,7 @@
       <canvas id="canvasEscala" class="hidden"></canvas>
       <div id="areaImagemEscala"></div>
     </section>
+
 
 
     <section id="fechamentoRota" class="tab-content">
@@ -1727,9 +1761,8 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       document.getElementById('resultadoCliente').value = mensagem;
     }
 
-
     function parseCSV(texto) {
-      texto = texto.replace(/^\uFEFF/, '');
+      texto = String(texto || '').replace(/^\uFEFF/, '');
       const linhas = [];
       let linha = [];
       let campo = '';
@@ -1750,9 +1783,11 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
         } else if ((char === '\n' || char === '\r') && !dentroAspas) {
           if (char === '\r' && proximo === '\n') i++;
           linha.push(campo);
-          if (linha.some(valor => valor.trim() !== '')) {
+
+          if (linha.some(valor => String(valor).trim() !== '')) {
             linhas.push(linha);
           }
+
           linha = [];
           campo = '';
         } else {
@@ -1762,7 +1797,7 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
 
       if (campo.length > 0 || linha.length > 0) {
         linha.push(campo);
-        if (linha.some(valor => valor.trim() !== '')) {
+        if (linha.some(valor => String(valor).trim() !== '')) {
           linhas.push(linha);
         }
       }
@@ -1770,9 +1805,33 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       return linhas;
     }
 
+    function normalizarColunaEscala(texto) {
+      return String(texto || '')
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .trim()
+        .toUpperCase()
+        .replace(/[^A-Z0-9]+/g, ' ')
+        .trim();
+    }
+
+    function obterValorEscala(linha, possiveisNomes) {
+      const chaves = Object.keys(linha || {});
+
+      for (const nome of possiveisNomes) {
+        const alvo = normalizarColunaEscala(nome);
+        const colunaEncontrada = chaves.find(chave => normalizarColunaEscala(chave) === alvo);
+
+        if (colunaEncontrada && linha[colunaEncontrada] !== undefined && linha[colunaEncontrada] !== null) {
+          return linha[colunaEncontrada];
+        }
+      }
+
+      return '';
+    }
+
     function carregarCsvEscala(event) {
       const arquivo = event.target.files[0];
-
       if (!arquivo) return;
 
       const leitor = new FileReader();
@@ -1786,18 +1845,22 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
           return;
         }
 
-        colunasEscalaCsv = linhas[0].map(coluna => coluna.trim());
+        colunasEscalaCsv = linhas[0].map(coluna => String(coluna || '').trim());
+
         dadosEscalaCsv = linhas.slice(1).map(linha => {
           const obj = {};
+
           colunasEscalaCsv.forEach((coluna, index) => {
-            obj[coluna] = linha[index] ? linha[index].trim() : '';
+            obj[coluna] = linha[index] ? String(linha[index]).trim() : '';
           });
+
           return obj;
         });
 
         montarTabelaCsvCompleto();
-        montarTabelaEscalaSimplificada();
-        document.getElementById('areaImagemEscala').innerHTML = '';
+
+        const areaImagem = document.getElementById('areaImagemEscala');
+        if (areaImagem) areaImagem.innerHTML = '';
       };
 
       leitor.readAsText(arquivo, 'UTF-8');
@@ -1805,14 +1868,10 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
 
     function montarTabelaCsvCompleto() {
       const tabela = document.getElementById('tabelaCsvCompleto');
+      if (!tabela) return;
+
       const thead = tabela.querySelector('thead');
       const tbody = tabela.querySelector('tbody');
-
-      const normalizarColuna = texto => String(texto || '')
-        .trim()
-        .toUpperCase()
-        .replace(/\s+/g, ' ')
-        .replace(/:/g, '');
 
       const colunasOcultas = [
         'PLACA',
@@ -1823,81 +1882,40 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       ];
 
       const colunasVisiveis = colunasEscalaCsv.filter(coluna => {
-        return !colunasOcultas.includes(normalizarColuna(coluna));
+        return !colunasOcultas.includes(normalizarColunaEscala(coluna));
       });
 
       thead.innerHTML = `
         <tr>
           ${colunasVisiveis.map(coluna => `<th>${coluna}</th>`).join('')}
+          <th class="coluna-driver-fixa">Driver</th>
         </tr>
       `;
 
-      tbody.innerHTML = dadosEscalaCsv.map(linha => `
+      tbody.innerHTML = dadosEscalaCsv.map((linha, index) => `
         <tr>
-          ${colunasVisiveis.map(coluna => `<td class="${normalizarColuna(coluna) === 'REGIAO' || normalizarColuna(coluna) === 'REGIÃO' ? 'celula-regiao' : ''}" title="${linha[coluna] || ''}">${linha[coluna] || ''}</td>`).join('')}
+          ${colunasVisiveis.map(coluna => `
+            <td class="${normalizarColunaEscala(coluna) === 'REGIAO' ? 'celula-regiao' : ''}" title="${linha[coluna] || ''}">
+              ${linha[coluna] || ''}
+            </td>
+          `).join('')}
+          <td class="celula-driver-escala">
+            <input type="text" class="campo-driver-escala" id="driverEscala${index}" placeholder="Preencher driver" />
+          </td>
         </tr>
       `).join('');
     }
 
-    function montarTabelaEscalaSimplificada() {
-      const tbody = document.querySelector('#tabelaEscalaSimplificada tbody');
-
-      if (!dadosEscalaCsv.length) {
-        tbody.innerHTML = '<tr><td colspan="5">Suba um CSV para montar a escala.</td></tr>';
-        return;
-      }
-
-      tbody.innerHTML = dadosEscalaCsv.map((linha, index) => {
-        const onda = linha['Onda'] || '';
-        const rotaOtimizada = linha['Rota otimizada'] || linha['Rota Otimizada'] || '';
-        const doca = linha['Doca'] || '';
-        const transportadora = 'COOPMETRO';
-
-        return `
-          <tr>
-            <td>${onda}</td>
-            <td>${rotaOtimizada}</td>
-            <td>${doca}</td>
-            <td>${transportadora}</td>
-            <td>
-              <input class="driver-input" id="driverEscala${index}" placeholder="Preencher driver" />
-            </td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function quebrarTextoCanvas(ctx, texto, larguraMaxima) {
-      const palavras = String(texto || '').split(' ');
-      const linhas = [];
-      let linhaAtual = '';
-
-      palavras.forEach(palavra => {
-        const teste = linhaAtual ? linhaAtual + ' ' + palavra : palavra;
-        const medida = ctx.measureText(teste).width;
-
-        if (medida > larguraMaxima && linhaAtual) {
-          linhas.push(linhaAtual);
-          linhaAtual = palavra;
-        } else {
-          linhaAtual = teste;
-        }
-      });
-
-      if (linhaAtual) linhas.push(linhaAtual);
-      return linhas;
-    }
-
     function gerarImagemEscala() {
-      if (!dadosEscalaCsv.length) {
+      if (!dadosEscalaCsv || !dadosEscalaCsv.length) {
         alert('Suba um CSV antes de gerar a imagem da escala.');
         return;
       }
 
       const escala = dadosEscalaCsv.map((linha, index) => ({
-        onda: linha['Onda'] || '',
-        rota: linha['Rota otimizada'] || linha['Rota Otimizada'] || '',
-        doca: linha['Doca'] || '',
+        onda: obterValorEscala(linha, ['Onda']),
+        rota: obterValorEscala(linha, ['Rota otimizada', 'Rota Otimizada']),
+        doca: obterValorEscala(linha, ['Doca']),
         transportadora: 'COOPMETRO',
         driver: valor(`driverEscala${index}`)
       }));
@@ -1905,80 +1923,87 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
       const canvas = document.getElementById('canvasEscala');
       const ctx = canvas.getContext('2d');
 
-      const largura = 1400;
-      const margem = 50;
-      const alturaCabecalho = 120;
-      const alturaLinha = 72;
-      const altura = alturaCabecalho + 70 + escala.length * alturaLinha + 60;
+      const largura = 1500;
+      const margem = 55;
+      const alturaCabecalho = 130;
+      const alturaLinha = 76;
+      const altura = alturaCabecalho + 74 + escala.length * alturaLinha + 70;
 
       canvas.width = largura;
       canvas.height = altura;
 
+      const corPrimaria = '#123c69';
+      const corSecundaria = '#f5a623';
+      const corFundo = '#eef3f8';
+      const corTexto = '#172033';
+      const corLinha = '#d7e0ea';
+      const corCinza = '#98a2b3';
+
       ctx.fillStyle = '#ffffff';
       ctx.fillRect(0, 0, largura, altura);
 
-      ctx.fillStyle = 'var(--primary)';
+      ctx.fillStyle = corPrimaria;
       ctx.fillRect(0, 0, largura, alturaCabecalho);
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 42px Arial';
-      ctx.fillText('ESCALA COOPMETRO', margem, 55);
+      ctx.font = 'bold 44px Arial';
+      ctx.fillText('ESCALA COOPMETRO', margem, 58);
 
       ctx.font = '24px Arial';
       const dataHoje = new Date().toLocaleDateString('pt-BR');
-      ctx.fillText(`Data: ${dataHoje}`, margem, 92);
+      ctx.fillText(`Data: ${dataHoje}`, margem, 96);
 
-      const inicioY = alturaCabecalho + 35;
+      const inicioY = alturaCabecalho + 38;
+
       const colunas = [
         { titulo: 'ONDA', x: margem, w: 180 },
-        { titulo: 'ROTA OTIMIZADA', x: 230, w: 260 },
-        { titulo: 'DOCA', x: 520, w: 120 },
-        { titulo: 'TRANSPORTADORA', x: 670, w: 260 },
-        { titulo: 'DRIVER', x: 960, w: 360 }
+        { titulo: 'ROTA OTIMIZADA', x: 250, w: 260 },
+        { titulo: 'DOCA', x: 545, w: 110 },
+        { titulo: 'TRANSPORTADORA', x: 700, w: 260 },
+        { titulo: 'DRIVER', x: 1005, w: 410 }
       ];
 
-      ctx.fillStyle = 'var(--secondary)';
-      ctx.fillRect(margem, inicioY, largura - margem * 2, 44);
+      ctx.fillStyle = corSecundaria;
+      ctx.fillRect(margem, inicioY, largura - margem * 2, 46);
 
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 22px Arial';
+
       colunas.forEach(coluna => {
-        ctx.fillText(coluna.titulo, coluna.x, inicioY + 29);
+        ctx.fillText(coluna.titulo, coluna.x, inicioY + 31);
       });
 
-      let y = inicioY + 44;
+      let y = inicioY + 46;
 
       escala.forEach((item, index) => {
-        ctx.fillStyle = index % 2 === 0 ? 'var(--bg)' : '#ffffff';
+        ctx.fillStyle = index % 2 === 0 ? corFundo : '#ffffff';
         ctx.fillRect(margem, y, largura - margem * 2, alturaLinha);
 
-        ctx.strokeStyle = 'var(--line)';
+        ctx.strokeStyle = corLinha;
         ctx.strokeRect(margem, y, largura - margem * 2, alturaLinha);
 
-        ctx.fillStyle = 'var(--text)';
+        ctx.fillStyle = corTexto;
         ctx.font = '22px Arial';
 
-        ctx.fillText(item.onda, colunas[0].x, y + 43);
-        ctx.fillText(item.rota, colunas[1].x, y + 43);
-        ctx.fillText(item.doca, colunas[2].x, y + 43);
-        ctx.fillText(item.transportadora, colunas[3].x, y + 43);
+        ctx.fillText(item.onda || '', colunas[0].x, y + 46);
+        ctx.fillText(item.rota || '', colunas[1].x, y + 46);
+        ctx.fillText(item.doca || '', colunas[2].x, y + 46);
+        ctx.fillText(item.transportadora || '', colunas[3].x, y + 46);
 
-        const linhasDriver = quebrarTextoCanvas(ctx, item.driver || '', colunas[4].w);
-        if (linhasDriver.length) {
-          linhasDriver.slice(0, 2).forEach((linhaTexto, linhaIndex) => {
-            ctx.fillText(linhaTexto, colunas[4].x, y + 32 + linhaIndex * 24);
-          });
+        if ((item.driver || '').trim()) {
+          ctx.fillStyle = corTexto;
+          ctx.fillText(item.driver, colunas[4].x, y + 46);
         } else {
-          ctx.fillStyle = '#98a2b3';
-          ctx.fillText('________________', colunas[4].x, y + 43);
+          ctx.fillStyle = corCinza;
+          ctx.fillText('________________', colunas[4].x, y + 46);
         }
 
         y += alturaLinha;
       });
 
-      ctx.fillStyle = 'var(--primary)';
+      ctx.fillStyle = corPrimaria;
       ctx.font = 'bold 20px Arial';
-      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 25);
+      ctx.fillText('Feito por EDINAN MAGALHÃES, SEU DISPATCHER FAVORITO!', margem, altura - 28);
 
       const imagem = canvas.toDataURL('image/png');
 
@@ -1992,13 +2017,17 @@ Poderia informar, por gentileza, bloco, apartamento, ponto de referência ou aut
     function limparEscala() {
       dadosEscalaCsv = [];
       colunasEscalaCsv = [];
-      document.getElementById('arquivoEscalaCsv').value = '';
-      document.querySelector('#tabelaCsvCompleto thead').innerHTML = '<tr><th>Aguardando CSV...</th></tr>';
-      document.querySelector('#tabelaCsvCompleto tbody').innerHTML = '';
-      document.querySelector('#tabelaEscalaSimplificada tbody').innerHTML = '<tr><td colspan="5">Suba um CSV para montar a escala.</td></tr>';
-      document.getElementById('areaImagemEscala').innerHTML = '';
-    }
 
+      const arquivo = document.getElementById('arquivoEscalaCsv');
+      const thead = document.querySelector('#tabelaCsvCompleto thead');
+      const tbody = document.querySelector('#tabelaCsvCompleto tbody');
+      const areaImagem = document.getElementById('areaImagemEscala');
+
+      if (arquivo) arquivo.value = '';
+      if (thead) thead.innerHTML = '<tr><th>Aguardando CSV...</th></tr>';
+      if (tbody) tbody.innerHTML = '';
+      if (areaImagem) areaImagem.innerHTML = '';
+    }
 
 
     function gerarFechamentoRota() {
