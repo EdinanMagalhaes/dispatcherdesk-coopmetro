@@ -657,6 +657,64 @@
 
 
 
+
+    .home-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+      gap:18px;
+      align-items:start;
+    }
+    .home-hero{
+      position:relative; overflow:hidden; border-radius:34px; padding:34px; color:#fff;
+      background:linear-gradient(135deg,var(--green-950),var(--green-700)); box-shadow:var(--shadow);
+      min-height:350px; display:grid; align-content:space-between; gap:24px;
+    }
+    .home-hero:after{content:""; position:absolute; width:340px; height:340px; border-radius:999px; right:-120px; top:-120px; border:54px solid rgba(255,255,255,.08)}
+    .home-hero h3{position:relative; z-index:1; margin:8px 0 12px; font-size:clamp(34px,5vw,58px); line-height:.92; letter-spacing:-.08em}
+    .home-hero p{position:relative; z-index:1; margin:0; color:rgba(255,255,255,.78); font-size:16px; line-height:1.65; max-width:720px; font-weight:600}
+    .home-actions{position:relative; z-index:1; display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+    .whatsapp-btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; text-decoration:none; border-radius:16px; padding:14px 18px; font-weight:950; background:#25d366; color:#052d21; box-shadow:0 18px 40px rgba(37,211,102,.22); transition:.2s ease}
+    .whatsapp-btn:hover{transform:translateY(-1px)}
+    .home-card,.rotina-card{background:rgba(255,255,255,.92); border:1px solid var(--line); border-radius:var(--radius-xl); box-shadow:var(--shadow); padding:24px; backdrop-filter:blur(14px)}
+    .home-card h3,.rotina-card h3{margin:4px 0 12px; color:var(--green-900); font-size:24px; letter-spacing:-.05em}
+    .home-card p{margin:0 0 14px; color:var(--muted); line-height:1.65; font-weight:550}
+    .home-feature-list{display:grid; gap:12px; margin-top:16px}
+    .home-feature{display:flex; gap:12px; align-items:flex-start; padding:14px; border:1px solid var(--line); border-radius:18px; background:linear-gradient(180deg,#fff,var(--green-50))}
+    .home-feature b{color:var(--green-900); display:block; margin-bottom:3px}
+    .home-feature span{color:var(--muted); font-size:13px; line-height:1.45; font-weight:650}
+    .access-modal-overlay{position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(6,61,44,.52); z-index:80}
+    .access-modal-overlay.show{display:flex}
+    .access-modal{width:min(560px,100%); background:#fff; border-radius:30px; padding:26px; box-shadow:0 30px 100px rgba(0,0,0,.3)}
+    .access-modal h3{margin:6px 0 10px; color:var(--green-900); font-size:30px; letter-spacing:-.06em}
+    .access-modal p{margin:0 0 18px; color:var(--muted); line-height:1.6; font-weight:600}
+
+    .rotina-grid{display:grid; grid-template-columns:minmax(420px,.9fr) minmax(520px,1.1fr); gap:18px; align-items:start}
+    .rotina-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+    .rotina-tab-btn{border:1px solid var(--line); background:#fff; color:var(--green-800); border-radius:999px; padding:10px 13px; font-weight:950; font-size:12px; transition:.2s ease}
+    .rotina-tab-btn.active{background:linear-gradient(135deg,var(--green-900),var(--green-600)); color:#fff; border-color:transparent; box-shadow:0 14px 28px rgba(8,118,78,.18)}
+    .rotina-list{display:grid; gap:12px; max-height:560px; overflow:auto; padding-right:4px}
+    .rotina-item{border:1px solid var(--line); border-radius:20px; background:linear-gradient(180deg,#fff,#f9fffb); padding:15px; display:grid; gap:12px; box-shadow:0 10px 26px rgba(6,61,44,.06)}
+    .rotina-item.done{opacity:.72; background:#f6faf8}
+    .rotina-item-header{display:flex; justify-content:space-between; gap:12px; align-items:flex-start}
+    .rotina-item-title{display:grid; gap:4px}
+    .rotina-item-title strong{color:var(--green-900); font-size:16px; letter-spacing:-.03em}
+    .rotina-item-title span{color:var(--muted); font-size:12px; font-weight:800; line-height:1.35}
+    .rotina-item p{margin:0; color:#33443b; line-height:1.5; font-size:13px; white-space:pre-wrap}
+    .rotina-badges{display:flex; gap:7px; flex-wrap:wrap}
+    .rotina-badge{display:inline-flex; padding:7px 9px; border-radius:999px; font-size:11px; font-weight:950; background:var(--green-100); color:var(--green-800); white-space:nowrap}
+    .rotina-badge.prioridade-alta{background:#fff0f0; color:var(--danger)}
+    .rotina-badge.prioridade-media,.rotina-badge.status-pendente{background:#fff4e5; color:var(--warning)}
+    .rotina-badge.status-concluido{background:var(--green-100); color:var(--green-800)}
+    .rotina-actions{display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap}
+    .rotina-summary{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:16px}
+    .rotina-summary-card{border:1px solid var(--line); border-radius:18px; padding:13px; background:linear-gradient(180deg,#fff,var(--green-50))}
+    .rotina-summary-card small{display:block; color:var(--muted); font-weight:850; margin-bottom:6px; font-size:10px; text-transform:uppercase; letter-spacing:.08em}
+    .rotina-summary-card strong{color:var(--green-900); font-size:25px; letter-spacing:-.05em}
+    .rotina-notes-area{min-height:260px; font-family:Inter,ui-sans-serif,system-ui,sans-serif; line-height:1.55}
+    .rotina-templates{display:grid; gap:10px}
+    .rotina-template-btn{text-align:left; border:1px solid var(--line); background:#fff; border-radius:18px; padding:13px; color:var(--green-900); font-weight:950; display:grid; gap:4px; box-shadow:0 8px 22px rgba(6,61,44,.05)}
+    .rotina-template-btn span{color:var(--muted); font-size:12px; font-weight:750; line-height:1.35}
+
     .tab-section{display:none}
     .tab-section.active{display:block}
 
@@ -801,186 +859,10 @@
 
 
 
-
-    .home-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
-      gap:18px;
-      align-items:start;
-    }
-
-    .home-hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:34px;
-      padding:34px;
-      color:#fff;
-      background:linear-gradient(135deg,var(--green-950),var(--green-700));
-      box-shadow:var(--shadow);
-      min-height:360px;
-      display:grid;
-      align-content:space-between;
-      gap:26px;
-    }
-
-    .home-hero:after{
-      content:"";
-      position:absolute;
-      width:360px;
-      height:360px;
-      border-radius:999px;
-      right:-120px;
-      top:-120px;
-      border:54px solid rgba(255,255,255,.08);
-    }
-
-    .home-hero h3{
-      position:relative;
-      z-index:1;
-      margin:8px 0 12px;
-      font-size:clamp(34px,5vw,58px);
-      line-height:.92;
-      letter-spacing:-.08em;
-    }
-
-    .home-hero p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      color:rgba(255,255,255,.78);
-      font-size:16px;
-      line-height:1.65;
-      max-width:720px;
-      font-weight:600;
-    }
-
-    .home-actions{
-      position:relative;
-      z-index:1;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .whatsapp-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      border-radius:16px;
-      padding:14px 18px;
-      font-weight:950;
-      background:#25d366;
-      color:#052d21;
-      box-shadow:0 18px 40px rgba(37,211,102,.22);
-      transition:.2s ease;
-    }
-
-    .whatsapp-btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .home-card{
-      background:rgba(255,255,255,.92);
-      border:1px solid var(--line);
-      border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
-      padding:24px;
-      backdrop-filter:blur(14px);
-    }
-
-    .home-card h3{
-      margin:4px 0 12px;
-      color:var(--green-900);
-      font-size:24px;
-      letter-spacing:-.05em;
-    }
-
-    .home-card p{
-      margin:0 0 14px;
-      color:var(--muted);
-      line-height:1.65;
-      font-weight:550;
-    }
-
-    .home-feature-list{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .home-feature{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:linear-gradient(180deg,#fff,var(--green-50));
-    }
-
-    .home-feature b{
-      color:var(--green-900);
-      display:block;
-      margin-bottom:3px;
-    }
-
-    .home-feature span{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
-      font-weight:650;
-    }
-
-    .access-modal-overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(6,61,44,.52);
-      z-index:80;
-    }
-
-    .access-modal-overlay.show{
-      display:flex;
-    }
-
-    .access-modal{
-      width:min(560px,100%);
-      background:#fff;
-      border-radius:30px;
-      padding:26px;
-      box-shadow:0 30px 100px rgba(0,0,0,.3);
-    }
-
-    .access-modal h3{
-      margin:6px 0 10px;
-      color:var(--green-900);
-      font-size:30px;
-      letter-spacing:-.06em;
-    }
-
-    .access-modal p{
-      margin:0 0 18px;
-      color:var(--muted);
-      line-height:1.6;
-      font-weight:600;
-    }
-
-    .feedback-box{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
     .escala-grid{
       display:grid;
-      grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
-      gap:14px;
+      grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+      gap:18px;
       align-items:start;
     }
 
@@ -999,37 +881,6 @@
       flex-wrap:wrap;
       align-items:center;
       margin-bottom:18px;
-    }
-
-
-    #tab-escala .form-card,
-    #tab-escala .records-card,
-    #tab-escala .escala-preview{
-      padding:18px;
-      border-radius:24px;
-    }
-
-    #tab-escala .section-title{
-      margin-bottom:12px;
-    }
-
-    #tab-escala .form-grid{
-      gap:10px 12px;
-    }
-
-    #tab-escala .escala-toolbar{
-      margin-bottom:12px;
-    }
-
-    #tab-escala input,
-    #tab-escala textarea,
-    #tab-escala select{
-      padding:10px 12px;
-    }
-
-    #tab-escala .escala-table-wrap{
-      max-height:none;
-      overflow-x:hidden;
     }
 
     .escala-table-wrap{
@@ -1054,18 +905,18 @@
       top:0;
       z-index:2;
       text-align:left;
-      font-size:10px;
+      font-size:11px;
       text-transform:uppercase;
-      letter-spacing:.07em;
+      letter-spacing:.08em;
       color:var(--muted);
       background:#f8fbf9;
-      padding:10px;
+      padding:12px;
       border-bottom:1px solid var(--line);
-      white-space:normal;
+      white-space:nowrap;
     }
 
     .escala-table td{
-      padding:8px 10px;
+      padding:10px 12px;
       border-bottom:1px solid var(--line);
       font-size:13px;
       vertical-align:middle;
@@ -1077,22 +928,22 @@
 
 
     .escala-table th:nth-child(1),
-    .escala-table td:nth-child(1){width:62px}
+    .escala-table td:nth-child(1){width:72px}
 
     .escala-table th:nth-child(2),
-    .escala-table td:nth-child(2){width:104px}
+    .escala-table td:nth-child(2){width:130px}
 
     .escala-table th:nth-child(3),
-    .escala-table td:nth-child(3){width:78px}
+    .escala-table td:nth-child(3){width:100px}
 
     .escala-table th:nth-child(4),
-    .escala-table td:nth-child(4){width:155px}
+    .escala-table td:nth-child(4){width:190px}
 
     .escala-table th:nth-child(5),
-    .escala-table td:nth-child(5){width:auto}
+    .escala-table td:nth-child(5){width:230px}
 
     .escala-table th:nth-child(6),
-    .escala-table td:nth-child(6){width:92px}
+    .escala-table td:nth-child(6){width:110px}
 
 
     .escala-table .regiao-textarea{
@@ -1146,8 +997,8 @@
 
     .regiao-full-box{
       display:grid;
-      gap:6px;
-      padding:10px;
+      gap:7px;
+      padding:12px;
       border:1px solid var(--line);
       border-radius:16px;
       background:var(--green-50);
@@ -1163,10 +1014,10 @@
 
     .regiao-full-box textarea{
       width:100%;
-      min-height:64px;
+      min-height:84px;
       resize:vertical;
       border-radius:14px;
-      line-height:1.35;
+      line-height:1.4;
       white-space:normal;
       overflow:auto;
     }
@@ -1212,15 +1063,14 @@
 
     .escala-preview-canvas-wrap{
       width:100%;
-      overflow:hidden;
+      overflow:auto;
       border:1px dashed var(--line);
       border-radius:20px;
       background:var(--green-50);
-      padding:8px;
+      padding:12px;
     }
 
     #canvasEscala{
-      width:100%;
       max-width:100%;
       height:auto;
       display:block;
@@ -1570,184 +1420,8 @@
       background:var(--green-50);
     }
 
-    @media(max-width:1250px){
-  
-    .home-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
-      gap:18px;
-      align-items:start;
-    }
-
-    .home-hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:34px;
-      padding:34px;
-      color:#fff;
-      background:linear-gradient(135deg,var(--green-950),var(--green-700));
-      box-shadow:var(--shadow);
-      min-height:360px;
-      display:grid;
-      align-content:space-between;
-      gap:26px;
-    }
-
-    .home-hero:after{
-      content:"";
-      position:absolute;
-      width:360px;
-      height:360px;
-      border-radius:999px;
-      right:-120px;
-      top:-120px;
-      border:54px solid rgba(255,255,255,.08);
-    }
-
-    .home-hero h3{
-      position:relative;
-      z-index:1;
-      margin:8px 0 12px;
-      font-size:clamp(34px,5vw,58px);
-      line-height:.92;
-      letter-spacing:-.08em;
-    }
-
-    .home-hero p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      color:rgba(255,255,255,.78);
-      font-size:16px;
-      line-height:1.65;
-      max-width:720px;
-      font-weight:600;
-    }
-
-    .home-actions{
-      position:relative;
-      z-index:1;
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      align-items:center;
-    }
-
-    .whatsapp-btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      text-decoration:none;
-      border-radius:16px;
-      padding:14px 18px;
-      font-weight:950;
-      background:#25d366;
-      color:#052d21;
-      box-shadow:0 18px 40px rgba(37,211,102,.22);
-      transition:.2s ease;
-    }
-
-    .whatsapp-btn:hover{
-      transform:translateY(-1px);
-    }
-
-    .home-card{
-      background:rgba(255,255,255,.92);
-      border:1px solid var(--line);
-      border-radius:var(--radius-xl);
-      box-shadow:var(--shadow);
-      padding:24px;
-      backdrop-filter:blur(14px);
-    }
-
-    .home-card h3{
-      margin:4px 0 12px;
-      color:var(--green-900);
-      font-size:24px;
-      letter-spacing:-.05em;
-    }
-
-    .home-card p{
-      margin:0 0 14px;
-      color:var(--muted);
-      line-height:1.65;
-      font-weight:550;
-    }
-
-    .home-feature-list{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .home-feature{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:18px;
-      background:linear-gradient(180deg,#fff,var(--green-50));
-    }
-
-    .home-feature b{
-      color:var(--green-900);
-      display:block;
-      margin-bottom:3px;
-    }
-
-    .home-feature span{
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.45;
-      font-weight:650;
-    }
-
-    .access-modal-overlay{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:rgba(6,61,44,.52);
-      z-index:80;
-    }
-
-    .access-modal-overlay.show{
-      display:flex;
-    }
-
-    .access-modal{
-      width:min(560px,100%);
-      background:#fff;
-      border-radius:30px;
-      padding:26px;
-      box-shadow:0 30px 100px rgba(0,0,0,.3);
-    }
-
-    .access-modal h3{
-      margin:6px 0 10px;
-      color:var(--green-900);
-      font-size:30px;
-      letter-spacing:-.06em;
-    }
-
-    .access-modal p{
-      margin:0 0 18px;
-      color:var(--muted);
-      line-height:1.6;
-      font-weight:600;
-    }
-
-    .feedback-box{
-      display:grid;
-      gap:12px;
-      margin-top:16px;
-    }
-
-    .escala-grid{
+    @media(max-width:1400px){
+      .escala-grid{
         grid-template-columns:1fr;
       }
 
@@ -1769,7 +1443,7 @@
       .topbar,.section-title{flex-direction:column}
       .hero-panel{grid-template-columns:1fr}
       .hero-number{justify-self:stretch;text-align:left}
-      .metrics-grid,.form-grid,.record-grid,.history-filters,.history-summary,.hora-grid,.alarm-panel,.fechamento-grid,.motivos-grid,.mensagens-grid,.message-type-grid,.escala-grid,.home-grid{grid-template-columns:1fr}
+      .metrics-grid,.form-grid,.record-grid,.history-filters,.history-summary,.hora-grid,.alarm-panel,.fechamento-grid,.motivos-grid,.mensagens-grid,.message-type-grid,.escala-grid{grid-template-columns:1fr}
       label.two{grid-column:auto}
       .nav-menu{grid-template-columns:1fr}
       .top-actions,.form-actions{justify-content:stretch}
@@ -1792,6 +1466,7 @@
       <div class="nav-label">Módulos</div>
       <nav class="nav-menu">
         <button class="nav-item active" type="button" data-tab="home"><span>🏠</span>Home</button>
+        <button class="nav-item" type="button" data-tab="rotina"><span>✅</span>Rotina</button>
         <button class="nav-item" type="button" data-tab="ambulancia"><span>🚑</span>Solicitação / Abertura</button>
         <button class="nav-item" type="button" data-tab="hora"><span>📊</span>Hora a Hora</button>
         <button class="nav-item" type="button" data-tab="fechamento"><span>📋</span>Fechamento</button>
@@ -1819,61 +1494,80 @@
         </div>
       </header>
 
+
       <section class="tab-section active" id="tab-home">
         <section class="home-grid">
           <div class="home-hero">
             <div>
               <span class="eyebrow" style="color:rgba(255,255,255,.82)">Central operacional</span>
               <h3>DispatcherDesk CoopMetro</h3>
-              <p>
-                Sistema desenvolvido para apoiar a rotina da operação, reduzindo retrabalho e padronizando os principais processos: ambulância, hora a hora, fechamento, mensagens rápidas e escala.
-              </p>
+              <p>Sistema desenvolvido para apoiar a rotina da operação, reduzir retrabalho e padronizar ambulância, hora a hora, fechamento, mensagens rápidas, escala e rotina.</p>
             </div>
-
             <div class="home-actions">
-              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20tenho%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">
-                💬 Enviar feedback no WhatsApp
-              </a>
+              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20tenho%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">💬 Enviar feedback no WhatsApp</a>
               <button type="button" class="ghost-btn" id="btnAbrirPopupAcesso">Registrar acesso</button>
             </div>
           </div>
-
           <div class="records-column">
             <section class="home-card">
               <span class="eyebrow">Sobre o sistema</span>
               <h3>Feito para a operação ser mais rápida e organizada</h3>
-              <p>
-                O DispatcherDesk reúne ferramentas práticas para gerar mensagens padronizadas, salvar histórico local, controlar alarmes, montar escala e gerar relatórios com mais qualidade.
-              </p>
-              <p>
-                Criado por <strong>Edinan Magalhães</strong> para uso operacional da CoopMetro, com foco em clareza, agilidade e padronização.
-              </p>
-
+              <p>O DispatcherDesk reúne ferramentas práticas para gerar mensagens padronizadas, salvar histórico local, controlar alarmes, montar escala e gerar relatórios com mais qualidade.</p>
+              <p>Criado por <strong>Edinan Magalhães</strong> para uso operacional da CoopMetro.</p>
               <div class="home-feature-list">
-                <div class="home-feature">
-                  <div>🚑</div>
-                  <div><b>Ambulância e abertura</b><span>Gere solicitações, aberturas e mantenha histórico por data.</span></div>
-                </div>
-                <div class="home-feature">
-                  <div>📊</div>
-                  <div><b>Hora a Hora</b><span>Alarme configurável e mensagens rápidas de acompanhamento.</span></div>
-                </div>
-                <div class="home-feature">
-                  <div>🗓️</div>
-                  <div><b>Escala</b><span>Importe CSV, organize motoristas e gere imagem premium para envio.</span></div>
-                </div>
+                <div class="home-feature"><div>🚑</div><div><b>Ambulância e abertura</b><span>Solicitações, aberturas e histórico por data.</span></div></div>
+                <div class="home-feature"><div>📊</div><div><b>Hora a Hora</b><span>Alarme configurável e mensagens de acompanhamento.</span></div></div>
+                <div class="home-feature"><div>✅</div><div><b>Rotina</b><span>Checklist, pendências, concluídos e anotações.</span></div></div>
               </div>
             </section>
-
             <section class="home-card">
               <span class="eyebrow">Feedbacks</span>
               <h3>Ajude a melhorar</h3>
-              <p>
-                Encontrou algum erro, bug ou tem sugestão de melhoria? Envie diretamente para o WhatsApp do Edinan.
-              </p>
-              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20quero%20enviar%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">
-                💬 Falar com Edinan
-              </a>
+              <p>Encontrou algum erro, bug ou tem sugestão de melhoria? Envie diretamente para o WhatsApp do Edinan.</p>
+              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20quero%20enviar%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">💬 Falar com Edinan</a>
+            </section>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-section" id="tab-rotina">
+        <section class="instruction-card">Use esta aba como painel diário do dispatcher: registre tarefas, checklists, anotações, pendências, prioridades e marque o que já foi concluído.</section>
+        <section class="rotina-grid">
+          <div class="records-column">
+            <form class="rotina-card" id="formRotina">
+              <div class="section-title"><div><span class="eyebrow">Nova tarefa</span><h3>Checklist / Pendência</h3></div><button type="button" class="mini-btn" id="btnRotinaHoje">Hoje</button></div>
+              <div class="form-grid">
+                <label class="full">Título<input type="text" id="rotinaTitulo" placeholder="Ex.: Conferir ambulâncias não pagas" required></label>
+                <label>Categoria<select id="rotinaCategoria"><option>Checklist</option><option>Pendência</option><option>Anotação</option><option>Urgente</option><option>Follow-up</option><option>Escala</option><option>Fechamento</option></select></label>
+                <label>Prioridade<select id="rotinaPrioridade"><option>Baixa</option><option selected>Média</option><option>Alta</option></select></label>
+                <label>Data<input type="date" id="rotinaData"></label>
+                <label>Horário / Prazo<input type="time" id="rotinaHora"></label>
+                <label class="full">Detalhes<textarea id="rotinaDetalhes" rows="5" placeholder="Descreva o que precisa ser feito, links, responsáveis, observações..."></textarea></label>
+              </div>
+              <div class="form-actions"><button type="button" class="ghost-btn" id="btnLimparRotinaForm">Limpar</button><button type="submit" class="primary-btn">Salvar tarefa</button></div>
+            </form>
+            <section class="rotina-card">
+              <div class="section-title"><div><span class="eyebrow">Modelos rápidos</span><h3>Adicionar rotina comum</h3></div></div>
+              <div class="rotina-templates">
+                <button type="button" class="rotina-template-btn" data-template="cursos">Puxar lista de cursos<span>Conferência semanal dos cursos pendentes.</span></button>
+                <button type="button" class="rotina-template-btn" data-template="ambulancias">Conferir ambulâncias não pagas<span>Controle de pendências financeiras/operacionais.</span></button>
+                <button type="button" class="rotina-template-btn" data-template="ofensoras">Verificar rotas ofensoras<span>Checar rotas com risco e possíveis suportes.</span></button>
+                <button type="button" class="rotina-template-btn" data-template="fechamento">Preparar fechamento diário<span>Separar DS, motivos e justificativas.</span></button>
+                <button type="button" class="rotina-template-btn" data-template="escala">Montar escala do próximo ciclo<span>Conferir motoristas, regiões, docas e apoios.</span></button>
+              </div>
+            </section>
+          </div>
+          <div class="records-column">
+            <section class="rotina-card">
+              <div class="section-title"><div><span class="eyebrow">Painel da rotina</span><h3>Resumo operacional</h3></div><button type="button" class="mini-btn" id="btnExportarRotina">Exportar rotina</button></div>
+              <div class="rotina-summary"><article class="rotina-summary-card"><small>Total</small><strong id="rotinaTotal">0</strong></article><article class="rotina-summary-card"><small>Pendentes</small><strong id="rotinaPendentes">0</strong></article><article class="rotina-summary-card"><small>Concluídas</small><strong id="rotinaConcluidas">0</strong></article><article class="rotina-summary-card"><small>Alta prioridade</small><strong id="rotinaAlta">0</strong></article></div>
+              <div class="rotina-tabs"><button type="button" class="rotina-tab-btn active" data-filtro="pendente">Pendentes</button><button type="button" class="rotina-tab-btn" data-filtro="concluido">Concluídas</button><button type="button" class="rotina-tab-btn" data-filtro="todas">Todas</button><button type="button" class="rotina-tab-btn" data-filtro="hoje">Hoje</button><button type="button" class="rotina-tab-btn" data-filtro="alta">Alta prioridade</button></div>
+              <div id="listaRotina" class="rotina-list"><div class="history-empty">Nenhuma tarefa cadastrada ainda.</div></div>
+            </section>
+            <section class="rotina-card">
+              <div class="section-title"><div><span class="eyebrow">Bloco de notas</span><h3>Anotações livres</h3></div><button type="button" class="mini-btn" id="btnCopiarNotasRotina">Copiar notas</button></div>
+              <textarea id="rotinaNotasLivres" class="rotina-notes-area" placeholder="Use este espaço para anotações rápidas da operação. Tudo fica salvo automaticamente neste navegador."></textarea>
+              <div class="form-actions"><button type="button" class="ghost-btn" id="btnSalvarNotasRotina">Salvar notas</button><button type="button" class="ghost-btn danger-btn" id="btnLimparNotasRotina">Limpar notas</button></div>
             </section>
           </div>
         </section>
@@ -2684,20 +2378,10 @@
     <div class="access-modal">
       <span class="eyebrow">Primeiro acesso</span>
       <h3>DispatcherDesk CoopMetro</h3>
-      <p>
-        Este sistema foi feito por <strong>Edinan Magalhães</strong> para apoiar a operação. Preencha seu nome para registrar este acesso.
-      </p>
-
+      <p>Este sistema foi feito por <strong>Edinan Magalhães</strong> para apoiar a operação. Preencha seu nome para registrar este acesso.</p>
       <form id="formPrimeiroAcesso">
-        <label>
-          Seu nome
-          <input type="text" id="nomePrimeiroAcesso" placeholder="Digite seu nome" required>
-        </label>
-
-        <div class="form-actions">
-          <button type="button" class="ghost-btn" id="btnPularPrimeiroAcesso">Pular</button>
-          <button type="submit" class="primary-btn">Registrar acesso</button>
-        </div>
+        <label>Seu nome<input type="text" id="nomePrimeiroAcesso" placeholder="Digite seu nome" required></label>
+        <div class="form-actions"><button type="button" class="ghost-btn" id="btnPularPrimeiroAcesso">Pular</button><button type="submit" class="primary-btn">Registrar acesso</button></div>
       </form>
     </div>
   </div>
@@ -2806,6 +2490,13 @@
     const modalPrimeiroAcesso = document.getElementById('modalPrimeiroAcesso');
     const formPrimeiroAcesso = document.getElementById('formPrimeiroAcesso');
     const nomePrimeiroAcesso = document.getElementById('nomePrimeiroAcesso');
+    const ROTINA_KEY = 'dispatcherdesk_rotina_tarefas_v1';
+    const ROTINA_NOTAS_KEY = 'dispatcherdesk_rotina_notas_v1';
+    const formRotina = document.getElementById('formRotina');
+    const listaRotina = document.getElementById('listaRotina');
+    const rotinaNotasLivres = document.getElementById('rotinaNotasLivres');
+    let rotinaTarefas = carregarRotinaTarefas();
+    let rotinaFiltroAtual = 'pendente';
 
     let registros = carregarRegistros();
     let registroSelecionadoId = null;
@@ -3357,11 +3048,8 @@
       if(btn) btn.classList.add('active');
 
       const cabecalhos = {
-        home: {
-          eyebrow: 'Bem-vindo',
-          titulo: 'DispatcherDesk CoopMetro',
-          descricao: 'Sistema operacional criado para agilizar solicitações, acompanhamento, fechamento, mensagens rápidas e escala da operação.'
-        },
+        home: {eyebrow:'Bem-vindo', titulo:'DispatcherDesk CoopMetro', descricao:'Sistema operacional criado para agilizar solicitações, acompanhamento, fechamento, mensagens rápidas e escala da operação.'},
+        rotina: {eyebrow:'Organização diária', titulo:'Rotina do Dispatcher', descricao:'Controle checklists, anotações, pendências e tarefas concluídas para não esquecer nada durante a operação.'},
         ambulancia: {
           eyebrow: 'Operação CoopMetro',
           titulo: 'Solicitação de Ambulância e Abertura',
@@ -3678,6 +3366,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Registro excluído.');
     }
 
@@ -3711,6 +3401,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       copiarTexto(mensagem);
       mostrarToast('Hora a Hora gerado, salvo e copiado.');
     });
@@ -3756,6 +3448,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Histórico do Hora a Hora limpo.');
     });
 
@@ -4006,6 +3700,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Fechamento excluído.');
     }
 
@@ -4032,6 +3728,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       atualizarPreviewFechamento();
       copiarTexto(mensagem);
       mostrarToast('Fechamento gerado, salvo e copiado.');
@@ -4073,6 +3771,8 @@
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Histórico de fechamentos limpo.');
     });
 
@@ -4267,6 +3967,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Mensagem excluída.');
     }
 
@@ -4309,6 +4011,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       copiarTexto(mensagem);
       mostrarToast('Mensagem rápida gerada, salva e copiada.');
     });
@@ -4324,6 +4028,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Histórico de mensagens rápidas limpo.');
     });
 
@@ -4714,7 +4420,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
           ctx.font = '900 20px Inter, Arial';
           ctx.fillText(r.rota || '-', x+142, cy+64);
         });
-        y += linhasRotas * (cardH + gap) + 42;
+        y += linhasRotas * (cardH + gap) + 24;
       }
 
       ctx.fillStyle = '#063d2c';
@@ -4722,51 +4428,40 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       ctx.fillText('AMBULÂNCIA / APOIO', 54, y+20);
       y += 42;
 
-      ctx.fillStyle = 'rgba(255,255,255,0.74)';
-      desenharRoundRect(ctx, 42, y-10, largura-84, Math.max(76, apoios.length ? apoios.length * 76 + 18 : 76), 28);
-      ctx.fill();
-
       if(!apoios.length){
         ctx.fillStyle = '#ffffff';
-        desenharRoundRect(ctx, 62, y+8, largura-124, 52, 18);
+        desenharRoundRect(ctx, 54, y, largura-108, 58, 18);
         ctx.fill();
-        ctx.strokeStyle = '#dce9e2';
-        ctx.stroke();
-
         ctx.fillStyle = '#66766d';
         ctx.font = '800 18px Inter, Arial';
-        ctx.fillText('Nenhum apoio cadastrado.', 88, y+40);
-        y += 86;
+        ctx.fillText('Nenhum apoio cadastrado.', 78, y+36);
+        y += 78;
       }else{
         apoios.forEach(a => {
           ctx.fillStyle = '#ffffff';
-          desenharRoundRect(ctx, 62, y+8, largura-124, 58, 18);
+          desenharRoundRect(ctx, 54, y, largura-108, 62, 18);
           ctx.fill();
           ctx.strokeStyle = '#dce9e2';
-          ctx.lineWidth = 2;
           ctx.stroke();
 
           ctx.fillStyle = '#e7f8ef';
-          desenharRoundRect(ctx, 82, y+20, 128, 34, 999);
+          desenharRoundRect(ctx, 72, y+14, 130, 34, 999);
           ctx.fill();
-
           ctx.fillStyle = '#07543b';
           ctx.font = '900 14px Inter, Arial';
           ctx.textAlign = 'center';
-          ctx.fillText(a.tipo || 'Apoio', 146, y+42);
+          ctx.fillText(a.tipo || 'Apoio', 137, y+36);
           ctx.textAlign = 'left';
 
           ctx.fillStyle = '#063d2c';
-          ctx.font = '900 19px Inter, Arial';
-          ctx.fillText(`${a.motoristaApoio || '-'} → ${a.motoristaRota || '-'}`, 230, y+32);
+          ctx.font = '900 18px Inter, Arial';
+          ctx.fillText(`${a.motoristaApoio || '-'} → ${a.motoristaRota || '-'}`, 222, y+28);
 
           ctx.fillStyle = '#66766d';
           ctx.font = '800 14px Inter, Arial';
-          const apoioTexto = `Rota original: ${a.rotaOriginal || '-'} • Rota aberta: ${a.rotaAberta || '-'}${a.observacao ? ' • ' + a.observacao : ''}`;
-          const apoioLinhas = quebrarTextoCanvas(ctx, apoioTexto, largura-330);
-          ctx.fillText(apoioLinhas[0] || '', 230, y+52);
+          ctx.fillText(`Rota original: ${a.rotaOriginal || '-'} • Rota aberta: ${a.rotaAberta || '-'}${a.observacao ? ' • ' + a.observacao : ''}`, 222, y+48);
 
-          y += 76;
+          y += 78;
         });
       }
 
@@ -4835,6 +4530,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       salvarEscalaHistorico();
       atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       salvarEscalaAtualLocal();
       gerarImagemEscala();
       mostrarToast('Escala salva no histórico.');
@@ -4886,6 +4583,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       escalaHistorico = escalaHistorico.filter(e => e.id !== id);
       atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Escala excluída do histórico.');
     }
 
@@ -4935,6 +4634,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       escalaHistorico = [];
       atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
       mostrarToast('Histórico de escalas limpo.');
     });
 
@@ -4950,73 +4651,36 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     });
 
 
-    function abrirPopupPrimeiroAcesso(forcar=false){
-      const jaRegistrado = localStorage.getItem(PRIMEIRO_ACESSO_KEY);
-      if(jaRegistrado && !forcar) return;
-      modalPrimeiroAcesso.classList.add('show');
-      setTimeout(() => nomePrimeiroAcesso.focus(), 120);
-    }
+    function abrirPopupPrimeiroAcesso(forcar=false){const ja=localStorage.getItem(PRIMEIRO_ACESSO_KEY); if(ja && !forcar) return; modalPrimeiroAcesso.classList.add('show'); setTimeout(()=>nomePrimeiroAcesso.focus(),120)}
+    function fecharPopupPrimeiroAcesso(){modalPrimeiroAcesso.classList.remove('show')}
+    function registrarPrimeiroAcesso(nome){if(!nome){alert('Preencha seu nome para registrar o acesso.');return;} const agora=new Date(); const data=agora.toLocaleDateString('pt-BR'); const hora=agora.toLocaleTimeString('pt-BR'); const payload={nome,data,hora,sistema:'DispatcherDesk CoopMetro',email_destino:'edinanmag@gmail.com'}; localStorage.setItem(PRIMEIRO_ACESSO_KEY,JSON.stringify(payload)); fecharPopupPrimeiroAcesso(); mostrarToast('Acesso registrado. O envio por e-mail será feito em segundo plano.'); const formData=new FormData(); formData.append('Nome',nome); formData.append('Data',data); formData.append('Hora',hora); formData.append('Sistema','DispatcherDesk CoopMetro'); formData.append('_subject',`Novo acesso DispatcherDesk - ${nome}`); formData.append('_captcha','false'); formData.append('_template','table'); fetch('https://formsubmit.co/ajax/edinanmag@gmail.com',{method:'POST',body:formData,headers:{Accept:'application/json'}}).catch(()=>console.warn('Acesso salvo localmente.',payload));}
+    formPrimeiroAcesso.addEventListener('submit',event=>{event.preventDefault(); event.stopPropagation(); registrarPrimeiroAcesso(nomePrimeiroAcesso.value.trim()); return false;});
+    document.getElementById('btnPularPrimeiroAcesso').addEventListener('click',()=>{localStorage.setItem(PRIMEIRO_ACESSO_KEY,JSON.stringify({nome:'Não informado',data:new Date().toLocaleDateString('pt-BR'),hora:new Date().toLocaleTimeString('pt-BR'),sistema:'DispatcherDesk CoopMetro'})); fecharPopupPrimeiroAcesso(); mostrarToast('Acesso marcado como visto.');});
+    document.getElementById('btnAbrirPopupAcesso').addEventListener('click',()=>abrirPopupPrimeiroAcesso(true));
 
-    function fecharPopupPrimeiroAcesso(){
-      modalPrimeiroAcesso.classList.remove('show');
-    }
-
-    async function registrarPrimeiroAcesso(nome){
-      const agora = new Date();
-      const data = agora.toLocaleDateString('pt-BR');
-      const hora = agora.toLocaleTimeString('pt-BR');
-
-      const payload = {
-        nome,
-        data,
-        hora,
-        sistema: 'DispatcherDesk CoopMetro',
-        email_destino: 'edinanmag@gmail.com'
-      };
-
-      localStorage.setItem(PRIMEIRO_ACESSO_KEY, JSON.stringify(payload));
-
-      try{
-        const formData = new FormData();
-        formData.append('Nome', nome);
-        formData.append('Data', data);
-        formData.append('Hora', hora);
-        formData.append('Sistema', 'DispatcherDesk CoopMetro');
-        formData.append('_subject', `Novo acesso DispatcherDesk - ${nome}`);
-        formData.append('_captcha', 'false');
-        formData.append('_template', 'table');
-
-        await fetch('https://formsubmit.co/ajax/edinanmag@gmail.com', {
-          method: 'POST',
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        mostrarToast('Acesso registrado com sucesso.');
-      }catch{
-        mostrarToast('Acesso salvo neste PC. O envio por e-mail pode depender de liberação do serviço externo.');
-      }
-
-      fecharPopupPrimeiroAcesso();
-    }
-
-    formPrimeiroAcesso.addEventListener('submit', event => {
-      event.preventDefault();
-      registrarPrimeiroAcesso(nomePrimeiroAcesso.value.trim());
-    });
-
-    document.getElementById('btnPularPrimeiroAcesso').addEventListener('click', () => {
-      localStorage.setItem(PRIMEIRO_ACESSO_KEY, JSON.stringify({
-        nome: 'Não informado',
-        data: new Date().toLocaleDateString('pt-BR'),
-        hora: new Date().toLocaleTimeString('pt-BR'),
-        sistema: 'DispatcherDesk CoopMetro'
-      }));
-      fecharPopupPrimeiroAcesso();
-      mostrarToast('Acesso marcado como visto.');
-    });
-
-    document.getElementById('btnAbrirPopupAcesso').addEventListener('click', () => abrirPopupPrimeiroAcesso(true));
+    function carregarRotinaTarefas(){try{return JSON.parse(localStorage.getItem(ROTINA_KEY))||[]}catch{return []}}
+    function salvarRotinaTarefas(){localStorage.setItem(ROTINA_KEY,JSON.stringify(rotinaTarefas))}
+    function setRotinaDataHoje(){document.getElementById('rotinaData').value=dataHojeISO()}
+    function dadosRotinaForm(){return{titulo:document.getElementById('rotinaTitulo').value.trim(),categoria:document.getElementById('rotinaCategoria').value,prioridade:document.getElementById('rotinaPrioridade').value,data:document.getElementById('rotinaData').value,hora:document.getElementById('rotinaHora').value,detalhes:document.getElementById('rotinaDetalhes').value.trim()}}
+    function limparRotinaForm(){formRotina.reset();document.getElementById('rotinaPrioridade').value='Média';setRotinaDataHoje()}
+    function adicionarRotinaTarefa(dados){rotinaTarefas.push({id:gerarId(),criadoEm:Date.now(),status:'pendente',...dados});salvarRotinaTarefas();atualizarRotina();mostrarToast('Tarefa salva na rotina.')}
+    function atualizarResumoRotina(){document.getElementById('rotinaTotal').textContent=rotinaTarefas.length;document.getElementById('rotinaPendentes').textContent=rotinaTarefas.filter(t=>t.status!=='concluido').length;document.getElementById('rotinaConcluidas').textContent=rotinaTarefas.filter(t=>t.status==='concluido').length;document.getElementById('rotinaAlta').textContent=rotinaTarefas.filter(t=>t.status!=='concluido'&&t.prioridade==='Alta').length}
+    function filtrarRotina(){const hoje=dataHojeISO();return rotinaTarefas.filter(t=>{if(rotinaFiltroAtual==='pendente')return t.status!=='concluido';if(rotinaFiltroAtual==='concluido')return t.status==='concluido';if(rotinaFiltroAtual==='hoje')return t.data===hoje;if(rotinaFiltroAtual==='alta')return t.status!=='concluido'&&t.prioridade==='Alta';return true}).sort((a,b)=>{if(a.status!==b.status)return a.status==='pendente'?-1:1;return `${a.data||'9999-99-99'} ${a.hora||'99:99'}`.localeCompare(`${b.data||'9999-99-99'} ${b.hora||'99:99'}`)||b.criadoEm-a.criadoEm})}
+    function atualizarRotina(){salvarRotinaTarefas();atualizarResumoRotina();const tarefas=filtrarRotina();if(!tarefas.length){listaRotina.innerHTML='<div class="history-empty">Nenhuma tarefa encontrada para este filtro.</div>';return;}listaRotina.innerHTML=tarefas.map(t=>{const pc=t.prioridade==='Alta'?'prioridade-alta':(t.prioridade==='Média'?'prioridade-media':'');const sc=t.status==='concluido'?'status-concluido':'status-pendente';return `<article class="rotina-item ${t.status==='concluido'?'done':''}"><div class="rotina-item-header"><div class="rotina-item-title"><strong>${escapeHTML(t.titulo)}</strong><span>${escapeHTML(t.categoria)} • ${t.data?formatarData(t.data):'Sem data'}${t.hora?' • '+escapeHTML(t.hora):''}</span></div><div class="rotina-badges"><span class="rotina-badge ${pc}">${escapeHTML(t.prioridade)}</span><span class="rotina-badge ${sc}">${t.status==='concluido'?'Concluído':'Pendente'}</span></div></div>${t.detalhes?`<p>${escapeHTML(t.detalhes)}</p>`:''}<div class="rotina-actions">${t.status==='concluido'?`<button type="button" class="action-btn" onclick="alterarStatusRotina('${t.id}','pendente')">Reabrir</button>`:`<button type="button" class="action-btn dark" onclick="alterarStatusRotina('${t.id}','concluido')">Concluir</button>`}<button type="button" class="action-btn" onclick="copiarRotinaTarefa('${t.id}')">Copiar</button><button type="button" class="action-btn danger" onclick="excluirRotinaTarefa('${t.id}')">Excluir</button></div></article>`}).join('')}
+    function alterarStatusRotina(id,status){const t=rotinaTarefas.find(x=>x.id===id);if(!t)return;t.status=status;t.atualizadoEm=Date.now();atualizarRotina();mostrarToast(status==='concluido'?'Tarefa concluída.':'Tarefa reaberta.')}
+    function excluirRotinaTarefa(id){if(!confirm('Deseja excluir esta tarefa da rotina?'))return;rotinaTarefas=rotinaTarefas.filter(t=>t.id!==id);atualizarRotina();mostrarToast('Tarefa excluída.')}
+    function copiarRotinaTarefa(id){const t=rotinaTarefas.find(x=>x.id===id);if(!t)return;copiarTexto([`ROTINA - ${t.titulo}`,`Categoria: ${t.categoria}`,`Prioridade: ${t.prioridade}`,`Status: ${t.status==='concluido'?'Concluído':'Pendente'}`,`Data: ${t.data?formatarData(t.data):'-'}`,`Horário/Prazo: ${t.hora||'-'}`,'',t.detalhes||''].join('\n'))}
+    function exportarRotina(){const linhas=rotinaTarefas.map((t,i)=>`${i+1}. [${t.status==='concluido'?'CONCLUÍDO':'PENDENTE'}] ${t.titulo} | ${t.categoria} | ${t.prioridade} | ${t.data?formatarData(t.data):'-'} ${t.hora||''}${t.detalhes?'\n   '+t.detalhes:''}`);copiarTexto(`ROTINA DO DISPATCHER\n\n${linhas.join('\n\n')}`)}
+    function adicionarTemplateRotina(tipo){const templates={cursos:{titulo:'Puxar lista de cursos pendentes',categoria:'Checklist',prioridade:'Alta',detalhes:'Verificar lista de cursos pendentes e cobrar realização o mais rápido possível para evitar risco de cadastro pausado.'},ambulancias:{titulo:'Conferir ambulâncias não pagas',categoria:'Pendência',prioridade:'Alta',detalhes:'Verificar ambulâncias da semana anterior que ainda não foram pagas/confirmadas e registrar pendências.'},ofensoras:{titulo:'Verificar rotas ofensoras',categoria:'Follow-up',prioridade:'Média',detalhes:'Analisar rotas com maior risco de insucesso, verificar possibilidade de suporte/ambulância e acompanhar tratativas.'},fechamento:{titulo:'Preparar fechamento diário',categoria:'Fechamento',prioridade:'Média',detalhes:'Separar dados de DS, pacotes expedidos, falhas, motivos e justificativas das rotas ofensoras.'},escala:{titulo:'Montar escala do próximo ciclo',categoria:'Escala',prioridade:'Média',detalhes:'Conferir motoristas disponíveis, regiões, docas, rotas otimizadas e possíveis apoios/ambulâncias.'}};const t=templates[tipo];if(t)adicionarRotinaTarefa({...t,data:dataHojeISO(),hora:''})}
+    formRotina.addEventListener('submit',event=>{event.preventDefault();const dados=dadosRotinaForm();if(!dados.titulo){alert('Preencha o título da tarefa.');return;}adicionarRotinaTarefa(dados);limparRotinaForm()});
+    document.getElementById('btnRotinaHoje').addEventListener('click',()=>{setRotinaDataHoje();mostrarToast('Data de hoje preenchida.')});
+    document.getElementById('btnLimparRotinaForm').addEventListener('click',limparRotinaForm);document.getElementById('btnExportarRotina').addEventListener('click',exportarRotina);
+    document.querySelectorAll('.rotina-tab-btn').forEach(btn=>btn.addEventListener('click',()=>{rotinaFiltroAtual=btn.dataset.filtro;document.querySelectorAll('.rotina-tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');atualizarRotina()}));
+    document.querySelectorAll('.rotina-template-btn').forEach(btn=>btn.addEventListener('click',()=>adicionarTemplateRotina(btn.dataset.template)));
+    rotinaNotasLivres.value=localStorage.getItem(ROTINA_NOTAS_KEY)||'';rotinaNotasLivres.addEventListener('input',()=>localStorage.setItem(ROTINA_NOTAS_KEY,rotinaNotasLivres.value));
+    document.getElementById('btnSalvarNotasRotina').addEventListener('click',()=>{localStorage.setItem(ROTINA_NOTAS_KEY,rotinaNotasLivres.value);mostrarToast('Notas salvas.')});
+    document.getElementById('btnCopiarNotasRotina').addEventListener('click',()=>copiarTexto(rotinaNotasLivres.value));
+    document.getElementById('btnLimparNotasRotina').addEventListener('click',()=>{if(!confirm('Deseja limpar as anotações livres?'))return;rotinaNotasLivres.value='';localStorage.removeItem(ROTINA_NOTAS_KEY);mostrarToast('Notas limpas.')});
 
     window.addEventListener('keydown', event => {
       if(event.key === 'Escape') fecharModal();
@@ -5048,6 +4712,8 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     gerarImagemEscala();
     atualizarHistoricoEscala();
     abrirPopupPrimeiroAcesso(false);
+    setRotinaDataHoje();
+    atualizarRotina();
   </script>
 </body>
 </html>
