@@ -801,6 +801,182 @@
 
 
 
+
+    .home-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .home-hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:34px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--green-950),var(--green-700));
+      box-shadow:var(--shadow);
+      min-height:360px;
+      display:grid;
+      align-content:space-between;
+      gap:26px;
+    }
+
+    .home-hero:after{
+      content:"";
+      position:absolute;
+      width:360px;
+      height:360px;
+      border-radius:999px;
+      right:-120px;
+      top:-120px;
+      border:54px solid rgba(255,255,255,.08);
+    }
+
+    .home-hero h3{
+      position:relative;
+      z-index:1;
+      margin:8px 0 12px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .home-hero p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:16px;
+      line-height:1.65;
+      max-width:720px;
+      font-weight:600;
+    }
+
+    .home-actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .whatsapp-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-weight:950;
+      background:#25d366;
+      color:#052d21;
+      box-shadow:0 18px 40px rgba(37,211,102,.22);
+      transition:.2s ease;
+    }
+
+    .whatsapp-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .home-card{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:24px;
+      backdrop-filter:blur(14px);
+    }
+
+    .home-card h3{
+      margin:4px 0 12px;
+      color:var(--green-900);
+      font-size:24px;
+      letter-spacing:-.05em;
+    }
+
+    .home-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.65;
+      font-weight:550;
+    }
+
+    .home-feature-list{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .home-feature{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,var(--green-50));
+    }
+
+    .home-feature b{
+      color:var(--green-900);
+      display:block;
+      margin-bottom:3px;
+    }
+
+    .home-feature span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      font-weight:650;
+    }
+
+    .access-modal-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(6,61,44,.52);
+      z-index:80;
+    }
+
+    .access-modal-overlay.show{
+      display:flex;
+    }
+
+    .access-modal{
+      width:min(560px,100%);
+      background:#fff;
+      border-radius:30px;
+      padding:26px;
+      box-shadow:0 30px 100px rgba(0,0,0,.3);
+    }
+
+    .access-modal h3{
+      margin:6px 0 10px;
+      color:var(--green-900);
+      font-size:30px;
+      letter-spacing:-.06em;
+    }
+
+    .access-modal p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+    }
+
+    .feedback-box{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
     .escala-grid{
       display:grid;
       grid-template-columns:minmax(0,1.18fr) minmax(360px,.82fr);
@@ -1395,7 +1571,183 @@
     }
 
     @media(max-width:1250px){
-      .escala-grid{
+  
+    .home-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+      gap:18px;
+      align-items:start;
+    }
+
+    .home-hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:34px;
+      padding:34px;
+      color:#fff;
+      background:linear-gradient(135deg,var(--green-950),var(--green-700));
+      box-shadow:var(--shadow);
+      min-height:360px;
+      display:grid;
+      align-content:space-between;
+      gap:26px;
+    }
+
+    .home-hero:after{
+      content:"";
+      position:absolute;
+      width:360px;
+      height:360px;
+      border-radius:999px;
+      right:-120px;
+      top:-120px;
+      border:54px solid rgba(255,255,255,.08);
+    }
+
+    .home-hero h3{
+      position:relative;
+      z-index:1;
+      margin:8px 0 12px;
+      font-size:clamp(34px,5vw,58px);
+      line-height:.92;
+      letter-spacing:-.08em;
+    }
+
+    .home-hero p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      color:rgba(255,255,255,.78);
+      font-size:16px;
+      line-height:1.65;
+      max-width:720px;
+      font-weight:600;
+    }
+
+    .home-actions{
+      position:relative;
+      z-index:1;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .whatsapp-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      text-decoration:none;
+      border-radius:16px;
+      padding:14px 18px;
+      font-weight:950;
+      background:#25d366;
+      color:#052d21;
+      box-shadow:0 18px 40px rgba(37,211,102,.22);
+      transition:.2s ease;
+    }
+
+    .whatsapp-btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .home-card{
+      background:rgba(255,255,255,.92);
+      border:1px solid var(--line);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:24px;
+      backdrop-filter:blur(14px);
+    }
+
+    .home-card h3{
+      margin:4px 0 12px;
+      color:var(--green-900);
+      font-size:24px;
+      letter-spacing:-.05em;
+    }
+
+    .home-card p{
+      margin:0 0 14px;
+      color:var(--muted);
+      line-height:1.65;
+      font-weight:550;
+    }
+
+    .home-feature-list{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .home-feature{
+      display:flex;
+      gap:12px;
+      align-items:flex-start;
+      padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background:linear-gradient(180deg,#fff,var(--green-50));
+    }
+
+    .home-feature b{
+      color:var(--green-900);
+      display:block;
+      margin-bottom:3px;
+    }
+
+    .home-feature span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      font-weight:650;
+    }
+
+    .access-modal-overlay{
+      position:fixed;
+      inset:0;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(6,61,44,.52);
+      z-index:80;
+    }
+
+    .access-modal-overlay.show{
+      display:flex;
+    }
+
+    .access-modal{
+      width:min(560px,100%);
+      background:#fff;
+      border-radius:30px;
+      padding:26px;
+      box-shadow:0 30px 100px rgba(0,0,0,.3);
+    }
+
+    .access-modal h3{
+      margin:6px 0 10px;
+      color:var(--green-900);
+      font-size:30px;
+      letter-spacing:-.06em;
+    }
+
+    .access-modal p{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.6;
+      font-weight:600;
+    }
+
+    .feedback-box{
+      display:grid;
+      gap:12px;
+      margin-top:16px;
+    }
+
+    .escala-grid{
         grid-template-columns:1fr;
       }
 
@@ -1417,7 +1769,7 @@
       .topbar,.section-title{flex-direction:column}
       .hero-panel{grid-template-columns:1fr}
       .hero-number{justify-self:stretch;text-align:left}
-      .metrics-grid,.form-grid,.record-grid,.history-filters,.history-summary,.hora-grid,.alarm-panel,.fechamento-grid,.motivos-grid,.mensagens-grid,.message-type-grid,.escala-grid{grid-template-columns:1fr}
+      .metrics-grid,.form-grid,.record-grid,.history-filters,.history-summary,.hora-grid,.alarm-panel,.fechamento-grid,.motivos-grid,.mensagens-grid,.message-type-grid,.escala-grid,.home-grid{grid-template-columns:1fr}
       label.two{grid-column:auto}
       .nav-menu{grid-template-columns:1fr}
       .top-actions,.form-actions{justify-content:stretch}
@@ -1439,7 +1791,8 @@
 
       <div class="nav-label">Módulos</div>
       <nav class="nav-menu">
-        <button class="nav-item active" type="button" data-tab="ambulancia"><span>🚑</span>Solicitação / Abertura</button>
+        <button class="nav-item active" type="button" data-tab="home"><span>🏠</span>Home</button>
+        <button class="nav-item" type="button" data-tab="ambulancia"><span>🚑</span>Solicitação / Abertura</button>
         <button class="nav-item" type="button" data-tab="hora"><span>📊</span>Hora a Hora</button>
         <button class="nav-item" type="button" data-tab="fechamento"><span>📋</span>Fechamento</button>
         <button class="nav-item" type="button" data-tab="mensagens"><span>💬</span>Mensagens Rápidas</button>
@@ -1455,9 +1808,9 @@
     <main class="main-content">
       <header class="topbar">
         <div>
-          <span class="eyebrow" id="topbarEyebrow">Operação CoopMetro</span>
-          <h2 id="topbarTitulo">Solicitação de Ambulância e Abertura</h2>
-          <p id="topbarDescricao">Primeiro gere a solicitação sem rota aberta. Depois selecione abertura, preencha a rota aberta, atualize os números e gere a nova mensagem.</p>
+          <span class="eyebrow" id="topbarEyebrow">Bem-vindo</span>
+          <h2 id="topbarTitulo">DispatcherDesk CoopMetro</h2>
+          <p id="topbarDescricao">Sistema operacional criado para agilizar solicitações, acompanhamento, fechamento, mensagens rápidas e escala da operação.</p>
         </div>
         <div class="top-actions">
           <button class="ghost-btn" id="btnExportar" type="button">Exportar registros</button>
@@ -1466,7 +1819,67 @@
         </div>
       </header>
 
-      <section class="tab-section active" id="tab-ambulancia">
+      <section class="tab-section active" id="tab-home">
+        <section class="home-grid">
+          <div class="home-hero">
+            <div>
+              <span class="eyebrow" style="color:rgba(255,255,255,.82)">Central operacional</span>
+              <h3>DispatcherDesk CoopMetro</h3>
+              <p>
+                Sistema desenvolvido para apoiar a rotina da operação, reduzindo retrabalho e padronizando os principais processos: ambulância, hora a hora, fechamento, mensagens rápidas e escala.
+              </p>
+            </div>
+
+            <div class="home-actions">
+              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20tenho%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">
+                💬 Enviar feedback no WhatsApp
+              </a>
+              <button type="button" class="ghost-btn" id="btnAbrirPopupAcesso">Registrar acesso</button>
+            </div>
+          </div>
+
+          <div class="records-column">
+            <section class="home-card">
+              <span class="eyebrow">Sobre o sistema</span>
+              <h3>Feito para a operação ser mais rápida e organizada</h3>
+              <p>
+                O DispatcherDesk reúne ferramentas práticas para gerar mensagens padronizadas, salvar histórico local, controlar alarmes, montar escala e gerar relatórios com mais qualidade.
+              </p>
+              <p>
+                Criado por <strong>Edinan Magalhães</strong> para uso operacional da CoopMetro, com foco em clareza, agilidade e padronização.
+              </p>
+
+              <div class="home-feature-list">
+                <div class="home-feature">
+                  <div>🚑</div>
+                  <div><b>Ambulância e abertura</b><span>Gere solicitações, aberturas e mantenha histórico por data.</span></div>
+                </div>
+                <div class="home-feature">
+                  <div>📊</div>
+                  <div><b>Hora a Hora</b><span>Alarme configurável e mensagens rápidas de acompanhamento.</span></div>
+                </div>
+                <div class="home-feature">
+                  <div>🗓️</div>
+                  <div><b>Escala</b><span>Importe CSV, organize motoristas e gere imagem premium para envio.</span></div>
+                </div>
+              </div>
+            </section>
+
+            <section class="home-card">
+              <span class="eyebrow">Feedbacks</span>
+              <h3>Ajude a melhorar</h3>
+              <p>
+                Encontrou algum erro, bug ou tem sugestão de melhoria? Envie diretamente para o WhatsApp do Edinan.
+              </p>
+              <a class="whatsapp-btn" href="https://wa.me/5562935000674?text=Olá%20Edinan,%20quero%20enviar%20um%20feedback%20sobre%20o%20DispatcherDesk" target="_blank" rel="noopener">
+                💬 Falar com Edinan
+              </a>
+            </section>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-section" id="tab-ambulancia">
       <section class="instruction-card">
         Primeiro gere a solicitação sem rota aberta. Depois selecione abertura, preencha a rota aberta, atualize os números e gere a nova mensagem.
       </section>
@@ -2266,6 +2679,29 @@
     </div>
   </div>
 
+
+  <div class="access-modal-overlay" id="modalPrimeiroAcesso">
+    <div class="access-modal">
+      <span class="eyebrow">Primeiro acesso</span>
+      <h3>DispatcherDesk CoopMetro</h3>
+      <p>
+        Este sistema foi feito por <strong>Edinan Magalhães</strong> para apoiar a operação. Preencha seu nome para registrar este acesso.
+      </p>
+
+      <form id="formPrimeiroAcesso">
+        <label>
+          Seu nome
+          <input type="text" id="nomePrimeiroAcesso" placeholder="Digite seu nome" required>
+        </label>
+
+        <div class="form-actions">
+          <button type="button" class="ghost-btn" id="btnPularPrimeiroAcesso">Pular</button>
+          <button type="submit" class="primary-btn">Registrar acesso</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="toast" id="toast"></div>
 
   <footer class="credits">Feito por Edinan Magalhães • DispatcherDesk CoopMetro</footer>
@@ -2365,6 +2801,11 @@
     let escalaRotas = [];
     let escalaApoios = [];
     let escalaHistorico = carregarEscalaHistorico();
+
+    const PRIMEIRO_ACESSO_KEY = 'dispatcherdesk_primeiro_acesso_registrado_v1';
+    const modalPrimeiroAcesso = document.getElementById('modalPrimeiroAcesso');
+    const formPrimeiroAcesso = document.getElementById('formPrimeiroAcesso');
+    const nomePrimeiroAcesso = document.getElementById('nomePrimeiroAcesso');
 
     let registros = carregarRegistros();
     let registroSelecionadoId = null;
@@ -2916,6 +3357,11 @@
       if(btn) btn.classList.add('active');
 
       const cabecalhos = {
+        home: {
+          eyebrow: 'Bem-vindo',
+          titulo: 'DispatcherDesk CoopMetro',
+          descricao: 'Sistema operacional criado para agilizar solicitações, acompanhamento, fechamento, mensagens rápidas e escala da operação.'
+        },
         ambulancia: {
           eyebrow: 'Operação CoopMetro',
           titulo: 'Solicitação de Ambulância e Abertura',
@@ -3231,6 +3677,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Registro excluído.');
     }
 
@@ -3263,6 +3710,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       copiarTexto(mensagem);
       mostrarToast('Hora a Hora gerado, salvo e copiado.');
     });
@@ -3307,6 +3755,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Histórico do Hora a Hora limpo.');
     });
 
@@ -3556,6 +4005,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Fechamento excluído.');
     }
 
@@ -3581,6 +4031,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       atualizarPreviewFechamento();
       copiarTexto(mensagem);
       mostrarToast('Fechamento gerado, salvo e copiado.');
@@ -3621,6 +4072,7 @@
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Histórico de fechamentos limpo.');
     });
 
@@ -3814,6 +4266,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Mensagem excluída.');
     }
 
@@ -3855,6 +4308,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       copiarTexto(mensagem);
       mostrarToast('Mensagem rápida gerada, salva e copiada.');
     });
@@ -3869,6 +4323,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Histórico de mensagens rápidas limpo.');
     });
 
@@ -4379,6 +4834,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       escalaHistorico.push(dados);
       salvarEscalaHistorico();
       atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       salvarEscalaAtualLocal();
       gerarImagemEscala();
       mostrarToast('Escala salva no histórico.');
@@ -4429,6 +4885,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       if(!confirm('Deseja excluir esta escala do histórico?')) return;
       escalaHistorico = escalaHistorico.filter(e => e.id !== id);
       atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Escala excluída do histórico.');
     }
 
@@ -4477,6 +4934,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       if(!confirm('Deseja apagar todo o histórico de escalas salvo neste navegador?')) return;
       escalaHistorico = [];
       atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
       mostrarToast('Histórico de escalas limpo.');
     });
 
@@ -4490,6 +4948,75 @@ Entramos em contato referente à rota {rota}, parada {parada}.
         gerarImagemEscala();
       });
     });
+
+
+    function abrirPopupPrimeiroAcesso(forcar=false){
+      const jaRegistrado = localStorage.getItem(PRIMEIRO_ACESSO_KEY);
+      if(jaRegistrado && !forcar) return;
+      modalPrimeiroAcesso.classList.add('show');
+      setTimeout(() => nomePrimeiroAcesso.focus(), 120);
+    }
+
+    function fecharPopupPrimeiroAcesso(){
+      modalPrimeiroAcesso.classList.remove('show');
+    }
+
+    async function registrarPrimeiroAcesso(nome){
+      const agora = new Date();
+      const data = agora.toLocaleDateString('pt-BR');
+      const hora = agora.toLocaleTimeString('pt-BR');
+
+      const payload = {
+        nome,
+        data,
+        hora,
+        sistema: 'DispatcherDesk CoopMetro',
+        email_destino: 'edinanmag@gmail.com'
+      };
+
+      localStorage.setItem(PRIMEIRO_ACESSO_KEY, JSON.stringify(payload));
+
+      try{
+        const formData = new FormData();
+        formData.append('Nome', nome);
+        formData.append('Data', data);
+        formData.append('Hora', hora);
+        formData.append('Sistema', 'DispatcherDesk CoopMetro');
+        formData.append('_subject', `Novo acesso DispatcherDesk - ${nome}`);
+        formData.append('_captcha', 'false');
+        formData.append('_template', 'table');
+
+        await fetch('https://formsubmit.co/ajax/edinanmag@gmail.com', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        mostrarToast('Acesso registrado com sucesso.');
+      }catch{
+        mostrarToast('Acesso salvo neste PC. O envio por e-mail pode depender de liberação do serviço externo.');
+      }
+
+      fecharPopupPrimeiroAcesso();
+    }
+
+    formPrimeiroAcesso.addEventListener('submit', event => {
+      event.preventDefault();
+      registrarPrimeiroAcesso(nomePrimeiroAcesso.value.trim());
+    });
+
+    document.getElementById('btnPularPrimeiroAcesso').addEventListener('click', () => {
+      localStorage.setItem(PRIMEIRO_ACESSO_KEY, JSON.stringify({
+        nome: 'Não informado',
+        data: new Date().toLocaleDateString('pt-BR'),
+        hora: new Date().toLocaleTimeString('pt-BR'),
+        sistema: 'DispatcherDesk CoopMetro'
+      }));
+      fecharPopupPrimeiroAcesso();
+      mostrarToast('Acesso marcado como visto.');
+    });
+
+    document.getElementById('btnAbrirPopupAcesso').addEventListener('click', () => abrirPopupPrimeiroAcesso(true));
 
     window.addEventListener('keydown', event => {
       if(event.key === 'Escape') fecharModal();
@@ -4520,6 +5047,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     renderizarApoios();
     gerarImagemEscala();
     atualizarHistoricoEscala();
+    abrirPopupPrimeiroAcesso(false);
   </script>
 </body>
 </html>
