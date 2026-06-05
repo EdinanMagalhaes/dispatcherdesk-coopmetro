@@ -1449,6 +1449,454 @@
       .top-actions,.form-actions{justify-content:stretch}
       .primary-btn,.ghost-btn,.mini-btn,.file-btn{width:100%}
     }
+  
+    /* Ajuste solicitado: área da escala formatada maior e mais visível */
+    #tab-escala .escala-grid{
+      grid-template-columns:1fr !important;
+      gap:18px;
+    }
+
+    #tab-escala .escala-preview{
+      width:100%;
+      padding:22px;
+    }
+
+    #tab-escala .escala-preview-canvas-wrap{
+      width:100%;
+      max-height:none;
+      overflow:hidden;
+      padding:14px;
+    }
+
+    #tab-escala #canvasEscala{
+      width:100%;
+      max-width:100%;
+      height:auto;
+      display:block;
+    }
+
+    #tab-escala .records-column{
+      width:100%;
+    }
+
+    #tab-escala .escala-table-wrap{
+      width:100%;
+      overflow-x:hidden;
+    }
+
+    #tab-escala .escala-table{
+      width:100%;
+      min-width:0 !important;
+      table-layout:fixed;
+    }
+
+    #tab-escala .escala-table input,
+    #tab-escala .escala-table textarea,
+    #tab-escala .escala-table select{
+      width:100%;
+      min-width:0;
+    }
+
+  
+    /* Escala formatada: campos internos de pacotes e paradas, sem aparecer na imagem */
+    #tab-escala .escala-table th:nth-child(1),
+    #tab-escala .escala-table td:nth-child(1){width:62px}
+
+    #tab-escala .escala-table th:nth-child(2),
+    #tab-escala .escala-table td:nth-child(2){width:100px}
+
+    #tab-escala .escala-table th:nth-child(3),
+    #tab-escala .escala-table td:nth-child(3){width:78px}
+
+    #tab-escala .escala-table th:nth-child(4),
+    #tab-escala .escala-table td:nth-child(4){width:145px}
+
+    #tab-escala .escala-table th:nth-child(5),
+    #tab-escala .escala-table td:nth-child(5){width:auto}
+
+    #tab-escala .escala-table th:nth-child(6),
+    #tab-escala .escala-table td:nth-child(6){width:92px}
+
+    #tab-escala .escala-table th:nth-child(7),
+    #tab-escala .escala-table td:nth-child(7){width:92px}
+
+    #tab-escala .escala-table th:nth-child(8),
+    #tab-escala .escala-table td:nth-child(8){width:92px}
+
+    #tab-escala .escala-table .number-input{
+      text-align:center;
+      font-weight:900;
+    }
+
+  
+    /* Correção definitiva: remover qualquer arte/overlay da prévia e da imagem da escala */
+    #tab-escala,
+    #tab-escala *,
+    #tab-escala *::before,
+    #tab-escala *::after{
+      background-image:none !important;
+    }
+
+    #tab-escala .escala-preview::before,
+    #tab-escala .escala-preview::after,
+    #tab-escala .escala-preview-canvas-wrap::before,
+    #tab-escala .escala-preview-canvas-wrap::after,
+    #canvasEscala::before,
+    #canvasEscala::after{
+      content:none !important;
+      display:none !important;
+      opacity:0 !important;
+      visibility:hidden !important;
+    }
+
+    #tab-escala .escala-preview,
+    #tab-escala .escala-preview-canvas-wrap{
+      position:relative;
+      overflow:hidden !important;
+      background:#f4fbf7 !important;
+    }
+
+    #canvasEscala{
+      background:#f4fbf7 !important;
+      isolation:isolate;
+    }
+
+  
+    /* Ajuste fino da aba Escala: alinhamento e visual limpo */
+    #tab-escala .escala-table th,
+    #tab-escala .escala-table td{
+      vertical-align:middle !important;
+    }
+
+    #tab-escala .escala-table input,
+    #tab-escala .escala-table textarea{
+      box-sizing:border-box;
+    }
+
+    #tab-escala .escala-preview-canvas-wrap{
+      background:#f4fbf7 !important;
+      border-radius:22px !important;
+    }
+
+    #tab-escala #canvasEscala{
+      border-radius:22px !important;
+    }
+
+  
+    /* Correção do botão Adicionar rota manual */
+    #tab-escala button,
+    #tab-escala .primary-btn,
+    #tab-escala .ghost-btn,
+    #tab-escala .mini-btn{
+      color:inherit;
+    }
+
+    #tab-escala .primary-btn{
+      color:#ffffff !important;
+    }
+
+    #tab-escala .ghost-btn,
+    #tab-escala .mini-btn{
+      color:var(--green-900) !important;
+    }
+
+    #btnAdicionarRotaEscala{
+      color:#ffffff !important;
+      font-weight:950 !important;
+      min-width:220px;
+    }
+
+  
+    /* Alinhamento final da escala */
+    #tab-escala .escala-toolbar,
+    #tab-escala .form-actions{
+      align-items:center !important;
+      gap:12px !important;
+      flex-wrap:wrap !important;
+    }
+
+    #tab-escala .escala-table th{
+      text-align:left !important;
+      vertical-align:middle !important;
+    }
+
+    #tab-escala .escala-table td{
+      vertical-align:middle !important;
+    }
+
+    #tab-escala .escala-table td:first-child,
+    #tab-escala .escala-table th:first-child{
+      text-align:center !important;
+    }
+
+    #tab-escala .escala-table input[type="checkbox"]{
+      width:18px !important;
+      height:18px !important;
+      margin:auto !important;
+      display:block !important;
+    }
+
+    #tab-escala .linha-regiao td{
+      padding-top:0 !important;
+    }
+
+    #tab-escala .escala-preview .section-title{
+      align-items:center !important;
+    }
+
+  
+    /* Ajuste do menu lateral e saudação do usuário */
+    .sidebar{
+      width:300px !important;
+      min-width:300px !important;
+      flex:0 0 300px !important;
+    }
+
+    .brand,
+    .nav-item,
+    .system-status,
+    .user-greeting-card{
+      max-width:100%;
+      box-sizing:border-box;
+    }
+
+    .nav{
+      gap:10px;
+    }
+
+    .nav-item{
+      width:100%;
+      justify-content:flex-start;
+      white-space:normal;
+      line-height:1.25;
+      min-height:54px;
+      padding:14px 16px;
+    }
+
+    .nav-item span{
+      width:22px;
+      min-width:22px;
+      display:inline-flex;
+      justify-content:center;
+    }
+
+    .user-greeting-card{
+      margin:16px 0;
+      padding:16px;
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      display:grid;
+      gap:6px;
+    }
+
+    .user-greeting-card small{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      font-weight:900;
+      color:rgba(255,255,255,.62);
+    }
+
+    .user-greeting-card strong{
+      font-size:18px;
+      color:#fff;
+      line-height:1.2;
+    }
+
+    .user-greeting-card span{
+      color:rgba(255,255,255,.7);
+      font-size:12px;
+      line-height:1.4;
+      font-weight:700;
+    }
+
+    .main{
+      min-width:0;
+    }
+
+    @media(max-width:980px){
+      .sidebar{
+        width:100% !important;
+        min-width:0 !important;
+        flex:initial !important;
+      }
+    }
+
+  
+    /* Ajuste final do menu lateral: largura, alinhamento e melhor aproveitamento */
+    body{
+      overflow-x:hidden;
+    }
+
+    .app-shell,
+    .app{
+      display:grid !important;
+      grid-template-columns:340px minmax(0,1fr) !important;
+      align-items:stretch !important;
+      width:100% !important;
+      min-height:100vh !important;
+    }
+
+    .sidebar{
+      width:340px !important;
+      min-width:340px !important;
+      max-width:340px !important;
+      flex:0 0 340px !important;
+      height:100vh !important;
+      min-height:100vh !important;
+      position:sticky !important;
+      top:0 !important;
+      overflow-y:auto !important;
+      overflow-x:hidden !important;
+      padding:22px 20px !important;
+      box-sizing:border-box !important;
+    }
+
+    .sidebar::-webkit-scrollbar{
+      width:7px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb{
+      background:rgba(255,255,255,.32);
+      border-radius:999px;
+    }
+
+    .main,
+    .content,
+    main{
+      min-width:0 !important;
+      width:100% !important;
+    }
+
+    .brand{
+      width:100% !important;
+      padding:18px !important;
+      border-radius:24px !important;
+      margin-bottom:18px !important;
+      box-sizing:border-box !important;
+    }
+
+    .brand h1,
+    .brand-title,
+    .brand strong{
+      line-height:1.06 !important;
+      margin-bottom:6px !important;
+      word-break:normal !important;
+      overflow-wrap:break-word !important;
+    }
+
+    .brand p{
+      line-height:1.45 !important;
+      margin:0 !important;
+      font-size:13px !important;
+    }
+
+    .nav,
+    .sidebar nav{
+      width:100% !important;
+      display:grid !important;
+      gap:8px !important;
+      margin:12px 0 16px !important;
+    }
+
+    .nav-item{
+      width:100% !important;
+      min-height:48px !important;
+      padding:12px 14px !important;
+      border-radius:16px !important;
+      display:flex !important;
+      align-items:center !important;
+      justify-content:flex-start !important;
+      gap:12px !important;
+      text-align:left !important;
+      white-space:normal !important;
+      overflow:visible !important;
+      line-height:1.2 !important;
+      box-sizing:border-box !important;
+      font-size:14px !important;
+    }
+
+    .nav-item span{
+      width:24px !important;
+      min-width:24px !important;
+      height:24px !important;
+      display:inline-flex !important;
+      align-items:center !important;
+      justify-content:center !important;
+      flex:0 0 24px !important;
+    }
+
+    .user-greeting-card{
+      width:100% !important;
+      margin:14px 0 !important;
+      padding:14px 16px !important;
+      border-radius:20px !important;
+      box-sizing:border-box !important;
+      display:grid !important;
+      gap:5px !important;
+    }
+
+    .user-greeting-card small{
+      font-size:10px !important;
+      letter-spacing:.08em !important;
+      line-height:1.2 !important;
+    }
+
+    .user-greeting-card strong{
+      font-size:17px !important;
+      line-height:1.15 !important;
+      white-space:normal !important;
+      overflow-wrap:break-word !important;
+    }
+
+    .user-greeting-card span{
+      font-size:12px !important;
+      line-height:1.35 !important;
+    }
+
+    .system-status{
+      width:100% !important;
+      padding:14px 16px !important;
+      border-radius:20px !important;
+      margin-top:12px !important;
+      box-sizing:border-box !important;
+    }
+
+    .system-status h3,
+    .system-status strong,
+    .system-status-title{
+      line-height:1.2 !important;
+      margin-bottom:10px !important;
+      font-size:13px !important;
+    }
+
+    .system-status .status-pill,
+    .status-pill{
+      max-width:100% !important;
+      white-space:normal !important;
+      line-height:1.25 !important;
+      padding:10px 12px !important;
+      box-sizing:border-box !important;
+    }
+
+    @media(max-width:980px){
+      .app-shell,
+      .app{
+        grid-template-columns:1fr !important;
+      }
+
+      .sidebar{
+        width:100% !important;
+        min-width:0 !important;
+        max-width:none !important;
+        height:auto !important;
+        min-height:0 !important;
+        position:relative !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1475,7 +1923,13 @@
       </nav>
 
       <div class="sidebar-footer">
-        <strong>Status do sistema</strong>
+        
+        <div class="user-greeting-card" id="userGreetingCard">
+          <small>Usuário conectado</small>
+          <strong id="userGreetingName">Olá, usuário</strong>
+          <span>Bom trabalho na operação de hoje.</span>
+        </div>
+<strong>Status do sistema</strong>
         <span class="status-pill">Local • Salvamento ativo</span>
       </div>
     </aside>
@@ -2017,6 +2471,11 @@
                   Transportadora
                   <input type="text" id="escalaTransportadora" value="COOPMETRO">
                 </label>
+                <label>
+                  Dispatcher da escala
+                  <input type="text" id="escalaDispatcher" placeholder="Ex.: Edinan, Lorranny, Mariana">
+                </label>
+
               </div>
 
               <div class="escala-toolbar">
@@ -2034,11 +2493,13 @@
                       <th>Doca</th>
                       <th>Rota Otimizada</th>
                       <th>Driver</th>
+                      <th>Pacotes</th>
+                      <th>Paradas</th>
                       <th>Ação</th>
                     </tr>
                   </thead>
                   <tbody id="tbodyEscala">
-                    <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Nenhuma rota importada ou adicionada.</td></tr>
+                    <tr><td colspan="8" style="text-align:center;color:var(--muted);padding:24px">Nenhuma rota importada ou adicionada.</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -2064,16 +2525,16 @@
                   <span class="eyebrow">Imagem da escala</span>
                   <h3>Prévia premium</h3>
                 </div>
-                <button type="button" class="mini-btn" id="btnGerarImagemEscala">Gerar imagem</button>
+                <button type="button" class="mini-btn" id="btnGerarImagemEscala">Gerar imagem limpa</button>
               </div>
 
               <div class="form-actions" style="justify-content:flex-start;margin:0">
-                <button type="button" class="ghost-btn" id="btnBaixarImagemEscala">Baixar imagem</button>
+                <button type="button" class="ghost-btn" id="btnBaixarImagemEscala">Baixar imagem limpa</button>
                 <button type="button" class="ghost-btn" id="btnCopiarTextoEscala">Copiar texto</button>
               </div>
 
               <div class="escala-preview-canvas-wrap">
-                <canvas id="canvasEscala" width="1100" height="720"></canvas>
+                <canvas id="canvasEscala" width="1400" height="900"></canvas>
               </div>
             </section>
 
@@ -4060,7 +4521,7 @@ Entramos em contato referente à rota {rota}, parada {parada}.
         document.getElementById('escalaData').value = dados.data || dataHojeISO();
         document.getElementById('escalaTurno').value = dados.turno || '';
         document.getElementById('escalaTransportadora').value = dados.transportadora || 'COOPMETRO';
-        escalaRotas = dados.rotas || [];
+        escalaRotas = (dados.rotas || []).map(r => ({pacotes:'', paradas:'', ...r}));
         escalaApoios = dados.apoios || [];
       }catch{}
     }
@@ -4102,11 +4563,59 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     }
 
     function obterCampoCsv(obj, nomes){
+      const chaves = Object.keys(obj);
+      const nomesNormalizados = nomes.map(nome => normalizarCabecalhoEscala(nome));
+
+      for(const nome of nomesNormalizados){
+        const chaveExata = chaves.find(k => normalizarCabecalhoEscala(k) === nome);
+        if(chaveExata && obj[chaveExata]) return obj[chaveExata];
+      }
+
+      for(const nome of nomesNormalizados){
+        const chaveParcial = chaves.find(k => {
+          const nk = normalizarCabecalhoEscala(k);
+          return nk.includes(nome) || nome.includes(nk);
+        });
+        if(chaveParcial && obj[chaveParcial]) return obj[chaveParcial];
+      }
+
+      return '';
+    }
+
+    function obterPacotesCsv(obj){
+      return obterCampoCsv(obj, [
+        'pacotes','pacote','qtd pacotes','quantidade pacotes','quantidade de pacotes',
+        'total pacotes','total de pacotes','packages','package','total packages','shipment','shipments',
+        'envios','volumes','spr','itens','itens da rota'
+      ]);
+    }
+
+    function obterParadasCsv(obj){
+      return obterCampoCsv(obj, [
+        'paradas','parada','qtd paradas','quantidade paradas','quantidade de paradas',
+        'total paradas','total de paradas','stops','stop','total stops','enderecos','endereços',
+        'pontos','pontos de entrega','destinos'
+      ]);
+    }
+
+    function obterCampoCsvDiretoSGO(obj, nomes){
+      const chaves = Object.keys(obj || {});
       for(const nome of nomes){
-        const chave = Object.keys(obj).find(k => normalizarCabecalhoEscala(k).includes(nome));
-        if(chave && obj[chave]) return obj[chave];
+        const nomeNormalizado = normalizarCabecalhoEscala(nome);
+        const chave = chaves.find(k => normalizarCabecalhoEscala(k) === nomeNormalizado);
+        if(chave && obj[chave] !== undefined && obj[chave] !== null && String(obj[chave]).trim() !== ''){
+          return String(obj[chave]).trim();
+        }
       }
       return '';
+    }
+
+    function obterPacotesCsvSGO(obj){
+      return obterCampoCsvDiretoSGO(obj, ['Pacotes', 'PACOTES', 'pacotes']) || obterPacotesCsv(obj);
+    }
+
+    function obterParadasCsvSGO(obj){
+      return obterCampoCsvDiretoSGO(obj, ['Paradas', 'PARADAS', 'paradas']) || obterParadasCsv(obj);
     }
 
     function importarCsvEscala(texto){
@@ -4114,11 +4623,11 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       const linhas = texto.split(/\r?\n/).filter(l => l.trim());
       if(linhas.length < 2) return [];
 
-      const headers = parseCsvLinha(linhas[0], sep);
+      const headers = parseCsvLinha(linhas[0], sep).map(h => String(h || '').replace(/^\uFEFF/, '').trim());
       const rotas = [];
 
       for(let i=1;i<linhas.length;i++){
-        const cols = parseCsvLinha(linhas[i], sep);
+        const cols = parseCsvLinha(linhas[i], sep).map(c => String(c || '').replace(/^\uFEFF/, '').trim());
         const obj = {};
         headers.forEach((h, idx) => obj[h] = cols[idx] || '');
 
@@ -4127,14 +4636,16 @@ Entramos em contato referente à rota {rota}, parada {parada}.
           mostrar: true,
           onda: obterCampoCsv(obj, ['onda','ciclo','wave']),
           doca: obterCampoCsv(obj, ['doca','dock']),
-          rota: obterCampoCsv(obj, ['rotaotimizada','rota','route']),
-          regiao: obterCampoCsv(obj, ['regiao','region','bairro','area']),
-          driver: obterCampoCsv(obj, ['driver','motorista']),
+          rota: obterCampoCsv(obj, ['rotaotimizada','rota otimizada','rota','route','route id','id rota','id da rota']),
+          regiao: obterCampoCsv(obj, ['regiao','região','region','bairro','area','área','zone','zona']),
+          driver: obterCampoCsv(obj, ['driver','motorista','nome motorista','nome do motorista','courier','entregador']),
+          pacotes: obterPacotesCsvSGO(obj),
+          paradas: obterParadasCsvSGO(obj),
           origem: obj
         });
       }
 
-      return rotas.filter(r => r.rota || r.regiao || r.doca || r.onda);
+      return rotas.filter(r => r.rota || r.regiao || r.doca || r.onda || r.pacotes || r.paradas);
     }
 
     function adicionarRotaEscala(dados = {}){
@@ -4145,14 +4656,16 @@ Entramos em contato referente à rota {rota}, parada {parada}.
         doca: dados.doca || '',
         rota: dados.rota || '',
         regiao: dados.regiao || '',
-        driver: dados.driver || ''
+        driver: dados.driver || '',
+        pacotes: dados.pacotes || '',
+        paradas: dados.paradas || ''
       });
       renderizarTabelaEscala();
     }
 
     function renderizarTabelaEscala(){
       if(!escalaRotas.length){
-        tbodyEscala.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Nenhuma rota importada ou adicionada.</td></tr>';
+        tbodyEscala.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:24px">Nenhuma rota importada ou adicionada.</td></tr>';
         salvarEscalaAtualLocal();
         gerarImagemEscala();
         return;
@@ -4165,10 +4678,12 @@ Entramos em contato referente à rota {rota}, parada {parada}.
           <td><input value="${escapeHTML(r.doca)}" oninput="atualizarRotaEscala('${r.id}','doca',this.value)" placeholder="Doca"></td>
           <td><input value="${escapeHTML(r.rota)}" oninput="atualizarRotaEscala('${r.id}','rota',this.value)" placeholder="Rota" class="driver-input"></td>
           <td><input value="${escapeHTML(r.driver)}" oninput="atualizarRotaEscala('${r.id}','driver',this.value)" placeholder="Motorista" class="driver-input"></td>
+          <td><input value="${escapeHTML(r.pacotes || '')}" oninput="atualizarRotaEscala('${r.id}','pacotes',this.value)" placeholder="Qtd" class="number-input"></td>
+          <td><input value="${escapeHTML(r.paradas || '')}" oninput="atualizarRotaEscala('${r.id}','paradas',this.value)" placeholder="Qtd" class="number-input"></td>
           <td><button type="button" class="action-btn danger" onclick="removerRotaEscala('${r.id}')">Remover</button></td>
         </tr>
         <tr class="linha-regiao">
-          <td colspan="6">
+          <td colspan="8">
             <div class="regiao-full-box">
               <small>Região / Observação interna — não aparece na imagem enviada aos motoristas</small>
               <textarea oninput="atualizarRotaEscala('${r.id}','regiao',this.value)" placeholder="Região completa da rota">${escapeHTML(r.regiao)}</textarea>
@@ -4297,102 +4812,115 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     }
 
     function desenharRoundRect(ctx, x, y, w, h, r){
+      r = Math.max(0, Math.min(r || 0, w / 2, h / 2));
       ctx.beginPath();
-      ctx.moveTo(x+r,y);
-      ctx.arcTo(x+w,y,x+w,y+h,r);
-      ctx.arcTo(x+w,y+h,x,y+h,r);
-      ctx.arcTo(x,y+h,x,y,r);
-      ctx.arcTo(x,y,x+w,y,r);
+      if(typeof ctx.roundRect === 'function'){
+        ctx.roundRect(x, y, w, h, r);
+        return;
+      }
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.lineTo(x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.lineTo(x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.lineTo(x, y + h - r);
+      ctx.lineTo(x, y + r);
       ctx.closePath();
     }
 
+
+
+
     function gerarImagemEscala(){
-      const data = document.getElementById('escalaData').value || dataHojeISO();
-      const turno = document.getElementById('escalaTurno').value || 'OPERAÇÃO';
-      const transportadora = document.getElementById('escalaTransportadora').value || 'COOPMETRO';
-      const rotas = rotasVisiveisEscala();
-      const apoios = escalaApoios.filter(a => a.motoristaApoio || a.motoristaRota || a.rotaOriginal || a.rotaAberta);
+      const canvas = document.getElementById('canvasEscala');
+      if(!canvas) return;
 
-      const largura = 1200;
-      const cardH = 92;
-      const headerH = 180;
-      const gap = 18;
-      const cols = 2;
-      const linhasRotas = Math.max(1, Math.ceil(rotas.length / cols));
-      const apoioH = apoios.length ? 110 + apoios.length * 72 : 70;
-      const altura = Math.max(760, headerH + linhasRotas * (cardH + gap) + apoioH + 110);
+      const ctx = canvas.getContext('2d', { alpha:false });
+      const data = document.getElementById('escalaData')?.value || dataHojeISO();
+      const turno = document.getElementById('escalaTurno')?.value || 'PM';
+      const dispatcher = (document.getElementById('escalaDispatcher')?.value || '').trim();
 
-      canvasEscala.width = largura;
-      canvasEscala.height = altura;
+      const rotas = (escalaRotas || []).filter(r => r.mostrar && String(r.driver || '').trim());
+      const apoios = escalaApoios || [];
 
-      const ctx = ctxEscala;
-      ctx.clearRect(0,0,largura,altura);
+      const largura = 1400;
+      const margem = 58;
+      const gap = 24;
+      const cardH = 130;
+      const cardW = (largura - (margem * 2) - gap) / 2;
+      const headerH = 176;
+      const linhasRotas = Math.max(1, Math.ceil(rotas.length / 2));
+      const rotasH = rotas.length ? (linhasRotas * cardH) + ((linhasRotas - 1) * gap) : 90;
+      const apoioTituloH = 58;
+      const apoioLinhaH = 74;
+      const apoioH = apoioTituloH + (apoios.length ? apoios.length * apoioLinhaH : 72);
+      const footerH = 82;
+      const altura = headerH + rotasH + 46 + apoioH + footerH;
 
-      const grad = ctx.createLinearGradient(0,0,largura,altura);
-      grad.addColorStop(0,'#f8fffb');
-      grad.addColorStop(1,'#e8f7ef');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0,0,largura,altura);
+      canvas.width = largura;
+      canvas.height = altura;
 
+      ctx.setTransform(1,0,0,1,0,0);
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
+
+      ctx.fillStyle = '#f4fbf7';
+      ctx.fillRect(0, 0, largura, altura);
+
+      // Cabeçalho limpo e arredondado
       ctx.fillStyle = '#063d2c';
-      desenharRoundRect(ctx, 34, 34, largura-68, 120, 30);
+      desenharRoundRect(ctx, 36, 32, largura - 72, 122, 34);
       ctx.fill();
-
-      ctx.fillStyle = '#0a9b65';
-      ctx.beginPath();
-      ctx.arc(86, 94, 34, 0, Math.PI*2);
-      ctx.fill();
-
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 8;
-      ctx.lineCap = 'round';
-      ctx.beginPath();
-      ctx.moveTo(68,96);
-      ctx.bezierCurveTo(76,74,100,69,116,80);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(104,92);
-      ctx.bezierCurveTo(96,114,72,119,56,108);
-      ctx.stroke();
 
       ctx.fillStyle = '#ffffff';
-      ctx.font = '900 40px Inter, Arial';
-      ctx.fillText('ESCALA DE ROTAS', 140, 82);
+      ctx.font = '900 42px Inter, Arial';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+      ctx.fillText('ESCALA DE ROTAS', margem, 84);
 
-      ctx.font = '800 22px Inter, Arial';
-      ctx.fillStyle = 'rgba(255,255,255,.82)';
-      ctx.fillText(`${transportadora} • ${turno} • ${formatarData(data)}`, 140, 118);
+      ctx.font = '800 20px Inter, Arial';
+      ctx.fillStyle = 'rgba(255,255,255,.84)';
+      ctx.fillText(`COOPMETRO • ${turno} • ${formatarData(data)}`, margem, 120);
 
-      ctx.fillStyle = '#ffffff';
-      desenharRoundRect(ctx, largura-260, 64, 190, 60, 18);
+      ctx.fillStyle = 'rgba(255,255,255,.12)';
+      desenharRoundRect(ctx, largura - 332, 58, 236, 72, 26);
       ctx.fill();
-      ctx.fillStyle = '#063d2c';
-      ctx.font = '900 28px Inter, Arial';
+
       ctx.textAlign = 'center';
-      ctx.fillText(`${rotas.length} ROTAS`, largura-165, 103);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 34px Inter, Arial';
+      ctx.fillText(String(rotas.length).padStart(2, '0'), largura - 214, 84);
+
+      ctx.font = '800 14px Inter, Arial';
+      ctx.fillStyle = 'rgba(255,255,255,.78)';
+      ctx.fillText('ROTAS COM DRIVER', largura - 214, 112);
       ctx.textAlign = 'left';
 
-      const startX = 54;
-      let y = 184;
-      const cardW = (largura - 108 - gap) / 2;
+      let y = headerH;
 
       if(!rotas.length){
         ctx.fillStyle = '#ffffff';
-        desenharRoundRect(ctx, 54, y, largura-108, 120, 24);
+        desenharRoundRect(ctx, margem, y, largura - (margem * 2), 74, 22);
         ctx.fill();
+
+        ctx.strokeStyle = '#dce9e2';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
         ctx.fillStyle = '#66766d';
-        ctx.font = '800 24px Inter, Arial';
-        ctx.fillText('Nenhuma rota com Driver preenchido para exibir na imagem.', 90, y+68);
-        y += 150;
+        ctx.font = '900 22px Inter, Arial';
+        ctx.fillText('Nenhuma rota com Driver preenchido para aparecer na imagem.', margem + 24, y + 45);
+        y += 90;
       }else{
-        rotas.forEach((r, i) => {
-          const col = i % 2;
-          const row = Math.floor(i / 2);
-          const x = startX + col * (cardW + gap);
+        rotas.forEach((r, idx) => {
+          const col = idx % 2;
+          const row = Math.floor(idx / 2);
+          const x = margem + col * (cardW + gap);
           const cy = y + row * (cardH + gap);
 
           ctx.fillStyle = '#ffffff';
-          desenharRoundRect(ctx, x, cy, cardW, cardH, 24);
+          desenharRoundRect(ctx, x, cy, cardW, cardH, 28);
           ctx.fill();
 
           ctx.strokeStyle = '#dce9e2';
@@ -4400,77 +4928,115 @@ Entramos em contato referente à rota {rota}, parada {parada}.
           ctx.stroke();
 
           ctx.fillStyle = '#e7f8ef';
-          desenharRoundRect(ctx, x+18, cy+18, 104, 56, 18);
+          desenharRoundRect(ctx, x + 20, cy + 22, 96, 86, 24);
           ctx.fill();
 
           ctx.fillStyle = '#07543b';
-          ctx.font = '900 15px Inter, Arial';
+          ctx.font = '900 28px Inter, Arial';
           ctx.textAlign = 'center';
-          ctx.fillText(r.doca ? `DOCA ${r.doca}` : (r.onda || 'ROTA'), x+70, cy+42);
-          ctx.font = '800 12px Inter, Arial';
-          ctx.fillText(r.onda || turno, x+70, cy+62);
+          ctx.fillText(String(idx + 1).padStart(2, '0'), x + 68, cy + 56);
+
+          ctx.font = '850 13px Inter, Arial';
+          ctx.fillText('ROTA', x + 68, cy + 82);
           ctx.textAlign = 'left';
 
           ctx.fillStyle = '#063d2c';
-          ctx.font = '900 25px Inter, Arial';
-          const driverLinhas = quebrarTextoCanvas(ctx, r.driver, cardW - 160);
-          ctx.fillText(driverLinhas[0] || '-', x+142, cy+36);
+          ctx.font = '900 26px Inter, Arial';
+          const driverLinhas = quebrarTextoCanvas(ctx, String(r.driver || '-'), cardW - 160);
+          ctx.fillText(driverLinhas[0] || '-', x + 136, cy + 42);
 
-          ctx.fillStyle = '#0a9b65';
-          ctx.font = '900 20px Inter, Arial';
-          ctx.fillText(r.rota || '-', x+142, cy+64);
+          ctx.fillStyle = '#34483e';
+          ctx.font = '900 21px Inter, Arial';
+          ctx.fillText(String(r.rota || '-'), x + 136, cy + 74);
+
+          ctx.fillStyle = '#66766d';
+          ctx.font = '800 15px Inter, Arial';
+          ctx.fillText(`Onda/Ciclo: ${r.onda || '-'}  •  Doca: ${r.doca || '-'}`, x + 136, cy + 104);
         });
-        y += linhasRotas * (cardH + gap) + 24;
+
+        y += rotasH + 46;
       }
 
       ctx.fillStyle = '#063d2c';
-      ctx.font = '900 28px Inter, Arial';
-      ctx.fillText('AMBULÂNCIA / APOIO', 54, y+20);
-      y += 42;
+      ctx.font = '900 30px Inter, Arial';
+      ctx.fillText('AMBULÂNCIA / APOIO', margem, y + 28);
+      y += apoioTituloH;
 
       if(!apoios.length){
         ctx.fillStyle = '#ffffff';
-        desenharRoundRect(ctx, 54, y, largura-108, 58, 18);
+        desenharRoundRect(ctx, margem, y, largura - (margem * 2), 58, 20);
         ctx.fill();
+
+        ctx.strokeStyle = '#dce9e2';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
         ctx.fillStyle = '#66766d';
-        ctx.font = '800 18px Inter, Arial';
-        ctx.fillText('Nenhum apoio cadastrado.', 78, y+36);
-        y += 78;
+        ctx.font = '850 18px Inter, Arial';
+        ctx.fillText('Nenhum apoio cadastrado.', margem + 24, y + 36);
       }else{
         apoios.forEach(a => {
           ctx.fillStyle = '#ffffff';
-          desenharRoundRect(ctx, 54, y, largura-108, 62, 18);
+          desenharRoundRect(ctx, margem, y, largura - (margem * 2), 58, 20);
           ctx.fill();
+
           ctx.strokeStyle = '#dce9e2';
+          ctx.lineWidth = 2;
           ctx.stroke();
 
           ctx.fillStyle = '#e7f8ef';
-          desenharRoundRect(ctx, 72, y+14, 130, 34, 999);
+          desenharRoundRect(ctx, margem + 20, y + 12, 138, 34, 18);
           ctx.fill();
+
           ctx.fillStyle = '#07543b';
           ctx.font = '900 14px Inter, Arial';
           ctx.textAlign = 'center';
-          ctx.fillText(a.tipo || 'Apoio', 137, y+36);
+          ctx.fillText(a.tipo || 'Apoio', margem + 89, y + 34);
           ctx.textAlign = 'left';
 
           ctx.fillStyle = '#063d2c';
-          ctx.font = '900 18px Inter, Arial';
-          ctx.fillText(`${a.motoristaApoio || '-'} → ${a.motoristaRota || '-'}`, 222, y+28);
+          ctx.font = '900 19px Inter, Arial';
+          ctx.fillText(`${a.motoristaApoio || '-'} → ${a.motoristaRota || '-'}`, margem + 178, y + 25);
 
           ctx.fillStyle = '#66766d';
           ctx.font = '800 14px Inter, Arial';
-          ctx.fillText(`Rota original: ${a.rotaOriginal || '-'} • Rota aberta: ${a.rotaAberta || '-'}${a.observacao ? ' • ' + a.observacao : ''}`, 222, y+48);
+          const apoioTexto = `Rota original: ${a.rotaOriginal || '-'} • Rota aberta: ${a.rotaAberta || '-'}${a.observacao ? ' • ' + a.observacao : ''}`;
+          const apoioLinhas = quebrarTextoCanvas(ctx, apoioTexto, largura - 300);
+          ctx.fillText(apoioLinhas[0] || '', margem + 178, y + 46);
 
-          y += 78;
+          y += apoioLinhaH;
         });
       }
 
-      ctx.fillStyle = '#07543b';
-      ctx.font = '800 15px Inter, Arial';
-      ctx.textAlign = 'center';
-      ctx.fillText('DispatcherDesk CoopMetro • Feito por Edinan Magalhães', largura/2, altura-34);
+      // Rodapé alinhado
+      ctx.fillStyle = '#063d2c';
+      ctx.font = '850 15px Inter, Arial';
       ctx.textAlign = 'left';
+      ctx.fillText('DispatcherDesk CoopMetro • Feito por Edinan Magalhães', margem, altura - 34);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#07543b';
+      ctx.font = '900 16px Inter, Arial';
+      ctx.fillText(`Escala feita por ${dispatcher || 'Dispatcher'}`, largura - margem, altura - 34);
+
+      ctx.textAlign = 'left';
+      escalaImagemGerada = canvas.toDataURL('image/png');
+      const btn = document.getElementById('btnBaixarEscala') || document.getElementById('btnBaixarImagemEscala');
+      if(btn) btn.disabled = false;
+      return escalaImagemGerada;
     }
+
+    function baixarImagemEscala(){
+      const canvas = document.getElementById('canvasEscala');
+      if(!canvas) return;
+      const data = document.getElementById('escalaData')?.value || dataHojeISO();
+      gerarImagemEscala();
+      const link = document.createElement('a');
+      link.download = `escala-coopmetro-${data}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
 
     function textoEscala(){
       const data = document.getElementById('escalaData').value || dataHojeISO();
@@ -4505,14 +5071,19 @@ Entramos em contato referente à rota {rota}, parada {parada}.
       return linhas.join('\n');
     }
 
-    function baixarImagemEscala(){
-      gerarImagemEscala();
-      const link = document.createElement('a');
-      const data = document.getElementById('escalaData').value || dataHojeISO();
-      link.download = `escala-coopmetro-${data}.png`;
-      link.href = canvasEscala.toDataURL('image/png');
-      link.click();
-    }
+
+
+
+
+
+
+    // dispatcherdesk_limpar_imagem_antiga_v1
+    try{
+      localStorage.removeItem('escalaImagemGerada');
+      localStorage.removeItem('dispatcherdesk_escala_imagem');
+      localStorage.removeItem('dispatcherdesk_escala_canvas');
+    }catch(e){}
+
 
     function salvarEscalaNoHistorico(){
       const dados = {
@@ -4599,10 +5170,18 @@ Entramos em contato referente à rota {rota}, parada {parada}.
           alert('Não consegui identificar rotas nesse CSV. Verifique se ele possui cabeçalho e colunas de rota, doca, onda, região ou driver.');
           return;
         }
-        escalaRotas = importadas;
+        escalaRotas = importadas.map(r => ({
+          pacotes: '',
+          paradas: '',
+          ...r
+        }));
         renderizarTabelaEscala();
+        salvarEscalaAtualLocal();
         gerarImagemEscala();
-        mostrarToast(`${importadas.length} rota(s) importada(s).`);
+
+        const comPacotes = escalaRotas.filter(r => String(r.pacotes || '').trim()).length;
+        const comParadas = escalaRotas.filter(r => String(r.paradas || '').trim()).length;
+        mostrarToast(`${importadas.length} rota(s) importada(s). Pacotes: ${comPacotes} | Paradas: ${comParadas}`);
       };
       reader.readAsText(arquivo, 'UTF-8');
       event.target.value = '';
@@ -4714,6 +5293,91 @@ Entramos em contato referente à rota {rota}, parada {parada}.
     abrirPopupPrimeiroAcesso(false);
     setRotinaDataHoje();
     atualizarRotina();
+setTimeout(() => {
+      const possibleGenerateButtons = [...document.querySelectorAll('button')].filter(b => /gerar imagem/i.test(b.textContent || '') || b.id === 'btnGerarEscala' || b.id === 'btnGerarImagemEscala');
+      possibleGenerateButtons.forEach(btn => {
+        if(btn.dataset.cleanScaleBound === '1') return;
+        btn.dataset.cleanScaleBound = '1';
+        btn.onclick = (ev) => { ev.preventDefault(); gerarImagemEscala(); if(typeof mostrarToast === 'function') mostrarToast('Imagem limpa gerada.'); };
+      });
+
+      const possibleDownloadButtons = [...document.querySelectorAll('button')].filter(b => /baixar imagem/i.test(b.textContent || '') || b.id === 'btnBaixarEscala' || b.id === 'btnBaixarImagemEscala');
+      possibleDownloadButtons.forEach(btn => {
+        if(btn.dataset.cleanScaleDownloadBound === '1') return;
+        btn.dataset.cleanScaleDownloadBound = '1';
+        btn.onclick = (ev) => { ev.preventDefault(); baixarImagemEscala(); };
+      });
+
+      try{ gerarImagemEscala(); }catch(e){ console.warn(e); }
+    }, 500);
+
+  
+    // escalaDispatcherListener_v1
+    const escalaDispatcherInput = document.getElementById('escalaDispatcher');
+    if(escalaDispatcherInput){
+      escalaDispatcherInput.addEventListener('input', () => {
+        try{ salvarEscalaAtualLocal(); }catch(e){}
+        try{ gerarImagemEscala(); }catch(e){}
+      });
+    }
+
+  
+    // scaleCleanRoundedRebind_v2
+    setTimeout(() => {
+      const botoesGerar = [...document.querySelectorAll('button')].filter(b => /gerar imagem/i.test(b.textContent || '') || b.id === 'btnGerarEscala' || b.id === 'btnGerarImagemEscala');
+      botoesGerar.forEach(btn => {
+        btn.onclick = (ev) => {
+          ev.preventDefault();
+          gerarImagemEscala();
+          if(typeof mostrarToast === 'function') mostrarToast('Imagem da escala atualizada.');
+        };
+      });
+
+      const botoesBaixar = [...document.querySelectorAll('button')].filter(b => /baixar imagem/i.test(b.textContent || '') || b.id === 'btnBaixarEscala' || b.id === 'btnBaixarImagemEscala');
+      botoesBaixar.forEach(btn => {
+        btn.onclick = (ev) => {
+          ev.preventDefault();
+          baixarImagemEscala();
+        };
+      });
+
+      try{ gerarImagemEscala(); }catch(e){ console.warn(e); }
+    }, 500);
+
+  
+    // fixBotaoAdicionarRotaManual_v1
+    setTimeout(() => {
+      const btnAddRota = document.getElementById('btnAdicionarRotaEscala') || [...document.querySelectorAll('#tab-escala button')].find(b => /adicionar rota/i.test(b.textContent || '') || String(b.getAttribute('onclick') || '').includes('adicionarRotaEscala'));
+      if(btnAddRota){
+        btnAddRota.textContent = 'Adicionar rota manual';
+        btnAddRota.style.color = '#ffffff';
+        btnAddRota.style.fontWeight = '950';
+      }
+    }, 300);
+
+  
+    function atualizarSaudacaoUsuario(){
+      const el = document.getElementById('userGreetingName');
+      if(!el) return;
+
+      let nome = '';
+      try{
+        const bruto = localStorage.getItem('dispatcherdesk_primeiro_acesso_registrado_v1');
+        if(bruto){
+          const dados = JSON.parse(bruto);
+          nome = (dados.nome || '').trim();
+        }
+      }catch(e){}
+
+      if(!nome || nome === 'Não informado'){
+        nome = 'usuário';
+      }
+
+      el.textContent = `Olá, ${nome}`;
+    }
+
+    atualizarSaudacaoUsuario();
+
   </script>
 </body>
 </html>
