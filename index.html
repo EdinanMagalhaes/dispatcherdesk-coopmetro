@@ -2901,6 +2901,100 @@
       }
     }
 
+  
+    .drivers-groups{
+      display:grid;
+      gap:18px;
+      margin-top:12px;
+    }
+
+    .drivers-group-card{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:24px;
+      overflow:hidden;
+      box-shadow:0 14px 34px rgba(6,61,44,.07);
+    }
+
+    .drivers-group-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:16px 18px;
+      background:linear-gradient(135deg,#063d2c,#08764e);
+      color:#fff;
+    }
+
+    .drivers-group-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+    }
+
+    .drivers-group-icon{
+      width:42px;
+      height:42px;
+      border-radius:15px;
+      display:grid;
+      place-items:center;
+      background:rgba(255,255,255,.15);
+      border:1px solid rgba(255,255,255,.16);
+      font-size:21px;
+      flex:0 0 42px;
+    }
+
+    .drivers-group-head h3{
+      margin:0;
+      color:#fff;
+      font-size:20px;
+      letter-spacing:-.04em;
+    }
+
+    .drivers-group-head span{
+      display:block;
+      color:rgba(255,255,255,.76);
+      font-size:11px;
+      font-weight:900;
+      margin-top:2px;
+    }
+
+    .drivers-group-count{
+      border-radius:999px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.16);
+      padding:8px 12px;
+      font-size:12px;
+      font-weight:950;
+      white-space:nowrap;
+    }
+
+    .drivers-group-empty{
+      padding:18px;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:800;
+      background:linear-gradient(180deg,#fff,var(--green-50));
+    }
+
+    .drivers-group-card .drivers-table-wrap{
+      margin:0 !important;
+      border:none !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+      max-height:none !important;
+      min-height:auto !important;
+    }
+
+    .drivers-group-card .drivers-table{
+      min-width:1000px !important;
+    }
+
+    .drivers-group-card .drivers-table th{
+      top:0;
+    }
+
   </style>
 </head>
 <body>
@@ -7964,9 +8058,10 @@ function renderizarMotoristasSistema(){
       },
       motoristas: {
         titulo: 'Motoristas',
-        intro: 'A aba Motoristas controla o cadastro operacional de motoristas por SVC/Operação, placas, modais e status.',
+        intro: 'A aba Motoristas controla o cadastro operacional de motoristas por SVC/Operação, separando a planilha por Passeio, Utilitário, VUC e outros modais.',
         passos: [
           ['Selecione o SVC', 'Escolha a operação correta, como SGO3 ou SGO1. Cada SVC possui sua própria planilha de motoristas.'],
+          ['Confira por modal', 'A planilha fica separada por Passeio, Utilitário, VUC e outros tipos para facilitar a escala.'],
           ['Cadastre o motorista', 'Informe nome, placa, modal/tipo de veículo e turno.'],
           ['Defina o status', 'Marque como ativo quando estiver disponível e inativo quando não puder ser escalado.'],
           ['Use observações', 'Registre preferência de região, restrição, tipo de rota ou informação importante.'],
@@ -8201,6 +8296,202 @@ function renderizarMotoristasSistema(){
     }
 
     inicializarSVCMotoristas();
+
+
+
+    function obterTipoMotoristaSistema(motorista){
+      const raw = String(
+        motorista?.tipo ||
+        motorista?.modal ||
+        motorista?.veiculo ||
+        motorista?.tipoVeiculo ||
+        motorista?.categoria ||
+        ''
+      ).trim();
+
+      const normal = raw.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+
+      if(normal.includes('vuc')) return 'VUC';
+      if(normal.includes('util')) return 'Utilitário';
+      if(normal.includes('passeio') || normal.includes('carro')) return 'Passeio';
+      if(normal.includes('fiorino')) return 'Utilitário';
+      if(normal.includes('moto')) return 'Moto';
+      if(!raw) return 'Outro';
+
+      return raw.charAt(0).toUpperCase() + raw.slice(1);
+    }
+
+    function obterIconeTipoMotoristaSistema(tipo){
+      const t = String(tipo || '').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+      if(t.includes('passeio')) return '🚗';
+      if(t.includes('util')) return '🚐';
+      if(t.includes('vuc')) return '🚚';
+      if(t.includes('moto')) return '🏍️';
+      return '🚘';
+    }
+
+    function montarTabelaMotoristasSistema(lista){
+      if(!lista || !lista.length){
+        return '<div class="drivers-group-empty">Nenhum motorista cadastrado neste grupo.</div>';
+      }
+
+      return `
+        <div class="drivers-table-wrap">
+          <table class="drivers-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Placa</th>
+                <th>Modal</th>
+                <th>Turno</th>
+                <th>Status</th>
+                <th>Observação</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${lista.map(m => {
+                const nome = escapeHTML(m.nome || '-');
+                const nomeCopiar = escapeHTML(m.nome || '').replaceAll("'", "\\'");
+                const placa = escapeHTML(m.placa || '-');
+                const placaCopiar = escapeHTML(m.placa || '').replaceAll("'", "\\'");
+                const tipo = escapeHTML(obterTipoMotoristaSistema(m));
+                const turno = escapeHTML(m.turno || '-');
+                const ativo = m.ativo !== false;
+                const obs = escapeHTML(m.obs || m.observacao || '-');
+                const id = m.id;
+
+                return `
+                  <tr>
+                    <td><strong class="copy-cell" style="color:var(--green-900)" onclick="copiarMotoristaSistema('${nomeCopiar}', 'Nome')">${nome}</strong></td>
+                    <td><span class="copy-cell placa" onclick="copiarMotoristaSistema('${placaCopiar}', 'Placa')">${placa}</span></td>
+                    <td>${tipo}</td>
+                    <td>${turno}</td>
+                    <td><span class="status-pill ${ativo ? 'ok' : 'danger'}">${ativo ? 'Ativo' : 'Inativo'}</span></td>
+                    <td>${obs}</td>
+                    <td>
+                      <div class="table-actions">
+                        <button type="button" onclick="editarMotoristaSistema('${id}')">Editar</button>
+                        <button type="button" onclick="alternarStatusMotoristaSistema('${id}')">${ativo ? 'Inativar' : 'Ativar'}</button>
+                        <button type="button" class="danger" onclick="excluirMotoristaSistema('${id}')">Excluir</button>
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderizarMotoristasSistemaAgrupado(){
+      if(typeof obterMotoristasSistema !== 'function') return;
+
+      const listaCompleta = obterMotoristasSistema();
+      const busca = String(document.getElementById('buscaMotoristaSistema')?.value || '').trim().toLowerCase();
+      const filtroStatus = String(document.getElementById('filtroStatusMotoristaSistema')?.value || 'todos');
+
+      const lista = listaCompleta.filter(m => {
+        const texto = [
+          m.nome || '',
+          m.placa || '',
+          obterTipoMotoristaSistema(m),
+          m.turno || '',
+          m.obs || '',
+          m.observacao || ''
+        ].join(' ').toLowerCase();
+
+        const bateBusca = !busca || texto.includes(busca);
+        const ativo = m.ativo !== false;
+        const bateStatus =
+          filtroStatus === 'todos' ||
+          (filtroStatus === 'ativos' && ativo) ||
+          (filtroStatus === 'inativos' && !ativo);
+
+        return bateBusca && bateStatus;
+      });
+
+      const containerOriginal =
+        document.getElementById('listaMotoristasSistema') ||
+        document.getElementById('tbodyMotoristasSistema') ||
+        document.querySelector('#tab-motoristas .drivers-table tbody');
+
+      if(!containerOriginal) return;
+
+      let alvo = document.getElementById('driversGroupsSistema');
+      if(!alvo){
+        alvo = document.createElement('div');
+        alvo.id = 'driversGroupsSistema';
+        alvo.className = 'drivers-groups';
+
+        const wrap = containerOriginal.closest('.drivers-table-wrap') || containerOriginal.parentElement;
+        if(wrap){
+          wrap.replaceWith(alvo);
+        }else{
+          containerOriginal.replaceWith(alvo);
+        }
+      }
+
+      const ordem = ['Passeio', 'Utilitário', 'VUC', 'Moto', 'Outro'];
+      const grupos = {};
+      ordem.forEach(tipo => grupos[tipo] = []);
+
+      lista.forEach(m => {
+        const tipo = obterTipoMotoristaSistema(m);
+        const chave = ordem.includes(tipo) ? tipo : 'Outro';
+        grupos[chave].push(m);
+      });
+
+      const total = lista.length;
+      const svc = typeof obterSVCAtualMotoristas === 'function' ? obterSVCAtualMotoristas() : 'SVC';
+
+      alvo.innerHTML = ordem
+        .filter(tipo => grupos[tipo].length || ['Passeio','Utilitário','VUC'].includes(tipo))
+        .map(tipo => `
+          <section class="drivers-group-card">
+            <div class="drivers-group-head">
+              <div class="drivers-group-title">
+                <div class="drivers-group-icon">${obterIconeTipoMotoristaSistema(tipo)}</div>
+                <div>
+                  <h3>${tipo}</h3>
+                  <span>${svc} • Motoristas cadastrados por modal</span>
+                </div>
+              </div>
+              <div class="drivers-group-count">${grupos[tipo].length} de ${total}</div>
+            </div>
+            ${montarTabelaMotoristasSistema(grupos[tipo])}
+          </section>
+        `).join('');
+    }
+
+    function ativarAgrupamentoMotoristasSistema(){
+      if(typeof renderizarMotoristasSistema === 'function' && !renderizarMotoristasSistema.__agrupadoPorModal){
+        const renderOriginalMotoristasSistema = renderizarMotoristasSistema;
+        renderizarMotoristasSistema = function(){
+          try{
+            renderizarMotoristasSistemaAgrupado();
+          }catch(e){
+            console.warn('Falha ao renderizar motoristas agrupados. Usando render original.', e);
+            renderOriginalMotoristasSistema();
+          }
+        };
+        renderizarMotoristasSistema.__agrupadoPorModal = true;
+      }
+
+      renderizarMotoristasSistemaAgrupado();
+
+      ['buscaMotoristaSistema','filtroStatusMotoristaSistema','selectSVCMotoristas'].forEach(id => {
+        document.getElementById(id)?.addEventListener('input', () => setTimeout(renderizarMotoristasSistemaAgrupado, 80));
+        document.getElementById(id)?.addEventListener('change', () => setTimeout(renderizarMotoristasSistemaAgrupado, 80));
+      });
+
+      document.querySelectorAll('.nav-item[data-tab="motoristas"], [data-tab="motoristas"]').forEach(btn => {
+        btn.addEventListener('click', () => setTimeout(renderizarMotoristasSistemaAgrupado, 160));
+      });
+    }
+
+    ativarAgrupamentoMotoristasSistema();
 
 </script>
 </body>
